@@ -16,6 +16,8 @@ def main(args):
 					obj.registerSeries(id)
 		if option == "--byname" or option == "-n":
 			downloadTorrents.torrentFinder().checkByName()
+		if option == "--search" or option == "-s":
+			getSeries.getseries().promptName()
 			
 	else:
 		downloadTorrents.torrentFinder().readRSS()
