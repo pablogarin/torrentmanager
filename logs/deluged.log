@@ -1,0 +1,896 @@
+Torrent added!
+
+Torrent was not added! [Failure instance: Traceback: <type 'exceptions.TypeError'>: cannot concatenate 'str' and 'tuple' objects
+/usr/lib/python2.7/dist-packages/twisted/protocols/policies.py:118:dataReceived
+/usr/lib/python2.7/dist-packages/deluge/ui/client.py:189:dataReceived
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:397:errback
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:464:_startRunCallbacks
+--- <exception caught here> ---
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:551:_runCallbacks
+/usr/lib/python2.7/dist-packages/deluge/ui/client.py:391:__rpcError
+]
+
+Torrent was not added! [Failure instance: Traceback: <type 'exceptions.TypeError'>: cannot concatenate 'str' and 'tuple' objects
+/usr/lib/python2.7/dist-packages/twisted/protocols/policies.py:118:dataReceived
+/usr/lib/python2.7/dist-packages/deluge/ui/client.py:189:dataReceived
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:397:errback
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:464:_startRunCallbacks
+--- <exception caught here> ---
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:551:_runCallbacks
+/usr/lib/python2.7/dist-packages/deluge/ui/client.py:391:__rpcError
+]
+
+Torrent was not added! [Failure instance: Traceback: <type 'exceptions.TypeError'>: cannot concatenate 'str' and 'tuple' objects
+/usr/lib/python2.7/dist-packages/twisted/protocols/policies.py:118:dataReceived
+/usr/lib/python2.7/dist-packages/deluge/ui/client.py:189:dataReceived
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:397:errback
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:464:_startRunCallbacks
+--- <exception caught here> ---
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:551:_runCallbacks
+/usr/lib/python2.7/dist-packages/deluge/ui/client.py:391:__rpcError
+]
+
+Torrent added!
+
+Torrent added!
+
+Torrent added!
+
+Torrent added!
+
+Torrent added!
+
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/39A7645FD50BD23C67F3EF10718DC3F12141D467.torrent?title=[kat.cr]heroes.reborn.s01e10.720p.hdtv.x265.hevc.185mb.shaanig':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/D14CB3C67A8F5C0C322873604DA464C44A9BF7B9.torrent?title=[kat.cr]the.big.bang.theory.s09e09.720p.hdtv.x265.hevc.100mb.shaanig':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/9228B4ED3720D35315D8B63F998BB912F4676A9A.torrent?title=[kat.cr]supernatural.s11e07.720p.hdtv.x264.dimension.cttv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/1F8475EC0D0D0E6FF87CE30E6E01D45A9AF44D49.torrent?title=[kat.cr]bones.s11e08.hdtv.x264.killers.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/70907818042AE695F4DEF25ADF1F4DD396AC3AA6.torrent?title=[kat.cr]elementary.s04e03.720p.hdtv.x264.dimension':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/9073B2D851B54C81AF3DECF95E8A1D66AEF4F077.torrent?title=[kat.cr]sleepy.hollow.s03e08.720p.hdtv.x264.fleet.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/84F8FE261161EB1ABA6E335D4C316BFF37143AF2.torrent?title=[kat.cr]the.blacklist.s03e08.720p.hdtv.x264.fleet':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/90A5804EF8699405322B896360446C62F7CA51DB.torrent?title=[kat.cr]the.vampire.diaries.s07e07.720p.hdtv.x264.dimension':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/7FBA4DAA12F162D7E27859D4C2B520CA6387A9EE.torrent?title=[kat.cr]doctor.who.s09e10.proper.720p.hdtv.x265.hevc.215mb.shaanig':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/FE8E9298AFFC8A5469258744D11F160EC9A69C32.torrent?title=[kat.cr]z.nation.s02e11.proper.720p.hdtv.x264.killers.cttv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/15CC9C3724D05072EBCCC7929B002CCD277BCFF4.torrent?title=[kat.cr]supergirl.2015.s01e05.720p.hdtv.x264.dimension.cttv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/FE8E9298AFFC8A5469258744D11F160EC9A69C32.torrent?title=[kat.cr]z.nation.s02e11.proper.720p.hdtv.x264.killers.cttv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/1E54B84B890AD6E41FBF75E8A3DA7F51FC90B510.torrent?title=[kat.cr]blindspot.s01e09.hdtv.xvid.fum.ettv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/0F4C2EED296B101DC8119F252EE117E6F47D63A2.torrent?title=[kat.cr]supergirl.s01e05.1080p.hdtv.x264.dimension.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/AD673864448CE00E7DB77612A4524C9C45A5D028.torrent?title=[kat.cr]legends.2014.s02e03.hdtv.x264.killers.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/D8827EF8242A9E0B8ECDDDE908BFBA529417BED4.torrent?title=[kat.cr]supergirl.s01e05.livewire.720p.web.dl.en.sub.x264.mulvacoded':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/FEDD5650C6B4CBA4C53DA99CF74C16E9BFF49ABE.torrent?title=[kat.cr]blindspot.s01e10.720p.hdtv.x264.dimension.ettv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/7DCF37D19EBF563D4F64CC4F0F2F25A1FAF0F3CA.torrent?title=[kat.cr]the.flash.2014.s02e08.hdtv.x264.lol.mp4':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/7DCF37D19EBF563D4F64CC4F0F2F25A1FAF0F3CA.torrent?title=[kat.cr]the.flash.2014.s02e08.hdtv.x264.lol.mp4':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/1F53873EA4248BE2E720EDF4906CBC647F1FBEE6.torrent?title=[kat.cr]limitless.s01e10.720p.hdtv.x264.dimension.ettv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/133FCE0208499FC7B51D7A3EC167AFAFFFA82A47.torrent?title=[kat.cr]doctor.who.2005.s09e11.hdtv.xvid.fum.ettv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/E78FA97F53C60AB605AF875F30D2163C3F9AE67F.torrent?title=[kat.cr]the.walking.dead.s06e08.hdtv.x264.killers.talamasca32':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/1F8475EC0D0D0E6FF87CE30E6E01D45A9AF44D49.torrent?title=[kat.cr]bones.s11e08.hdtv.x264.killers.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/0244F6F059D001454893531C57AE1090AEBC272B.torrent?title=[kat.cr]the.flash.2014.s02e08.legends.of.today.720p.web.dl.x264.aac':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/9F81459AC76E0181A3BA5354F30A173C0DEBC34F.torrent?title=[kat.cr]supernatural.s11e08.720p.hdtv.x264.dimension.ettv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/98576EBC4536F5CBCA3E28956C67C8F352151195.torrent?title=[kat.cr]arrow.s04e08.legends.of.yesterday.720p.web.dl.x264.aac':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/A6CB7F112A5CCC65E9246B8ACA36F1554090F314.torrent?title=[kat.cr]the.expanse.s01e01.hdtv.xvid.fum.ettv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/7B261756AB99355E7EE919A20781426F410B4BB5.torrent?title=[kat.cr]grimm.s05e05.internal.720p.hdtv.x264.killers.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/7371B75C7B938AC80BECA37D55CCBA61217ECBCE.torrent?title=[kat.cr]once.upon.a.time.s05e11.720p.hdtv.x264.killers.ettv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/29230534B026C4E61FCAD8FAFE66E19A0D1538C0.torrent?title=[kat.cr]supergirl.s01e07.720p.hdtv.x264.dimension.ettv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/9F629B34AF951EC5C202FFD62F0B041483A4A57B.torrent?title=[kat.cr]marvels.agents.of.shield.3x09.hdtv.x264.killers.vtv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/05D7E37AA44C1512D49D46E389A47415EC9B36B1.torrent?title=[kat.cr]the.flash.2014.s02e09.hdtv.x264.lol.sparrow':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/724DFE8FBD2AF71B3FAD0E053B1B599791F8FEFE.torrent?title=[kat.cr]marvels.agents.of.shield.3x10.hdtv.x264.killers.vtv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/31D4DD095B615D1C618CD411BD144ABAA63E4C1E.torrent?title=[kat.cr]arrow.s04e09.720p.hdtv.x264.dimension.ettv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/3A707FE20E71FD28D092D1EE146DC8196EC131A1.torrent?title=[kat.cr]the.vampire.diaries.s07e09.hdtv.x264.lol.sparrow':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/31C2509E501EBD7B488D170F0B62EC58947DE076.torrent?title=[kat.cr]grimm.s05e06.720p.hdtv.x264.fleet.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/223170B2D0C88F8493718C88BD96C4AB295EF389.torrent?title=[kat.cr]z.nation.s02e14.hdtv.x264.killers.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/76AB76AD3830F32CA2609CE6B3D153FEABCF493A.torrent?title=[kat.cr]ash.vs.evil.dead.s01e07.720p.hdtv.x264.killers.ettv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/F216328D1285F89ABDE8CFCCBA7EA9C3ABBD073B.torrent?title=[kat.cr]supergirl.s01e08.720p.hdtv.x264.dimension.ettv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/AE9619D8A3C755E5EDDCB2D962B3C3DC6584F688.torrent?title=[kat.cr]the.vampire.diaries.s07e10.hdtv.x264.lol.mp4':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/A1DF6152740AEDDF86422A55C637CE6FB22ABE35.torrent?title=[kat.cr]colony.s01e01.1080p.hdtv.x264.brisk.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/B3D4EEA667B8B7C1A216146F0BD9387F2E3EA06E.torrent?title=[kat.cr]colony.s01e01.pilot.preair.720p.webrip.x264.srs.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/4E8368B965E8EDFFFBFC4C48C2D43E16D3E9A87C.torrent?title=[kat.cr]colony.s01e01.720p.hdtv.x264.batv.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/B3D4EEA667B8B7C1A216146F0BD9387F2E3EA06E.torrent?title=[kat.cr]colony.s01e01.pilot.preair.720p.webrip.x264.srs.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/FFCD7A2D493C9FD99479331658C3EE0E0DB40665.torrent?title=[kat.cr]supergirl.s01e09.720p.hdtv.x264.dimension.ettv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/8D5716C2D7944AD434781CC7AE10C176709EA251.torrent?title=[kat.cr]scorpion.s02e13.720p.hdtv.x264.dimension.ettv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/68B293FB42F62075AFDA3C3949E79C3C68877E7E.torrent?title=[kat.cr]galavant.s02e03.720p.hdtv.x264.killers.ettv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/7022D7EACBD37E194FE18130023E144561072EC6.torrent?title=[kat.cr]galavant.s02e04.720p.hdtv.x264.fleet.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/AC61883F6EAB6E0D87885B2E539F325080E7B158.torrent?title=[kat.cr]shadowhunters.s01e02.720p.hdtv.x264.batv.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/E42B2D5F0A6767F01D2048210D64C256107C203F.torrent?title=[kat.cr]superstore.s01e04.hdtv.x264.killers.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/CEF2CA59499270F63B082B0E97B10D5C8ED7ED6D.torrent?title=[kat.cr]the.shannara.chronicles.s01e04.1080p.hdtv.x264.brisk.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/798266512A9795F5B535B240C470656EB577FB3A.torrent?title=[kat.cr]colony.s01e02.720p.hdtv.x264.killers.ettv':
+Torrent was not added! [Failure instance: Traceback (failure with no frames): <class 'deluge.ui.client.DelugeRPCError'>: <deluge.ui.client.DelugeRPCError object at 0x24f7df0>
+]
+
+Torrent 'https://torcache.net/torrent/495963D92D758DAC1B23BEF617F509B3319DCA7B.torrent?title=[kat.cr]colony.s01e02.720p.hdtv.x264.killers.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/6C7C4D1DFDEF7691BB4824AAF12AE1E8D61B110B.torrent?title=[kat.cr]the.blacklist.s03e11.internal.720p.hdtv.x264.killers.ettv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/E13C3C596ECC6275849CA50E56BC9BEF48E580CD.torrent?title=[kat.cr]dcs.legends.of.tomorrow.s01e01.720p.hdtv.x264.dimension.ettv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/4ECE7F50DD9F33B56C010B88A587610D82C3662A.torrent?title=[kat.cr]heroes.reborn.s01e13.720p.hdtv.x264.killers.ettv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/9FBB1CF1348F0FCF5A02C746C4169905AB1285E7.torrent?title=[kat.cr]grimm.s05e08.720p.hdtv.x264.fleet.rartv':
+Torrent was not added! [Failure instance: Traceback (failure with no frames): <class 'deluge.ui.client.DelugeRPCError'>: <deluge.ui.client.DelugeRPCError object at 0x2653e10>
+]
+
+Torrent 'https://torcache.net/torrent/48666EDFBB9D36CFCFE73E5F3EBE6B2766030AC1.torrent?title=[kat.cr]grimm.s05e08.hdtv.x264.fleet.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/B58BDE7E9F7322E89E6153F64B6EE9480A7FB667.torrent?title=[kat.cr]the.walking.dead.s06e09.hdtv.xvid.fum.ettv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/855130AD1B50DF2FFFDA3D108FB1C85D98CEBA03.torrent?title=[kat.cr]the.walking.dead.s06e09.720p.hdtv.x264.sva.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/55EFAC87EDFA02D2941B7D684D272B95A616B7FC.torrent?title=[kat.cr]the.blacklist.s03e15.720p.hdtv.x264.avs.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/7A8D59B03253EB470B7441A6DDF08D91401F14C9.torrent?title=[kat.cr]lucifer.s01e05.720p.hdtv.x264.dimension.ettv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/54CFABAACA9F5A82CA012627972D6AABCBCD0419.torrent?title=[kat.cr]the.x.files.s10e06.720p.hdtv.x264.fleet.rartv':
+Torrent was not added! [Failure instance: Traceback (failure with no frames): <class 'deluge.ui.client.DelugeRPCError'>: <deluge.ui.client.DelugeRPCError object at 0x1b5cab0>
+]
+
+Torrent 'https://torcache.net/torrent/3A9C18A50C22BD6E23384A2AEA47DD78CE806F46.torrent?title=[kat.cr]the.x.files.s10e06.720p.hdtv.x264.avs.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/BD3630C0BDBE2B75EDE87742635EAF9B7BBCC024.torrent?title=[kat.cr]dcs.legends.of.tomorrow.s01e06.repack.720p.hdtv.x264.dimension.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/1705828305881158106768B212AA714A02A3A349.torrent?title=[kat.cr]second.chance.2016.s01e07.720p.hdtv.x264.killers.ettv':
+Torrent was not added! [Failure instance: Traceback (failure with no frames): <class 'deluge.ui.client.DelugeRPCError'>: <deluge.ui.client.DelugeRPCError object at 0x124cb90>
+]
+
+Torrent 'https://torcache.net/torrent/A8A2815AFD55512A701F88D8A10D359AF6B447D2.torrent?title=[kat.cr]blindspot.s01e11.720p.hdtv.x264.dimension.ettv':
+Torrent was not added! [Failure instance: Traceback (failure with no frames): <class 'deluge.ui.client.DelugeRPCError'>: <deluge.ui.client.DelugeRPCError object at 0x2407d90>
+]
+
+Torrent 'https://torcache.net/torrent/773712B1E53D4C85A5560CD2F948FC7CC307C851.torrent?title=[kat.cr]damien.s01e01.720p.hdtv.x264.avs.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/E6B0E61BAD9D9FA13DAB51634F65111D07B1F5FE.torrent?title=[kat.cr]marvels.daredevil.s02e01.720p.webrip.x264.deflate.ettv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/4636D473BB39C2C8218903AD5626BD5C449FDE68.torrent?title=[kat.cr]12.monkeys.s02e01.720p.web.x264.w4f.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/5DDD8EED6A9223B6D97E672CA3CDC9FEE49AFF39.torrent?title=[kat.cr]fear.the.walking.dead.s02e01.720p.web.dl.x264.fum.ettv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/2D8272CF27BAE4670F92C6E74491C7591C8249C4.torrent?title=[kat.cr]bones.s11e11.720p.hdtv.x264.avs.rartv':
+Torrent was not added! [Failure instance: Traceback (failure with no frames): <class 'deluge.ui.client.DelugeRPCError'>: <deluge.ui.client.DelugeRPCError object at 0x1a11dd0>
+]
+
+Torrent 'https://torcache.net/torrent/422A61584FA01688BDB1C2E5A54E6FA209AB77DF.torrent?title=[kat.cr]the.vampire.diaries.s07e18.720p.hdtv.x264.dimension.ettv':
+Torrent was not added! [Failure instance: Traceback (failure with no frames): <class 'deluge.ui.client.DelugeRPCError'>: <deluge.ui.client.DelugeRPCError object at 0x18dddd0>
+]
+
+Torrent 'https://torcache.net/torrent/EF62107884F05EF0031264444AF163FAC124878B.torrent?title=[kat.cr]the.vampire.diaries.s07e18.720p.hdtv.x264.dimension.rartv':
+Torrent was not added! [Failure instance: Traceback (failure with no frames): <class 'deluge.ui.client.DelugeRPCError'>: <deluge.ui.client.DelugeRPCError object at 0xa5edf0>
+]
+
+Torrent 'https://torcache.net/torrent/55395909AC922F8B45B2DE240B1C1913725BA856.torrent?title=[kat.cr]grimm.s05e17.720p.hdtv.x264.sva.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/995547EC80E76B2D75F7E22C9DD5BD5D31CADA60.torrent?title=[kat.cr]fear.the.walking.dead.s02e02.720p.hdtv.x264.avs.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/020FEC59B5C4FC5BF9DC37FDDA3D2ADF5197B583.torrent?title=[kat.cr]silicon.valley.s03e01.720p.hdtv.x264.sva.rartv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/AB8B63E83D5DA85D84100F007749209F13001FD9.torrent?title=[kat.cr]once.upon.a.time.5x19.720p.hdtv.x264.avs.vtv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/5E3F35ED3FC225FA9D1B45CA884C10B5ABD313DC.torrent?title=[kat.cr]containment.s01e04.720p.hdtv.x264.dimension.ettv':
+Torrent added!
+
+Torrent 'https://torcache.net/torrent/645E43E0E1F152B50503A21AEDE80D59A784E548.torrent?title=[kat.cr]suits.s06e01.720p.hdtv.x264.killers.ettv':
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Shameless.US.S06E07.HDTV.x264-LOL[eztv].mp4.torrent':
+Torrent was not added! [Failure instance: Traceback: <type 'exceptions.TypeError'>: cannot concatenate 'str' and 'tuple' objects
+/usr/lib/python2.7/dist-packages/twisted/protocols/policies.py:118:dataReceived
+/usr/lib/python2.7/dist-packages/deluge/ui/client.py:189:dataReceived
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:397:errback
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:464:_startRunCallbacks
+--- <exception caught here> ---
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:551:_runCallbacks
+/usr/lib/python2.7/dist-packages/deluge/ui/client.py:391:__rpcError
+]
+
+Torrent 'https://zoink.ch/torrent/Shameless.US.S06E07.HDTV.x264-LOL[eztv].mp4.torrent':
+Torrent was not added! [Failure instance: Traceback: <type 'exceptions.TypeError'>: cannot concatenate 'str' and 'tuple' objects
+/usr/lib/python2.7/dist-packages/twisted/protocols/policies.py:118:dataReceived
+/usr/lib/python2.7/dist-packages/deluge/ui/client.py:189:dataReceived
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:397:errback
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:464:_startRunCallbacks
+--- <exception caught here> ---
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:551:_runCallbacks
+/usr/lib/python2.7/dist-packages/deluge/ui/client.py:391:__rpcError
+]
+
+Torrent 'https://zoink.ch/torrent/Shameless.US.S06E07.HDTV.x264-LOL[eztv].mp4.torrent':
+Torrent was not added! [Failure instance: Traceback: <type 'exceptions.TypeError'>: cannot concatenate 'str' and 'tuple' objects
+/usr/lib/python2.7/dist-packages/twisted/protocols/policies.py:118:dataReceived
+/usr/lib/python2.7/dist-packages/deluge/ui/client.py:189:dataReceived
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:397:errback
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:464:_startRunCallbacks
+--- <exception caught here> ---
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:551:_runCallbacks
+/usr/lib/python2.7/dist-packages/deluge/ui/client.py:391:__rpcError
+]
+
+Torrent 'https://zoink.ch/torrent/Shameless.US.S06E07.HDTV.x264-LOL[eztv].mp4.torrent':
+Torrent was not added! [Failure instance: Traceback: <type 'exceptions.TypeError'>: cannot concatenate 'str' and 'tuple' objects
+/usr/lib/python2.7/dist-packages/twisted/protocols/policies.py:118:dataReceived
+/usr/lib/python2.7/dist-packages/deluge/ui/client.py:189:dataReceived
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:397:errback
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:464:_startRunCallbacks
+--- <exception caught here> ---
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:551:_runCallbacks
+/usr/lib/python2.7/dist-packages/deluge/ui/client.py:391:__rpcError
+]
+
+Torrent 'https://zoink.ch/torrent/Shameless.US.S06E07.HDTV.x264-LOL[eztv].mp4.torrent':
+Torrent was not added! [Failure instance: Traceback: <type 'exceptions.TypeError'>: cannot concatenate 'str' and 'tuple' objects
+/usr/lib/python2.7/dist-packages/twisted/protocols/policies.py:118:dataReceived
+/usr/lib/python2.7/dist-packages/deluge/ui/client.py:189:dataReceived
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:397:errback
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:464:_startRunCallbacks
+--- <exception caught here> ---
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:551:_runCallbacks
+/usr/lib/python2.7/dist-packages/deluge/ui/client.py:391:__rpcError
+]
+
+Torrent 'https://zoink.ch/torrent/Shameless.US.S06E07.HDTV.x264-LOL[eztv].mp4.torrent':
+Torrent was not added! [Failure instance: Traceback: <type 'exceptions.TypeError'>: cannot concatenate 'str' and 'tuple' objects
+/usr/lib/python2.7/dist-packages/twisted/protocols/policies.py:118:dataReceived
+/usr/lib/python2.7/dist-packages/deluge/ui/client.py:189:dataReceived
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:397:errback
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:464:_startRunCallbacks
+--- <exception caught here> ---
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:551:_runCallbacks
+/usr/lib/python2.7/dist-packages/deluge/ui/client.py:391:__rpcError
+]
+
+Torrent 'https://zoink.ch/torrent/Shameless.US.S06E07.720p.HDTV.X264-DIMENSION[eztv].mkv.torrent':
+Torrent was not added! [Failure instance: Traceback: <type 'exceptions.TypeError'>: cannot concatenate 'str' and 'tuple' objects
+/usr/lib/python2.7/dist-packages/twisted/protocols/policies.py:118:dataReceived
+/usr/lib/python2.7/dist-packages/deluge/ui/client.py:189:dataReceived
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:397:errback
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:464:_startRunCallbacks
+--- <exception caught here> ---
+/usr/lib/python2.7/dist-packages/twisted/internet/defer.py:551:_runCallbacks
+/usr/lib/python2.7/dist-packages/deluge/ui/client.py:391:__rpcError
+]
+
+Torrent 'https://zoink.ch/torrent/Shameless.US.S06E07.HDTV.x264-LOL[eztv].mp4.torrent':
+Attempting to add torrent: /tmp/Shameless.US.S06E07.HDTV.x264-LOL[eztv].mp4.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Marvels.Daredevil.S02E02.WEBRip.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Marvels.Daredevil.S02E02.WEBRip.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Wayward.Pines.S02E09.WEB-DL.x264-FUM[eztv].mp4.torrent':
+Attempting to add torrent: /tmp/Wayward.Pines.S02E09.WEB-DL.x264-FUM[eztv].mp4.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Suits.S06E02.HDTV.x264-KILLERS[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Suits.S06E02.HDTV.x264-KILLERS[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Mr.Robot.S02E03.HDTV.x264-KILLERS[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Mr.Robot.S02E03.HDTV.x264-KILLERS[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Bones.S11E22.720p.HDTV.x264-BRISK[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Bones.S11E22.720p.HDTV.x264-BRISK[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E04.HDTV.x264-FUM[eztv].mp4.torrent':
+Attempting to add torrent: /tmp/Killjoys.S02E04.HDTV.x264-FUM[eztv].mp4.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Dark.Matter.S02E04.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Dark.Matter.S02E04.720p.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Outcast.S01E07.720p.HDTV.x264-KILLERS[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Outcast.S01E07.720p.HDTV.x264-KILLERS[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Hell.on.Wheels.S05E14.720p.HDTV.x264-AVS[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Hell.on.Wheels.S05E14.720p.HDTV.x264-AVS[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/The.Last.Ship.S03E07.720p.HDTV.X264-DIMENSION[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/The.Last.Ship.S03E07.720p.HDTV.X264-DIMENSION[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/The.Last.Ship.S03E07.HDTV.x264-LOL[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/The.Last.Ship.S03E07.HDTV.x264-LOL[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Preacher.S01E09.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Preacher.S01E09.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Preacher.S01E09.720p.HDTV.x264-AVS[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Preacher.S01E09.720p.HDTV.x264-AVS[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Shameless.US.S06E08.720p.HDTV.X264-DIMENSION[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Shameless.US.S06E08.720p.HDTV.X264-DIMENSION[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Shameless.US.S06E08.HDTV.x264-LOL[eztv].mp4.torrent':
+Attempting to add torrent: /tmp/Shameless.US.S06E08.HDTV.x264-LOL[eztv].mp4.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Wayward.Pines.S02E10.720p.HDTV.x264-AVS[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Wayward.Pines.S02E10.720p.HDTV.x264-AVS[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Wayward.Pines.S02E10.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Wayward.Pines.S02E10.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Suits.S06E03.HDTV.x264-FUM[eztv].mp4.torrent':
+Attempting to add torrent: /tmp/Suits.S06E03.HDTV.x264-FUM[eztv].mp4.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Suits.S06E03.720p.HDTV.x264-KILLERS[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Suits.S06E03.720p.HDTV.x264-KILLERS[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Suits.S06E03.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Suits.S06E03.720p.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Suits.S06E03.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Suits.S06E03.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Mr.Robot.S02E04.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Mr.Robot.S02E04.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Mr.Robot.S02E04.720p.HDTV.x264-AVS[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Mr.Robot.S02E04.720p.HDTV.x264-AVS[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E05.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Killjoys.S02E05.720p.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E05.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Killjoys.S02E05.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Dark.Matter.S02E05.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Dark.Matter.S02E05.720p.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Dark.Matter.S02E05.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Dark.Matter.S02E05.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Outcast.S01E08.HDTV.x264-KILLERS[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Outcast.S01E08.HDTV.x264-KILLERS[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Outcast.S01E08.720p.HDTV.x264-KILLERS[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Outcast.S01E08.720p.HDTV.x264-KILLERS[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/The.Last.Ship.S03E08.720p.HDTV.X264-DIMENSION[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/The.Last.Ship.S03E08.720p.HDTV.X264-DIMENSION[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Preacher.S01E10.720p.HDTV.x264-AVS[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Preacher.S01E10.720p.HDTV.x264-AVS[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Shameless.US.S06E08.720p.HDTV.X264-DIMENSION[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Shameless.US.S06E08.720p.HDTV.X264-DIMENSION[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Shameless.US.S06E09.HDTV.x264-LOL[eztv].mp4.torrent':
+Attempting to add torrent: /tmp/Shameless.US.S06E09.HDTV.x264-LOL[eztv].mp4.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Shameless.US.S06E10.HDTV.x264-LOL[eztv].mp4.torrent':
+Attempting to add torrent: /tmp/Shameless.US.S06E10.HDTV.x264-LOL[eztv].mp4.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Shameless.US.S06E10.720p.HDTV.X264-DIMENSION[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Shameless.US.S06E10.720p.HDTV.X264-DIMENSION[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Shameless.US.S06E10.HDTV.x264-LOL[eztv].mp4.torrent':
+Attempting to add torrent: /tmp/Shameless.US.S06E10.HDTV.x264-LOL[eztv].mp4.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Shameless.US.S06E10.720p.HDTV.X264-DIMENSION[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Shameless.US.S06E10.720p.HDTV.X264-DIMENSION[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Shameless.US.S06E10.HDTV.x264-LOL[eztv].mp4.torrent':
+Attempting to add torrent: /tmp/Shameless.US.S06E10.HDTV.x264-LOL[eztv].mp4.torrent
+Torrent added!
+
+Torrent 'https://rarbg.to/download.php?id=xi3a259&f=Killjoys.S02E06.720p.HDTV.x264-FLEET[rartv].torrent':
+Attempting to add torrent: /tmp/download.php?id=xi3a259&f=Killjoys.S02E06.720p.HDTV.x264-FLEET[rartv].torrent
+Torrent added!
+
+Torrent 'https://rarbg.to/download.php?id=knvwjle&f=Dark.Matter.S02E06.720p.HDTV.x264-FLEET[rartv].torrent':
+Attempting to add torrent: /tmp/download.php?id=knvwjle&f=Dark.Matter.S02E06.720p.HDTV.x264-FLEET[rartv].torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Dark.Matter.S02E06.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Dark.Matter.S02E06.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Shameless.US.S06E11.720p.HDTV.X264-DIMENSION[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Shameless.US.S06E11.720p.HDTV.X264-DIMENSION[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://rarbg.to/download.php?id=64o3ac8&f=Outcast.S01E09.720p.HDTV.x264-KILLERS[rartv].torrent':
+Attempting to add torrent: /tmp/download.php?id=64o3ac8&f=Outcast.S01E09.720p.HDTV.x264-KILLERS[rartv].torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Shameless.US.S06E12.720p.HDTV.X264-DIMENSION[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Shameless.US.S06E12.720p.HDTV.X264-DIMENSION[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Suits.S06E05.720p.HDTV.x264-KILLERS[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Suits.S06E05.720p.HDTV.x264-KILLERS[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Mr.Robot.S02E06.PROPER.720p.HDTV.x264-KILLERS[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Mr.Robot.S02E06.PROPER.720p.HDTV.x264-KILLERS[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://rarbg.to/download.php?id=ik56sc8&f=Killjoys.S02E07.720p.HDTV.x264-AVS[rartv].torrent':
+Attempting to add torrent: /tmp/download.php?id=ik56sc8&f=Killjoys.S02E07.720p.HDTV.x264-AVS[rartv].torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E07.HDTV.x264-FUM[eztv].mp4.torrent':
+Attempting to add torrent: /tmp/Killjoys.S02E07.HDTV.x264-FUM[eztv].mp4.torrent
+Torrent added!
+
+Torrent 'https://rarbg.to/download.php?id=ncao694&f=Dark.Matter.S02E07.720p.HDTV.x264-FLEET[rartv].torrent':
+Attempting to add torrent: /tmp/download.php?id=ncao694&f=Dark.Matter.S02E07.720p.HDTV.x264-FLEET[rartv].torrent
+Torrent added!
+
+Torrent 'https://rarbg.to/download.php?id=sfq27zg&f=Outcast.S01E10.720p.HDTV.x264-KILLERS[rartv].torrent':
+Attempting to add torrent: /tmp/download.php?id=sfq27zg&f=Outcast.S01E10.720p.HDTV.x264-KILLERS[rartv].torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Outcast.S01E10.720p.HDTV.x264-KILLERS[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Outcast.S01E10.720p.HDTV.x264-KILLERS[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/The.Last.Ship.S03E09.HDTV.x264-LOL[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/The.Last.Ship.S03E09.HDTV.x264-LOL[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Suits.S06E06.720p.HDTV.x264-KILLERS[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Suits.S06E06.720p.HDTV.x264-KILLERS[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Mr.Robot.S02E07.HDTV.x264-FUM[eztv].mp4.torrent':
+Attempting to add torrent: /tmp/Mr.Robot.S02E07.HDTV.x264-FUM[eztv].mp4.torrent
+Torrent added!
+
+Torrent 'https://rarbg.to/download.php?id=rss_rt.php?id=xyd29uble4&m=t&f=Killjoys.S02E08.720p.HDTV.x264-FLEET[rartv].torrent':
+Attempting to add torrent: /tmp/download.php?id=rss_rt.php?id=xyd29uble4&m=t&f=Killjoys.S02E08.720p.HDTV.x264-FLEET[rartv].torrent
+Torrent added!
+
+Torrent 'https://rarbg.to/download.php?id=rss_rt.php?id=xyd29uble4&m=t&f=Killjoys.S02E08.720p.HDTV.x264-FLEET[rartv].torrent':
+Attempting to add torrent: /tmp/The.Amazing.World.of.Gumball.S04E33.WEB-DL.x264-RARBG.torrent
+Torrent added!
+
+Torrent 'https://rarbg.to/download.php?id=rss_rt.php?id=xyd29uble4&m=t&f=Killjoys.S02E08.720p.HDTV.x264-FLEET[rartv].torrent':
+Attempting to add torrent: /tmp/Killjoys.S02E08.720p.HDTV.x264-FLEET[rartv].torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Dark.Matter.S02E08.PROPER.HDTV.x264-KILLERS[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Dark.Matter.S02E08.PROPER.HDTV.x264-KILLERS[eztv].mkv.torrent.torrent
+Torrent added!
+
+Torrent 'https://rarbg.to/download.php?id=rss_rt.php?id=huxci79rk5&m=t&f=Fear.the.Walking.Dead.S02E08.720p.HDTV.x264-FLEET[rartv].torrent':
+Attempting to add torrent: /tmp/Fear.the.Walking.Dead.S02E08.720p.HDTV.x264-FLEET[rartv].torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Fear.the.Walking.Dead.S02E08.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Fear.the.Walking.Dead.S02E08.HDTV.x264-FLEET[eztv].mkv.torrent.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/The.Last.Ship.S03E10.HDTV.x264-LOL[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/The.Last.Ship.S03E10.HDTV.x264-LOL[eztv].mkv.torrent.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Mr.Robot.S02E05.HDTV.x264-FUM[eztv].mp4.torrent':
+Attempting to add torrent: /tmp/Mr.Robot.S02E05.HDTV.x264-FUM[eztv].mp4.torrent.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Mr.Robot.S02E05.HDTV.x264-FUM[eztv].mp4.torrent':
+Attempting to add torrent: /tmp/Mr.Robot.S02E05.HDTV.x264-FUM[eztv].mp4.torrent.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Stranger.Things.S01E02.WEBRip.x264-TURBO[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Stranger.Things.S01E02.WEBRip.x264-TURBO[eztv].mkv.torrent.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Mr.Robot.S02E06.PROPER.720p.HDTV.x264-KILLERS[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Mr.Robot.S02E06.PROPER.720p.HDTV.x264-KILLERS[eztv].mkv.torrent.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Stranger.Things.S01E03.WEBRip.x264-TURBO[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Stranger.Things.S01E03.WEBRip.x264-TURBO[eztv].mkv.torrent.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Mr.Robot.S02E05.HDTV.x264-FUM[eztv].mp4.torrent':
+Attempting to add torrent: /tmp/Mr.Robot.S02E05.HDTV.x264-FUM[eztv].mp4.torrent.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Mr.Robot.S02E05.INTERNAL.720p.HDTV.x264-KILLERS[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/mr..robot.S02E05.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Mr.Robot.S02E06.PROPER.720p.HDTV.x264-KILLERS[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/mr..robot.S02E06.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Mr.Robot.S02E07.INTERNAL.720p.HDTV.x264-KILLERS[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/mr..robot.S02E07.torrent
+Torrent added!
+
+Torrent 'https://rarbg.to/download.php?id=rss_rt.php?id=nwlomh07et&m=t&f=Suits.S06E07.720p.HDTV.x264-KILLERS[rartv].torrent':
+Failed to connect to 127.0.0.1:58846 with reason: Connection refused
+
+Torrent 'https://rarbg.to/download.php?id=rss_rt.php?id=nwlomh07et&m=t&f=Suits.S06E07.720p.HDTV.x264-KILLERS[rartv].torrent':
+Failed to connect to 127.0.0.1:58846 with reason: Connection refused
+
+Torrent 'https://rarbg.to/download.php?id=rss_rt.php?id=nwlomh07et&m=t&f=Suits.S06E07.720p.HDTV.x264-KILLERS[rartv].torrent':
+Failed to connect to 127.0.0.1:58846 with reason: Connection refused
+
+Torrent 'https://rarbg.to/download.php?id=rss_rt.php?id=nwlomh07et&m=t&f=Suits.S06E07.720p.HDTV.x264-KILLERS[rartv].torrent':
+Failed to connect to 127.0.0.1:58846 with reason: Connection refused
+
+Torrent 'https://rarbg.to/download.php?id=rss_rt.php?id=nwlomh07et&m=t&f=Suits.S06E07.720p.HDTV.x264-KILLERS[rartv].torrent':
+Failed to connect to 127.0.0.1:58846 with reason: Connection refused
+
+Torrent 'https://rarbg.to/download.php?id=rss_rt.php?id=nwlomh07et&m=t&f=Suits.S06E07.720p.HDTV.x264-KILLERS[rartv].torrent':
+Failed to connect to 127.0.0.1:58846 with reason: Connection refused
+
+Torrent 'https://rarbg.to/download.php?id=rss_rt.php?id=nwlomh07et&m=t&f=Suits.S06E07.720p.HDTV.x264-KILLERS[rartv].torrent':
+Failed to connect to 127.0.0.1:58846 with reason: Connection refused
+
+Torrent 'https://rarbg.to/download.php?id=rss_rt.php?id=nwlomh07et&m=t&f=Suits.S06E07.720p.HDTV.x264-KILLERS[rartv].torrent':
+Failed to connect to 127.0.0.1:58846 with reason: Connection refused
+
+Torrent 'https://rarbg.to/download.php?id=rss_rt.php?id=nwlomh07et&m=t&f=Suits.S06E07.720p.HDTV.x264-KILLERS[rartv].torrent':
+Failed to connect to 127.0.0.1:58846 with reason: Connection refused
+
+Torrent 'https://rarbg.to/download.php?id=rss_rt.php?id=nwlomh07et&m=t&f=Suits.S06E07.720p.HDTV.x264-KILLERS[rartv].torrent':
+Failed to connect to 127.0.0.1:58846 with reason: Connection refused
+
+Torrent 'https://zoink.ch/torrent/Dark.Matter.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/dark.matter.S02E09.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Dark.Matter.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/dark.matter.S02E09.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Dark.Matter.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+/tmp/Dark doesn't exist!
+Matter doesn't exist!
+S02E09 doesn't exist!
+720p doesn't exist!
+HDTV doesn't exist!
+x264-FLEET.torrent doesn't exist!
+
+Torrent 'https://zoink.ch/torrent/Dark.Matter.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+/tmp/Dark doesn't exist!
+Matter doesn't exist!
+S02E09 doesn't exist!
+HDTV doesn't exist!
+x264-FLEET.torrent doesn't exist!
+
+Torrent 'https://zoink.ch/torrent/Dark.Matter.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+/tmp/Dark doesn't exist!
+Matter doesn't exist!
+S02E09 doesn't exist!
+HDTV doesn't exist!
+x264-FLEET.torrent doesn't exist!
+
+Torrent 'https://zoink.ch/torrent/Dark.Matter.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+/tmp/Dark doesn't exist!
+Matter doesn't exist!
+S02E09 doesn't exist!
+HDTV doesn't exist!
+x264-FLEET.torrent doesn't exist!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+/tmp/Killjoys doesn't exist!
+S02E09 doesn't exist!
+720p doesn't exist!
+HDTV doesn't exist!
+x264-FLEET.torrent doesn't exist!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+/tmp/Killjoys doesn't exist!
+S02E09 doesn't exist!
+HDTV doesn't exist!
+x264-FLEET.torrent doesn't exist!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+/tmp/Killjoys doesn't exist!
+S02E09 doesn't exist!
+HDTV doesn't exist!
+x264-FLEET.torrent doesn't exist!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+/tmp/Killjoys doesn't exist!
+S02E09 doesn't exist!
+HDTV doesn't exist!
+x264-FLEET.torrent doesn't exist!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+/tmp/Killjoys doesn't exist!
+S02E09 doesn't exist!
+HDTV doesn't exist!
+x264-FLEET.torrent doesn't exist!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+/tmp/Killjoys doesn't exist!
+S02E09 doesn't exist!
+HDTV doesn't exist!
+x264-FLEET.torrent doesn't exist!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+/tmp/Killjoys doesn't exist!
+S02E09 doesn't exist!
+HDTV doesn't exist!
+x264-FLEET.torrent doesn't exist!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+/tmp/Killjoys doesn't exist!
+S02E09 doesn't exist!
+HDTV doesn't exist!
+x264-FLEET.torrent doesn't exist!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+/tmp/Killjoys doesn't exist!
+S02E09 doesn't exist!
+HDTV doesn't exist!
+x264-FLEET.torrent doesn't exist!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+/tmp/Killjoys doesn't exist!
+S02E09 doesn't exist!
+HDTV doesn't exist!
+x264-FLEET.torrent doesn't exist!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+/tmp/Killjoys doesn't exist!
+S02E09 doesn't exist!
+HDTV doesn't exist!
+x264-FLEET.torrent doesn't exist!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+/tmp/Killjoys doesn't exist!
+S02E09 doesn't exist!
+HDTV doesn't exist!
+x264-FLEET.torrent doesn't exist!
+
+Torrent 'https://zoink.ch/torrent/Dark.Matter.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Dark.Matter.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Dark.Matter.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Dark.Matter.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Dark.Matter.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Dark.Matter.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Dark.Matter.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Dark.Matter.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/Killjoys.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/The.Last.Ship.S03E11.720p.HDTV.X264-DIMENSION[eztv].mkv.torrent':
+Failed to connect to 127.0.0.1:58846 with reason: Connection refused
+
+Torrent 'https://zoink.ch/torrent/The.Last.Ship.S03E11.720p.HDTV.X264-DIMENSION[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/The.Last.Ship.S03E11.720p.HDTV.X264-DIMENSION[eztv].mkv.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Dark.Matter.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/dark.matter.S02E09.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Dark.Matter.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/dark.matter.S02E09.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Mr.Robot.S02E07.INTERNAL.720p.HDTV.x264-KILLERS[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/mr..robot.S02E07.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Mr.Robot.S02E08.720p.HDTV.x264-AVS[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/mr..robot.S02E08.torrent
+Torrent added!
+
+Torrent 'https://zoink.ch/torrent/Dark.Matter.S02E09.720p.HDTV.x264-FLEET[eztv].mkv.torrent':
+Attempting to add torrent: /tmp/dark.matter.S02E09.torrent
+Torrent added!
+
