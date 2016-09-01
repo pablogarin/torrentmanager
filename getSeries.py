@@ -6,10 +6,20 @@ def main():
 	get.promptName()
 
 class getseries:
-	database = '/home/pi/torrentManager/downloadTorrents.db'
+	folder = os.path.dirname(os.path.realpath(__file__))
+	database = folder+'/downloadTorrents.db'
 	prompt = False
 
 	def __init__(self):
+		conn = sqlite3.connect(self.database)
+		try:
+			with conn:
+				conn.row_factory = sqlite3.Row
+				c = conn.cursor()
+				c.execute("CREATE TABLE IF NOT EXISTS tv_show(id integer primary key autoincrement, title varchar(255), regex varchar(255), season int, episode int, status int, imdbID varchar(120), thetvdbID varchar(120), ultimoCapitulo datetime);")
+		except Exception, e:
+			print "Error al crear la base de datos: "+str(e)
+			sys.exit(1)
 		self.conn = sqlite3.connect(self.database)
 
 	def promptName(self):

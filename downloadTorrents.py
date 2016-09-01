@@ -23,6 +23,18 @@ class torrentFinder:
 		conn = sqlite3.connect(self.database)
 		try:
 			with conn:
+				conn.row_factory = sqlite3.Row
+				c = conn.cursor()
+				c.execute("CREATE TABLE IF NOT EXISTS tv_show(id integer primary key autoincrement, title varchar(255), regex varchar(255), season int, episode int, status int, imdbID varchar(120), thetvdbID varchar(120), ultimoCapitulo datetime);")
+		except Exception, e:
+			print "Error al crear la base de datos: "+str(e)
+			sys.exit(1)
+	
+	def loadDatabase(self):
+		print "Leyendo Series...\n"
+		conn = sqlite3.connect(self.database)
+		try:
+			with conn:
 				print "Leyendo Series...\n"
 				conn.row_factory = sqlite3.Row
 				c = conn.cursor()
@@ -35,6 +47,7 @@ class torrentFinder:
 		except Exception, e:
 			print "Error al leer la base de datos: "+str(e)
 			sys.exit(1)
+		
 	
 	def readRSS(self):
 		for url in self.safeRSS:
