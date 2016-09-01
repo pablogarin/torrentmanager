@@ -29,6 +29,8 @@ class torrentFinder:
 		except Exception, e:
 			print "Error al crear la base de datos: "+str(e)
 			sys.exit(1)
+		if not os.path.exists(self.folder+"/logs"):
+			os.makedirs(self.folder+"/logs")
 	
 	def loadDatabase(self):
 		print "Leyendo Series...\n"
