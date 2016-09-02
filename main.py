@@ -24,8 +24,11 @@ def main(args):
 			
 		else:
 			print "Parametro no encontrado."
-	elif len(args)==3:
-		value = args[2]
+	elif len(args)>=3:
+		value = ""
+		for i in range(2,len(args)):
+			value = value+args[i]+" "
+		value = value.rstrip()
 		if option == "--search" or option == "-s":
 			gs = getSeries.getseries()
 			if gs.search(value):
