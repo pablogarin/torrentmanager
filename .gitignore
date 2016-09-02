@@ -1,3 +1,4 @@
 downloadTorrents.db
-*.log
 config.ini
+*.pyc
+*.log
