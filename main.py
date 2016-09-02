@@ -16,7 +16,7 @@ def main(args):
 					obj.insertName = serie['title']
 					obj.imdb = serie['imdbID']
 					obj.registerSeries(id)
-		elif option == "--byname" or option == "-n":
+		elif option == "--by-name" or option == "-n":
 			downloadTorrents.torrentFinder().checkByName()
 		elif option == "--list-shows" or option == "-l":
 			for show in downloadTorrents.torrentFinder().getSeries():
