@@ -53,7 +53,7 @@ class torrentFinder:
 		
 	def defineDownloadFolder(self):
 		Config = ConfigParser.ConfigParser()
-		if not os.path.isfile("config.ini"):
+		if not os.path.isfile(self.folder+"/config.ini"):
 			folder = raw_input("Por favor ingrese una carpeta para la descarga de los torrents: ")
 			if not folder:
 				self.defineDownloadFolder()
@@ -61,11 +61,11 @@ class torrentFinder:
 				Config.add_section("generals")
 				Config.set("generals", "download_folder", folder)
 				self.downloadFolder = folder
-				cfgfile = open("config.ini", 'w')
+				cfgfile = open(self.folder+"/config.ini", 'w')
 				Config.write(cfgfile)
 				cfgfile.close()
 		else:
-			Config.read("config.ini")
+			Config.read(self.folder+"/config.ini")
 			self.downloadFolder = Config.get("generals", "download_folder")
 
 	def getSeries(self):
