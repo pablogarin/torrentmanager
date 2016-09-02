@@ -108,14 +108,15 @@ class getseries:
 					self.imdb = data['IMDB_ID']
 				else:
 					self.imdb = 'Null'
+				self.shows.append({'id':self.id, 'name':self.insertName, 'imdb': self.imdb})
 			if self.prompt:
 				print self.insertName
 				self.registerSeries(self.id)
-			return True
 		else:
 			if self.prompt:
 				print "No se encontraron series."
 			return False
+		return True
 	
 	def getShows(self):
 		return self.shows

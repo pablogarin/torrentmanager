@@ -32,6 +32,7 @@ def main(args):
 		if option == "--search" or option == "-s":
 			gs = getSeries.getseries()
 			if gs.search(value):
+				print "Encontrada"
 				for show in gs.getShows():
 					pprint(show)
 			else:
