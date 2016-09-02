@@ -4,3 +4,4 @@ pip install feedparser xmltodict
 touch /usr/bin/torrentmanager
 echo '#!/bin/bash' > /usr/bin/torrentmanager
 echo "$(pwd)/main.py \$@" >> /usr/bin/torrentmanager
+chmod +x /usr/bin/torrentmanager
