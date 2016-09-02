@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import os, sys, re, sqlite3, subprocess, urllib2, feedparser, time, threading, socket
+import os, sys, re, sqlite3, subprocess, urllib2, feedparser, time, threading, socket, ConfigParser
 from urllib2 import urlopen, Request, URLError, HTTPError
 from lxml import html
 from OpenSSL import SSL
@@ -32,6 +32,7 @@ class torrentFinder:
 		if not os.path.exists(self.folder+"/logs"):
 			os.makedirs(self.folder+"/logs")
 		self.loadDatabase()
+		self.defineDownloadFolder()
 	
 	def loadDatabase(self):
 		print "Leyendo Series...\n"
@@ -50,6 +51,23 @@ class torrentFinder:
 			print "Error al leer la base de datos: "+str(e)
 			sys.exit(1)
 		
+	def defineDownloadFolder(self):
+		Config = ConfigParser.ConfigParser()
+		if not os.path.isfile("config.ini"):
+			folder = raw_input("Por favor ingrese una carpeta para la descarga de los torrents: ")
+			if not folder:
+				self.defineDownloadFolder()
+			else:
+				Config.add_section("generals")
+				Config.set("generals", "download_folder", folder)
+				self.downloadFolder = folder
+				cfgfile = open("config.ini", 'w')
+				Config.write(cfgfile)
+				cfgfile.close()
+		else:
+			Config.read("config.ini")
+			self.downloadFolder = Config.get("generals", "download_folder")
+
 	def getSeries(self):
 		return self.series
 		
@@ -281,7 +299,7 @@ class torrentFinder:
 			print "Error de URL:", str(e), url
 		folder = serie['title'].replace(' ','.')
 		folder = folder.replace("'",'')
-		addCommand = "deluge-console add '/tmp/"+torrentFile+" --path=/mnt/drive/download/Series/"+folder+"/'"
+		addCommand = "deluge-console add '/tmp/"+torrentFile+" --path="+self.downloadFolder+"/"+folder+"/'"
 		print addCommand
 		result = subprocess.check_output(addCommand, shell=True)
 		self.logOutput(url,result)

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import urllib2, os, sys, re, sqlite3, xmltodict,time
+import urllib2, os, sys, re, sqlite3, xmltodict,time, ConfigParser
 from pprint import pprint
 
 def main():
@@ -17,6 +17,7 @@ class getseries:
 	shows  = []
 
 	def __init__(self):
+		self.defineDownloadFolder()
 		conn = sqlite3.connect(self.database)
 		try:
 			with conn:
@@ -28,6 +29,23 @@ class getseries:
 			sys.exit(1)
 		self.conn = sqlite3.connect(self.database)
 
+	def defineDownloadFolder(self):
+		Config = ConfigParser.ConfigParser()
+		if not os.path.isfile("config.ini"):
+			folder = raw_input("Por favor ingrese una carpeta para la descarga de los torrents: ")
+			if not folder:
+				self.defineDownloadFolder()
+			else:
+				Config.add_section("generals")
+				Config.set("generals", "download_folder", folder)
+				self.downloadFolder = folder
+				cfgfile = open("config.ini", 'w')
+				Config.write(cfgfile)
+				cfgfile.close()
+		else:
+			Config.read("config.ini")
+			self.downloadFolder = Config.get("generals", "download_folder")
+		
 	def promptName(self):
 		query = raw_input("Ingrese el nombre de la serie: ")
 		self.query = query
@@ -261,7 +279,7 @@ class getseries:
 						c.execute(query)
 						if self.prompt:
 							print "Serie '"+title+"' fue agendada con exito"
-						path = "/mnt/drive/download/Series/"+title.replace(' ','.');
+						path = self.downloadFolder+"/"+title.replace(' ','.');
 						if not os.path.exists(path):
 							os.makedirs(path)
 				return True
