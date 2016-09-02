@@ -31,6 +31,7 @@ class torrentFinder:
 			sys.exit(1)
 		if not os.path.exists(self.folder+"/logs"):
 			os.makedirs(self.folder+"/logs")
+		self.loadDatabase()
 	
 	def loadDatabase(self):
 		print "Leyendo Series...\n"
