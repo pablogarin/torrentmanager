@@ -1,8 +1,8 @@
-Torrent Manager<br/>
-====================<br/>
-<br/>
-To install, run "sudo ./install.sh"<br/>
-<br/>
+Torrent Manager
+====================
+
+To install, run "sudo ./install.sh"
+
 <b>TORRENTMANAGER(1)</b><br/>
 <br/>
 <b>NAME:</b><br/>
