@@ -18,6 +18,10 @@ def main(args):
 					obj.registerSeries(id)
 		elif option == "--byname" or option == "-n":
 			downloadTorrents.torrentFinder().checkByName()
+		elif option == "--list-shows" or option == "-l":
+			for show in downloadTorrents.torrentFinder().getSeries():
+				print show['title']+" (Temporada "+str(show['season'])+", Capitulo "+str(show['episode'])+")"
+			
 		else:
 			print "Parametro no encontrado."
 	elif len(args)==3:

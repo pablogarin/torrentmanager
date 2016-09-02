@@ -38,7 +38,6 @@ class torrentFinder:
 		conn = sqlite3.connect(self.database)
 		try:
 			with conn:
-				print "Leyendo Series...\n"
 				conn.row_factory = sqlite3.Row
 				c = conn.cursor()
 				c.execute("SELECT * FROM tv_show ORDER BY ultimoCapitulo");
@@ -51,7 +50,9 @@ class torrentFinder:
 			print "Error al leer la base de datos: "+str(e)
 			sys.exit(1)
 		
-	
+	def getSeries(self):
+		return self.series
+		
 	def readRSS(self):
 		for url in self.safeRSS:
 			print "Leyendo Feed RSS '"+url+"'"
