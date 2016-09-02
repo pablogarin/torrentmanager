@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import sys, downloadTorrents, getSeries
+import sys, os, downloadTorrents, getSeries, ConfigParser
 from pprint import pprint
 
 def main(args):
@@ -21,7 +21,8 @@ def main(args):
 		elif option == "--list-shows" or option == "-l":
 			for show in downloadTorrents.torrentFinder().getSeries():
 				print show['title']+" (Temporada "+str(show['season'])+", Capitulo "+str(show['episode'])+")"
-			
+		elif option == "--config" or option == "-c":
+			defineDownloadFolder()
 		else:
 			print "Parametro no encontrado."
 	elif len(args)>=3:
@@ -49,6 +50,20 @@ def main(args):
 	else:
 		downloadTorrents.torrentFinder().readRSS()
 	return 0
+
+def defineDownloadFolder():
+	path = os.path.dirname(os.path.realpath(__file__))
+	Config = ConfigParser.ConfigParser()
+	folder = raw_input("Por favor ingrese una carpeta para la descarga de los torrents: ")
+	if not folder:
+		print "Debe definir una carpeta."
+		defineDownloadFolder()
+	else:
+		Config.add_section("generals")
+		Config.set("generals", "download_folder", folder)
+		cfgfile = open(path+"/config.ini", 'w')
+		Config.write(cfgfile)
+		cfgfile.close()
 
 if __name__ == "__main__":
 	sys.exit(main(sys.argv))
