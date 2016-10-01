@@ -11,6 +11,7 @@ socket.setdefaulttimeout(3)
 class torrentFinder:
 	folder = os.path.dirname(os.path.realpath(__file__))
 	database = folder+'/downloadTorrents.db'
+	updateAfter = False
 	def __init__(self):
 		print "Inicializando variables..."
 		self.serie = None
@@ -110,7 +111,7 @@ class torrentFinder:
 						#m = re.search(regex,name)
 						#if m:
 						print "paso la primera"
-						regex = "(LOL|FUM|DIMENSION|KILLERS|FLEET|AVS)"
+						regex = "(LOL|FUM|DIMENSION|KILLERS|FLEET|AVS|TURBO)"
 						m = re.search(regex,name)
 						if m:
 							print "paso la segunda"
@@ -183,16 +184,20 @@ class torrentFinder:
 				name = tmp[-1]
 				if self.checkName(name, serie):
 					print "Torrent encontrado: '"+name+"'"
-					regex = "(LOL|FUM|DIMENSION|KILLERS|FLEET|AVS)"
+					regex = "(LOL|FUM|DIMENSION|KILLERS|FLEET|AVS|TURBO)"
 					m = re.search(regex,name)
 					if m:
 						print "paso la primera: '"+regex+"'"
+						torrent = link
+						torrentSeries = serie
+						foundBest = True
 						regex = "(720[Pp])"
 						m = re.search(regex,name)
 						if m:
 							print "paso la segunda: '"+regex+"'"
 							torrent = link
 							torrentSeries = serie
+							self.updateAfter = True
 							foundBest = True
 					regex = "(720[Pp])"
 					m = re.search(regex,name)
@@ -200,6 +205,7 @@ class torrentFinder:
 						print "paso la primera: '"+regex+"'"
 						torrent = link
 						torrentSeries = serie
+						self.updateAfter = True
 						foundBest = True
 			if torrent != None:
 				self.addTorrent(torrent,torrentSeries,filename)
@@ -309,8 +315,9 @@ class torrentFinder:
 			return
 		m = re.search("(Torrent added!)", result)
 		if m:
-			self.updateEpisode(serie)
-	#		sys.exit(0)
+			if self.updateAfter:
+				self.updateEpisode(serie)
+		#		sys.exit(0)
 		else:
 			self.invalidTorrents.append(url)
 			return
