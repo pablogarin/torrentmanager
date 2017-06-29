@@ -30,8 +30,8 @@ class torrentFinder:
 		except Exception, e:
 			print "Error al crear la base de datos: "+str(e)
 			sys.exit(1)
-		if not os.path.exists(self.folder+"/logs"):
-			os.makedirs(self.folder+"/logs")
+		# if not os.path.exists(self.folder+"/logs"):
+		# 	os.makedirs(self.folder+"/logs")
 		self.loadDatabase()
 		self.defineDownloadFolder()
 	
@@ -117,9 +117,13 @@ class torrentFinder:
 							print "paso la segunda"
 							regex = "(720[Pp])"
 							m = re.search(regex,name)
+							torrent = link
+							torrentSeries = serie
+							foundBest = True
 							if m:
 								print "paso la tercera"
 								torrent = link
+								self.updateAfter = True
 								torrentSeries = serie
 								foundBest = True
 						regex = "(720[Pp])"
@@ -127,6 +131,7 @@ class torrentFinder:
 						if m:
 							print "paso la segunda"
 							torrent = link
+							self.updateAfter = True
 							torrentSeries = serie
 				if torrent != None:
 					self.addTorrent(torrent,torrentSeries,filename)
@@ -214,6 +219,8 @@ class torrentFinder:
 			print "Error de HTTP:",str(e), url
 		except URLError, e:
 			print "Error de URL:",str(e), url
+		except:
+			print "Error Generico:",sys.exc_info()[0], url
 
 	def checkName(self,name,serie):
 		#TODO: add the best match, not the first
@@ -286,7 +293,7 @@ class torrentFinder:
 	def addTorrent(self,url,serie, fileName):
 		print "Intentando agregar el torrent '" + url + "' a la cola de descargas..."
 		try:
-			torrentFile = fileName
+			torrentFile = fileName.replace("'","")
 			print "Descargando ", torrentFile
 			hdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
 			       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -323,16 +330,16 @@ class torrentFinder:
 			return
 
 	def logOutput(self,torrent,output):
-		handle = open(self.folder+'/logs/deluged-'+str(date.today())+'.log','a')
-		handle.write("Torrent '"+torrent+"':\n")
-		handle.write(output)
-		handle.write("\n")
-		handle.close()
+		# handle = open(self.folder+'/logs/deluged-'+str(date.today())+'.log','a')
+		# handle.write("Torrent '"+torrent+"':\n")
+		# handle.write(output)
+		# handle.write("\n")
+		# handle.close()
 
 	def logProcess(self,strLog):
-		handle = open(self.folder+'/logs/whathappened-'+str(date.today())+'.log','a')
-		handle.write(strLog+"\n")
-		handle.close()
+		# handle = open(self.folder+'/logs/whathappened-'+str(date.today())+'.log','a')
+		# handle.write(strLog+"\n")
+		# handle.close()
 
 def main(argv=None):
 	if argv is None:

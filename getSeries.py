@@ -262,6 +262,7 @@ class getseries:
 						regex += word+" "
 					regex = regex.strip()
 					regex = regex.replace("'","")
+					regex = regex.replace(":","")
 					regex = re.sub('[ \.]',"[\\. ]{0,1}",regex)
 					regex = re.sub("[A-Z]",lambda pat: "["+pat.group(0)+pat.group(0).lower()+"]",regex)
 					
