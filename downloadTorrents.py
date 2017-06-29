@@ -335,11 +335,13 @@ class torrentFinder:
 		# handle.write(output)
 		# handle.write("\n")
 		# handle.close()
+		return
 
 	def logProcess(self,strLog):
 		# handle = open(self.folder+'/logs/whathappened-'+str(date.today())+'.log','a')
 		# handle.write(strLog+"\n")
 		# handle.close()
+		return
 
 def main(argv=None):
 	if argv is None:
