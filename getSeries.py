@@ -277,7 +277,6 @@ class getseries:
 				#		except:
 				#			id=1
 						query = "INSERT OR REPLACE INTO tv_show VALUES(COALESCE((SELECT id FROM tv_show WHERE title='"+title+"'),(SELECT MAX(id) FROM tv_show) + 1),'"+title+"','"+regex+"',"+`nextReg['season']`+","+`nextReg['episode']`+",1,'"+self.imdb+"','"+id+"',datetime())"
-						#print query
 						c.execute(query)
 						if self.prompt:
 							print "Serie '"+title+"' fue agendada con exito"
