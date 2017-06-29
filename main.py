@@ -18,6 +18,9 @@ def main(args):
 					obj.registerSeries(id)
 		elif option == "--by-name" or option == "-n":
 			downloadTorrents.torrentFinder().checkByName()
+		elif option == "--search" or option == "-s":
+			gs = getSeries.getseries()
+			gs.promptName()
 		elif option == "--list-shows" or option == "-l":
 			for show in downloadTorrents.torrentFinder().getSeries():
 				print show['title']+" (Temporada "+str(show['season'])+", Capitulo "+str(show['episode'])+")"
