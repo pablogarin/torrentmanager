@@ -3,8 +3,11 @@ import urllib2, os, sys, re, sqlite3, xmltodict,time, ConfigParser
 from pprint import pprint
 
 def main():
-	get = getseries()
-	get.promptName()
+	try:
+		get = getseries()
+		get.promptName()
+	except:
+		print "Cancelado por el usuario."
 
 class getseries:
 	folder = os.path.dirname(os.path.realpath(__file__))

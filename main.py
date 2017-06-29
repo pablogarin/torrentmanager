@@ -19,8 +19,11 @@ def main(args):
 		elif option == "--by-name" or option == "-n":
 			downloadTorrents.torrentFinder().checkByName()
 		elif option == "--search" or option == "-s":
-			gs = getSeries.getseries()
-			gs.promptName()
+			try:
+				gs = getSeries.getseries()
+				gs.promptName()
+			except:
+				print "Cancelado por el usuario"
 		elif option == "--list-shows" or option == "-l":
 			for show in downloadTorrents.torrentFinder().getSeries():
 				print show['title']+" (Temporada "+str(show['season'])+", Capitulo "+str(show['episode'])+")"
