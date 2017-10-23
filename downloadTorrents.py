@@ -111,7 +111,7 @@ class torrentFinder:
 						#m = re.search(regex,name)
 						#if m:
 						print "paso la primera"
-						regex = "(LOL|FUM|DIMENSION|KILLERS|FLEET|AVS|TURBO)"
+						regex = "(LOL|FUM|DIMENSION|KILLERS|FLEET|AVS|TURBO|STRiFE)"
 						m = re.search(regex,name)
 						if m:
 							print "paso la segunda"
@@ -189,7 +189,7 @@ class torrentFinder:
 				name = tmp[-1]
 				if self.checkName(name, serie):
 					print "Torrent encontrado: '"+name+"'"
-					regex = "(LOL|FUM|DIMENSION|KILLERS|FLEET|AVS|TURBO)"
+					regex = "(LOL|FUM|DIMENSION|KILLERS|FLEET|AVS|TURBO|STRiFE)"
 					m = re.search(regex,name)
 					if m:
 						print "paso la primera: '"+regex+"'"

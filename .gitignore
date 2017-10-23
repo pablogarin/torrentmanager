@@ -2,3 +2,7 @@ downloadTorrents.db
 config.ini
 *.pyc
 *.log
+lastExec
+lastUPD
+recursive_search
+torrentmanager
