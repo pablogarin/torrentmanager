@@ -7,7 +7,7 @@ def main():
 		get = getseries()
 		get.promptName()
 	except:
-		print "Cancelado por el usuario."
+		print "Cancelled by user."
 
 class getseries:
 	folder = os.path.dirname(os.path.realpath(__file__))
@@ -26,9 +26,9 @@ class getseries:
 			with conn:
 				conn.row_factory = sqlite3.Row
 				c = conn.cursor()
-				c.execute("CREATE TABLE IF NOT EXISTS tv_show(id integer primary key autoincrement, title varchar(255), regex varchar(255), season int, episode int, status int, imdbID varchar(120), thetvdbID varchar(120), ultimoCapitulo datetime);")
+				c.execute("CREATE TABLE IF NOT EXISTS tv_show(id integer primary key autoincrement, title varchar(255), regex varchar(255), season int, episode int, status int, imdbID varchar(120), thetvdbID varchar(120), lastDownload datetime);")
 		except Exception, e:
-			print "Error al crear la base de datos: "+str(e)
+                        print "Error: unable to create database. Details: "+str(e)
 			sys.exit(1)
 		self.conn = sqlite3.connect(self.database)
 
@@ -50,7 +50,7 @@ class getseries:
 			self.downloadFolder = Config.get("generals", "download_folder")
 		
 	def promptName(self):
-		query = raw_input("Ingrese el nombre de la serie: ")
+		query = raw_input("Please input the show to find: ")
 		self.query = query
 		self.prompt = True
 		self.search(query)
@@ -96,7 +96,7 @@ class getseries:
 					n+=1
 				if n>0:
 					if self.prompt:
-						i = int(raw_input("Por favor indique la serie a agregar: "))-1
+						i = int(raw_input("Please input the show to find: "))-1
 				else:
 					i = n
 
@@ -117,7 +117,7 @@ class getseries:
 				self.registerSeries(self.id)
 		else:
 			if self.prompt:
-				print "No se encontraron series."
+				print "Show not found."
 			return False
 		return True
 	
@@ -134,7 +134,7 @@ class getseries:
 			data = file.read()
 			file.close
 		except Exception, e:
-			print "No se pudo abrir la pagina web."
+			print "Unable to connect to web service."
 		if data != None:
 			try:
 				data = xmltodict.parse(data)
@@ -182,7 +182,10 @@ class getseries:
 							aired = False
 						if aired:
 							if self.prompt:
-								print "S"+S+"E"+E+": "+title+"(Aired "+time.strftime(airDate)+")"
+                                                                if title == None:
+                                                                    title = ''
+                                                                D=time.strftime(airDate)
+								print "S%sE%s: %s(Aired %s)" % (S,E,title,D)
 							curSes = int(S)
 							curEp = int(E)
 							if curSes>=lastSes:
@@ -195,9 +198,9 @@ class getseries:
 						else:
 							if self.prompt:
 								try:
-									print "S"+S+"E"+E+": "+title+"(Pending "+time.strftime(airDate)+")"
+									print "S%sE%s: %s(Pending %s)" % (S,E,title,time.strftime(airDate))
 								except:
-									print "S"+S+"E"+E
+									print "S%sE%s" % (S,E)
 							curSes = int(S)
 							curEp = int(E)
 							if nextSes<curSes:
@@ -226,10 +229,10 @@ class getseries:
 				if lastSes==100:
 					lastEp = " Pending confirmation"
 				else:
-					lastEp = 'S'+lastSes+'E'+lastEp
+					lastEp = "S%sE%s" % (lastSes,lastEp)
 				if self.prompt:
 					print ""
-					print "Last Episode: "+lastEp
+					print "Last Episode: %s" % lastEp
 
 				if nextSes < 10:
 					nextSes = '0'+`nextSes`
@@ -242,18 +245,18 @@ class getseries:
 				if nextSes==100:
 					nextEp = " Pending confirmation"
 				else:
-					nextEp = 'S'+nextSes+'E'+nextEp
+					nextEp = "S%sE%s" % (nextSes,nextEp)
 				if self.prompt:
 					print ""
-					print "Next Episode: "+nextEp
+					print "Next Episode: %s" % nextEp
 
 				if self.prompt:
-					grabar = raw_input("Desea agendar la serie?[Y/n]:")
-					grabar = r'y'==grabar.lower()
+					saveShow = raw_input("Do you wish to schedule the show?[Y/n]:")
+					saveShow = r'y'==saveShow.lower()
 				else:
-					grabar = True
+					saveShow = True
 
-				if grabar:
+				if saveShow:
 					regex = ""
 					self.insertName = re.sub("\([0-9]{,4}\)","",self.insertName)
 					self.insertName = self.insertName.strip()
@@ -282,15 +285,15 @@ class getseries:
 						query = "INSERT OR REPLACE INTO tv_show VALUES(COALESCE((SELECT id FROM tv_show WHERE title='"+title+"'),(SELECT MAX(id) FROM tv_show) + 1),'"+title+"','"+regex+"',"+`nextReg['season']`+","+`nextReg['episode']`+",1,'"+self.imdb+"','"+id+"',datetime())"
 						c.execute(query)
 						if self.prompt:
-							print "Serie '"+title+"' fue agendada con exito"
+							print "Show '%s' scheduled!" % title
 						path = self.downloadFolder+"/"+title.replace(' ','.');
 						if not os.path.exists(path):
 							os.makedirs(path)
 				return True
 			except Exception, e:
-				print "error al leer la pagina: ", e
+				print "Unable to connect to web service: ", e
 				if self.prompt:
-					print "error al leer la pagina: {0}", e
+					print "Unable to connect to web service: {0}", e
 				return False
 
 

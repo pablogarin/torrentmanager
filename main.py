@@ -10,7 +10,7 @@ def main(args):
 			series = downloadTorrents.torrentFinder().series
 			for serie in series:
 				id = serie['thetvdbID']
-				print "Actualizando serie '"+serie['title']+"'("+id+")"
+				print "Updating show '"+serie['title']+"'("+id+")"
 				if id != None:
 					obj = getSeries.getseries()
 					obj.insertName = serie['title']
@@ -23,14 +23,14 @@ def main(args):
 				gs = getSeries.getseries()
 				gs.promptName()
 			except:
-				print "Cancelado por el usuario"
+				print "Cancelled by user"
 		elif option == "--list-shows" or option == "-l":
 			for show in downloadTorrents.torrentFinder().getSeries():
-				print show['title']+" (Temporada "+str(show['season'])+", Capitulo "+str(show['episode'])+")"
+				print show['title']+" (Season "+str(show['season'])+", Episode "+str(show['episode'])+")"
 		elif option == "--config" or option == "-c":
 			defineDownloadFolder()
 		else:
-			print "Parametro no encontrado."
+			print "Unknown Option."
 	elif len(args)>=3:
 		value = ""
 		for i in range(2,len(args)):
@@ -39,19 +39,19 @@ def main(args):
 		if option == "--search" or option == "-s":
 			gs = getSeries.getseries()
 			if gs.search(value):
-				print "Encontrada"
+				print "Match Found!"
 				for show in gs.getShows():
 					pprint(show)
 			else:
-				print "No se encontraron series"
+				print "No Matches for Show"
 		elif option == "--add" or option == "-a":
 			gs = getSeries.getseries()
 			if gs.registerSeries(value):
-				print "Serie agregada"
+				print "Show Added"
 			else:
-				print "Serie no encontrada"
+				print "Show not found!"
 		else:
-			print "Parametro no encontrado."
+			print "Unknown Option."
 			
 	else:
 		downloadTorrents.torrentFinder().readRSS()
@@ -60,16 +60,22 @@ def main(args):
 def defineDownloadFolder():
 	path = os.path.dirname(os.path.realpath(__file__))
 	Config = ConfigParser.ConfigParser()
-	folder = raw_input("Por favor ingrese una carpeta para la descarga de los torrents: ")
+	folder = raw_input("Please, enter the download folder: ")
 	if not folder:
-		print "Debe definir una carpeta."
+		print "You must define a download folder."
 		defineDownloadFolder()
-	else:
-		Config.add_section("generals")
-		Config.set("generals", "download_folder", folder)
-		cfgfile = open(path+"/config.ini", 'w')
-		Config.write(cfgfile)
-		cfgfile.close()
+                return
+	quality = raw_input("Please, enter the download quality: ")
+	if not quality:
+		print "You must define a download quality."
+		defineDownloadFolder()
+                return
+        Config.add_section("generals")
+        Config.set("generals", "download_folder", folder)
+        Config.set("generals", "quality", quality)
+        cfgfile = open(path+"/config.ini", 'w')
+        Config.write(cfgfile)
+        cfgfile.close()
 
 if __name__ == "__main__":
 	sys.exit(main(sys.argv))

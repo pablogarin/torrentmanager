@@ -13,22 +13,23 @@ class torrentFinder:
 	database = folder+'/downloadTorrents.db'
 	updateAfter = False
 	def __init__(self):
-		print "Inicializando variables..."
+		print "Initializing..."
 		self.serie = None
 		self.series = []
 		self.invalidTorrents = []
 		# self.safeRSS = ["https://rarbg.to/rss.php?categories=18;41","https://kat.cr/usearch/category:tv%20age:hour/?rss=1"]
 		#self.safeRSS = ["https://rarbg.to/rss.php?categories=18;41"]
-		self.safeRSS = ["https://eztv.ag/ezrss.xml"]
-		print "Conectando a la base de datos...\n"
+                self.safeRSS = ["https://eztv.ag/ezrss.xml","http://rarbg.to/rss.php?category=1;18;41;49"]
+                self.safeRSS = ["http://rarbg.to/rssdd.php?category=1;18;41;49"]
+		print "Conecting to Data Base...\n"
 		conn = sqlite3.connect(self.database)
 		try:
 			with conn:
 				conn.row_factory = sqlite3.Row
 				c = conn.cursor()
-				c.execute("CREATE TABLE IF NOT EXISTS tv_show(id integer primary key autoincrement, title varchar(255), regex varchar(255), season int, episode int, status int, imdbID varchar(120), thetvdbID varchar(120), ultimoCapitulo datetime);")
+				c.execute("CREATE TABLE IF NOT EXISTS tv_show(id integer primary key autoincrement, title varchar(255), regex varchar(255), season int, episode int, status int, imdbID varchar(120), thetvdbID varchar(120), lastDownload datetime);")
 		except Exception, e:
-			print "Error al crear la base de datos: "+str(e)
+                        print "Error: unable to create database. Details: "+str(e)
 			sys.exit(1)
 		# if not os.path.exists(self.folder+"/logs"):
 		# 	os.makedirs(self.folder+"/logs")
@@ -36,52 +37,59 @@ class torrentFinder:
 		self.defineDownloadFolder()
 	
 	def loadDatabase(self):
-		print "Leyendo Series...\n"
+		print "Listing Shows...\n"
 		conn = sqlite3.connect(self.database)
 		try:
 			with conn:
 				conn.row_factory = sqlite3.Row
 				c = conn.cursor()
-				c.execute("SELECT * FROM tv_show ORDER BY ultimoCapitulo");
+				c.execute("SELECT * FROM tv_show ORDER BY lastDownload");
 				while True:
 					row = c.fetchone()
 					if row==None:
 						break
 					self.series.append(row)
 		except Exception, e:
-			print "Error al leer la base de datos: "+str(e)
+                        print "Error: Unable to read database. Details: "+str(e)
 			sys.exit(1)
 		
 	def defineDownloadFolder(self):
 		Config = ConfigParser.ConfigParser()
 		if not os.path.isfile(self.folder+"/config.ini"):
-			folder = raw_input("Por favor ingrese una carpeta para la descarga de los torrents: ")
+			folder = raw_input("Please, enter the download folder: ")
 			if not folder:
 				self.defineDownloadFolder()
-			else:
-				Config.add_section("generals")
-				Config.set("generals", "download_folder", folder)
-				self.downloadFolder = folder
-				cfgfile = open(self.folder+"/config.ini", 'w')
-				Config.write(cfgfile)
-				cfgfile.close()
+                                return
+			quality = raw_input("Please, enter the download quality: ")
+			if not quality:
+				self.defineDownloadFolder()
+                                return
+                        Config.add_section("generals")
+                        Config.set("generals", "download_folder", folder)
+                        Config.set("generals", "quality", quality)
+                        self.downloadFolder = folder
+                        self.quality = quality
+                        cfgfile = open(self.folder+"/config.ini", 'w')
+                        Config.write(cfgfile)
+                        cfgfile.close()
 		else:
 			Config.read(self.folder+"/config.ini")
 			self.downloadFolder = Config.get("generals", "download_folder")
+			self.quality = Config.get("generals", "quality")
 
 	def getSeries(self):
 		return self.series
 		
 	def readRSS(self):
 		for url in self.safeRSS:
-			print "Leyendo Feed RSS '"+url+"'"
+			print "Reading RSS Feed '%s'" % url
 			try:
 				feed=feedparser.parse(url)
 				feedEntries = feed['entries']
 				feed = None
 				self.checkAllNames(feedEntries)
 			except Exception, e:
-				print "Error al comunicarse con '"+url+"'. Motivo:"
+                                print "Error: unable to connect to '%s'. Details:" % url
 				print str(e)
 
 	def checkAllNames(self,feedEntries):
@@ -98,38 +106,38 @@ class torrentFinder:
 			for anchor in links:
 				if anchor.type == 'application/x-bittorrent':
 					link = anchor.href
-			print link
 			if link != None:
+                                print link
 				for serie in self.series:
 					self.logProcess(str(serie['title']+" => "+name))
 					if foundBest:
 						break
 					if self.checkName(name,serie):
-						print "Torrent encontrado: '"+name+"'"
+						print "Torrent found: '%s'" % name
 						filename = feedEntries[i]['torrent_filename']+".torrent"
 						#regex = "(\[rartv\]|\[rarbg\]|\[ettv\]|\[VTV\]|\[eztv\])$"
 						#m = re.search(regex,name)
 						#if m:
-						print "paso la primera"
+						print "First condition met!"
 						regex = "(LOL|FUM|DIMENSION|KILLERS|FLEET|AVS|TURBO|STRiFE)"
 						m = re.search(regex,name)
 						if m:
-							print "paso la segunda"
-							regex = "(720[Pp])"
+							print "Second condition met!"
+							regex = "(%s[Pp])" % self.quality
 							m = re.search(regex,name)
 							torrent = link
 							torrentSeries = serie
 							foundBest = True
 							if m:
-								print "paso la tercera"
+								print "Third condition met!"
 								torrent = link
 								self.updateAfter = True
 								torrentSeries = serie
 								foundBest = True
-						regex = "(720[Pp])"
+                                                regex = "(%s[Pp])" % self.quality
 						m = re.search(regex,name)
 						if m:
-							print "paso la segunda"
+							print "Second condition met!"
 							torrent = link
 							self.updateAfter = True
 							torrentSeries = serie
@@ -137,10 +145,38 @@ class torrentFinder:
 					self.addTorrent(torrent,torrentSeries,filename)
 					torrent = None
 				else:
-					print "No se encontraron torrents."
+					print "No torrents found."
+                        else:
+                            entry = feedEntries[i]
+                            name = entry['title']
+                            print "Checking '%s'" % name
+                            for serie in self.series:
+                                    if foundBest:
+                                            break
+                                    if self.checkName(name,serie):
+                                        filename = (serie['title'].replace(' ','.'))
+                                        filename = filename+".S"+"{:02d}".format(serie['season'])+"E"+"{:02d}".format(serie['episode'])+".torrent"
+                                        regex = "(%s[Pp])" % self.quality
+                                        m = re.search(regex,name)
+                                        if m:
+                                            print "Condition met!: %s" % regex
+                                            link = entry['link']
+                                            # hdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
+                                            #        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                                            #        'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
+                                            #        'Accept-Encoding': 'none',
+                                            #        'Accept-Language': 'en-US,en;q=0.8',
+                                            #        'Connection': 'keep-alive'}
+                                            # req = Request(link, headers=hdr);
+                                            # f = urlopen(req)
+                                            # link = f.geturl()
+                                            # link = link.replace('torrent/','download.php?id=')
+                                            print "%s: %s" % (name, link)
+                                            print "Found!"
+                                            # self.addTorrent(link,serie,filename)
 		
 	def checkByName(self):
-		print "Buscando por nombre, esto puede tardar un poco (1 a 5 minutos)...\n"
+		print "Searching by name. This might take a while (1-5 minutes)...\n"
 		tmp = []
 		for serie in self.series:
 			tmp.append((serie,))
@@ -152,7 +188,7 @@ class torrentFinder:
 			t.start()
 		for t in threads:
 			t.join()
-		print "Busqueda finalizada!"
+		print "Search done!"
 
 	def lookupTorrents(self,serie):
 		torrent = None
@@ -188,26 +224,26 @@ class torrentFinder:
 				tmp = link.split('/');
 				name = tmp[-1]
 				if self.checkName(name, serie):
-					print "Torrent encontrado: '"+name+"'"
+					print "Torrent found: '"+name+"'"
 					regex = "(LOL|FUM|DIMENSION|KILLERS|FLEET|AVS|TURBO|STRiFE)"
 					m = re.search(regex,name)
 					if m:
-						print "paso la primera: '"+regex+"'"
+						print "First condition met: '"+regex+"'"
 						torrent = link
 						torrentSeries = serie
 						foundBest = True
-						regex = "(720[Pp])"
+						regex = "(%s[Pp])" % self.quality
 						m = re.search(regex,name)
 						if m:
-							print "paso la segunda: '"+regex+"'"
+							print "Second condition met: '"+regex+"'"
 							torrent = link
 							torrentSeries = serie
 							self.updateAfter = True
 							foundBest = True
-					regex = "(720[Pp])"
+                                        regex = "(%s[Pp])" % self.quality
 					m = re.search(regex,name)
 					if m:
-						print "paso la primera: '"+regex+"'"
+						print "First condition met: '"+regex+"'"
 						torrent = link
 						torrentSeries = serie
 						self.updateAfter = True
@@ -216,11 +252,11 @@ class torrentFinder:
 				self.addTorrent(torrent,torrentSeries,filename)
 				torrent = None
 		except HTTPError, e:
-			print "Error de HTTP:",str(e), url
+			print "HTTP Error:",str(e), url
 		except URLError, e:
-			print "Error de URL:",str(e), url
+			print "URL Error:",str(e), url
 		except:
-			print "Error Generico:",sys.exc_info()[0], url
+			print "Error:",sys.exc_info()[0], url
 
 	def checkName(self,name,serie):
 		#TODO: add the best match, not the first
@@ -270,13 +306,13 @@ class torrentFinder:
 		return False
 
 	def updateEpisode(self,serie):
-		print "Actualizando base de datos..."
+		print "Updating database..."
 		idSerie = serie['id']
 		conn = sqlite3.connect(self.database)
 		with conn:
 			conn.row_factory = sqlite3.Row
 			c = conn.cursor()
-			c.execute("UPDATE tv_show SET episode="+`serie['episode']+1`+", ultimoCapitulo=datetime() WHERE id='"+`idSerie`+"'")
+			c.execute("UPDATE tv_show SET episode="+`serie['episode']+1`+", lastDownload=datetime() WHERE id='"+`idSerie`+"'")
 
 		self.series = []
 		conn = sqlite3.connect(self.database)
@@ -291,7 +327,7 @@ class torrentFinder:
 				self.series.append(row)
 
 	def addTorrent(self,url,serie, fileName):
-		print "Intentando agregar el torrent '" + url + "' a la cola de descargas..."
+		print "Trying to add torrent '" + url + "' to download queue..."
 		try:
 			torrentFile = fileName.replace("'","")
 			print "Descargando ", torrentFile
@@ -307,9 +343,9 @@ class torrentFinder:
 				fout.write(f.read())
 			f.close()
 		except HTTPError, e:
-			print "Error de HTTP:", str(e), url
+			print "HTTP Error:", str(e), url
 		except URLError, e:
-			print "Error de URL:", str(e), url
+			print "URL Error:", str(e), url
 		folder = serie['title'].replace(' ','.')
 		folder = folder.replace("'",'')
 		addCommand = "deluge-console add '/tmp/"+torrentFile+" --path="+self.downloadFolder+"/"+folder+"/'"
@@ -346,7 +382,7 @@ class torrentFinder:
 def main(argv=None):
 	if argv is None:
 		argv = sys.argv
-	print "Gestor de series automatico.\n"
+	print "Deluged tv shows Manager.\n"
 	option = None
 	if len(argv) == 2:
 		option = argv[1]
@@ -355,7 +391,7 @@ def main(argv=None):
 			finder = torrentFinder()
 			finder.checkByName()
 		else:
-			print "Comando no reconocido."
+			print "Unknown Option."
 	else:
 		finder = torrentFinder()
 		finder.readRSS()
