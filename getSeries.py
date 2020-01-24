@@ -287,13 +287,12 @@ class getseries:
 						if self.prompt:
 							print "Show '%s' scheduled!" % title
 						path = self.downloadFolder+"/"+title.replace(' ','.');
+						path = re.sub('[^ a-zA-Z0-9\.]','', path);
 						if not os.path.exists(path):
 							os.makedirs(path)
 				return True
 			except Exception, e:
-				print "Unable to connect to web service: ", e
-				if self.prompt:
-					print "Unable to connect to web service: {0}", e
+				print "Unable to save show: {0}", e
 				return False
 
 

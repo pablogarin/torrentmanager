@@ -19,7 +19,7 @@ class torrentFinder:
 		self.invalidTorrents = []
 		# self.safeRSS = ["https://rarbg.to/rss.php?categories=18;41","https://kat.cr/usearch/category:tv%20age:hour/?rss=1"]
 		#self.safeRSS = ["https://rarbg.to/rss.php?categories=18;41"]
-                self.safeRSS = ["https://eztv.ag/ezrss.xml","http://rarbg.to/rss.php?category=1;18;41;49"]
+                self.safeRSS = ["https://eztv.io/ezrss.xml","http://rarbg.to/rss.php?category=1;18;41;49"]
                 self.safeRSS = ["http://rarbg.to/rssdd.php?category=1;18;41;49"]
 		print "Conecting to Data Base...\n"
 		conn = sqlite3.connect(self.database)
@@ -119,7 +119,7 @@ class torrentFinder:
 						#m = re.search(regex,name)
 						#if m:
 						print "First condition met!"
-						regex = "(LOL|FUM|DIMENSION|KILLERS|FLEET|AVS|TURBO|STRiFE)"
+						regex = "(LOL|FUM|DIMENSION|KILLERS|FLEET|AVS|SVA|TURBO|STRiFE|MiNX)"
 						m = re.search(regex,name)
 						if m:
 							print "Second condition met!"
@@ -173,7 +173,7 @@ class torrentFinder:
                                             # link = link.replace('torrent/','download.php?id=')
                                             print "%s: %s" % (name, link)
                                             print "Found!"
-                                            # self.addTorrent(link,serie,filename)
+                                            self.addTorrent(link,serie,filename)
 		
 	def checkByName(self):
 		print "Searching by name. This might take a while (1-5 minutes)...\n"
@@ -202,7 +202,7 @@ class torrentFinder:
 		name = re.sub(r'[\']','',name)
 		name = re.sub(r'[\.,]','-',name)
 		name = name.rstrip('-')
-		url  = "https://eztv.ag/search/"+name
+		url  = "https://eztv.io/search/"+name
 		try:
 			hdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
 			       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -225,7 +225,7 @@ class torrentFinder:
 				name = tmp[-1]
 				if self.checkName(name, serie):
 					print "Torrent found: '"+name+"'"
-					regex = "(LOL|FUM|DIMENSION|KILLERS|FLEET|AVS|TURBO|STRiFE)"
+					regex = "(LOL|FUM|DIMENSION|KILLERS|FLEET|AVS|SVA|TURBO|STRiFE|MiNX)"
 					m = re.search(regex,name)
 					if m:
 						print "First condition met: '"+regex+"'"
@@ -264,8 +264,8 @@ class torrentFinder:
 		regex = serie['regex']#+".*(\[rartv\]|\[rarbg\]|\[eztv\]|\[ettv\]|\[VTV\]|\[eztv\])"
 		m = re.search(regex,name)
 		if m:
-			if self.checkEpisode(name,serie):
-				return True
+                    if self.checkEpisode(name,serie):
+                        return True
 		return False
 
 	def checkEpisode(self,name,serie):
@@ -327,31 +327,37 @@ class torrentFinder:
 				self.series.append(row)
 
 	def addTorrent(self,url,serie, fileName):
-		print "Trying to add torrent '" + url + "' to download queue..."
-		try:
-			torrentFile = fileName.replace("'","")
-			print "Descargando ", torrentFile
-			hdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
-			       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-			       'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
-			       'Accept-Encoding': 'none',
-			       'Accept-Language': 'en-US,en;q=0.8',
-			       'Connection': 'keep-alive'}
-			req = Request(url, headers=hdr);
-			f = urlopen(req)
-			with open(str("/tmp/"+torrentFile),'w') as fout:
-				fout.write(f.read())
-			f.close()
-		except HTTPError, e:
-			print "HTTP Error:", str(e), url
-		except URLError, e:
-			print "URL Error:", str(e), url
 		folder = serie['title'].replace(' ','.')
-		folder = folder.replace("'",'')
-		addCommand = "deluge-console add '/tmp/"+torrentFile+" --path="+self.downloadFolder+"/"+folder+"/'"
-		print addCommand
-		result = subprocess.check_output(addCommand, shell=True)
-		self.logOutput(url,result)
+		folder = re.sub('[^ a-zA-Z0-9\.]','', folder)
+                if "magnet:" in url:
+                    print "Trying to add torrent '" + url + "' to download queue..."
+                    addCommand = "deluge-console add '"+url+" --path="+self.downloadFolder+"/"+folder+"/'"
+                    print addCommand
+                    result = subprocess.check_output(addCommand, shell=True)
+                    self.logOutput(url,result)
+                else:
+                    try:
+                            torrentFile = fileName.replace("'","")
+                            print "Descargando ", torrentFile
+                            hdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
+                                   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                                   'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
+                                   'Accept-Encoding': 'none',
+                                   'Accept-Language': 'en-US,en;q=0.8',
+                                   'Connection': 'keep-alive'}
+                            req = Request(url, headers=hdr);
+                            f = urlopen(req)
+                            with open(str("/tmp/"+torrentFile),'w') as fout:
+                                    fout.write(f.read())
+                            f.close()
+                    except HTTPError, e:
+                            print "HTTP Error:", str(e), url
+                    except URLError, e:
+                            print "URL Error:", str(e), url
+                    addCommand = "deluge-console add '/tmp/"+torrentFile+" --path="+self.downloadFolder+"/"+folder+"/'"
+                    print addCommand
+                    result = subprocess.check_output(addCommand, shell=True)
+                    self.logOutput(url,result)
 		m = re.search("(ERROR|Torrent was not added!)", result)
 		if m:
 			invalidTorrents.append(url)

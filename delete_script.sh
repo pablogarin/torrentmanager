@@ -39,7 +39,7 @@ function check {
             DATE=true
         fi
         if [ "$PROGRESS_VALUE" = '100.00%' ]; then
-            if [[ "$DATE_VALUE" =~ ([12] days) ]];then
+            if [[ "$DATE_VALUE" =~ (1 days) ]];then
                 deluge-console del $ID_VALUE
                 echo "$ID_VALUE"
                 echo "$DATE_VALUE"
