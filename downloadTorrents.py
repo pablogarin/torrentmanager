@@ -269,39 +269,25 @@ class torrentFinder:
 		return False
 
 	def checkEpisode(self,name,serie):
+                """ Check if episode corresponds to season and episode number """
+                season = serie['season']
+                episode = serie['episode']
+                # S00E00 Format
 		regex = '(S[0-9]{,2}E[0-9]{,2})'
 		m = re.search(regex,name)
 		if m:
 			actual = m.group(0)
-			season = serie['season']
-			episode = serie['episode']
-			current = "S"
-			if season<10:
-				current += "0"+`season`
-			else:
-				current += `season`
-			current += "E"
-			if episode<10:
-				current += "0"+`episode`
-			else:
-				current += `episode`
+                        current = "S%02dE%02d" % (season, episode)
 			if actual==current:
 				return True
+
+                # 0x00 Format
 		regex = '([0-9]{1,2}[xX][0-9]{1,2})'
 		m = re.search(regex,name)
+                currents = (("%dx%02d" % (season, episode)), ("%dx%d" % (season, episode)))
 		if m:
 			actual = m.group(0)			
-			season = serie['season']
-			episode = serie['episode']
-			current = `season`+"x"
-			if episode<10:
-				current += "0"+`episode`
-			else:
-				current += `episode`
-			if actual==current:
-				return True
-			current = `season`+"x"+`episode`
-			if actual==current:
+			if actual.lower() in currents:
 				return True
 		return False
 
