@@ -1,5 +1,6 @@
 bin/*
 lib/*
+include/*
 downloadTorrents.db
 config.ini
 *.pyc
