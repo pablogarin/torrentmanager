@@ -1,6 +1,7 @@
 #!/usr/bin/env python
-import os, sys, re, sqlite3, subprocess, urllib2, feedparser, time, threading, socket, ConfigParser
-from urllib2 import urlopen, Request, URLError, HTTPError
+import os, sys, re, sqlite3, subprocess, feedparser, time, threading, socket
+from configparser import ConfigParser
+from urllib.request import urlopen, Request, URLError, HTTPError
 from lxml import html
 from OpenSSL import SSL
 from datetime import date
@@ -54,12 +55,12 @@ class torrentFinder:
             sys.exit(1)
         
     def defineDownloadFolder(self):
-        Config = ConfigParser.ConfigParser()
+        Config = ConfigParser()
         if not os.path.isfile(self.folder+"/config.ini"):
-            folder = raw_input("Please, enter the download folder: ")
+            folder = input("Please, enter the download folder: ")
             if not folder:
                 self.defineDownloadFolder()
-            quality = raw_input("Please, enter the download quality: ")
+            quality = input("Please, enter the download quality: ")
             if not quality:
                 self.defineDownloadFolder()
                 Config.add_section("generals")

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import sys, os
 from configparser import ConfigParser
 from modules import torrentFinder, getShow
