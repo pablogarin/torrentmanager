@@ -4,15 +4,16 @@ from xml import parsers
 from urllib.request import urlopen
 from configparser import ConfigParser
 from pprint import pprint
+from .persistence import PersistanceInterface, ShowManager
 
 def main():
 	try:
-		get = getShow()
+		get = getShow(ShowManager())
 		get.promptName()
 	except:
 		print("Cancelled by user.")
 
-class getShow:
+class getShow(object):
 	folder = os.path.dirname(os.path.realpath(__file__))
 	database = folder+'/downloadTorrents.db'
 	prompt = False
@@ -22,18 +23,9 @@ class getShow:
 	imdbIds= []
 	shows  = []
 
-	def __init__(self):
+	def __init__(self, database: PersistanceInterface):
+		self.database = database
 		self.defineDownloadFolder()
-		conn = sqlite3.connect(self.database)
-		try:
-			with conn:
-				conn.row_factory = sqlite3.Row
-				c = conn.cursor()
-				c.execute("CREATE TABLE IF NOT EXISTS tv_show(id integer primary key autoincrement, title varchar(255), regex varchar(255), season int, episode int, status int, imdbID varchar(120), thetvdbID varchar(120), lastDownload datetime);")
-		except Exception as e:
-			print("Error: unable to create database. Details: "+str(e))
-			sys.exit(1)
-		self.conn = sqlite3.connect(self.database)
 
 	def defineDownloadFolder(self):
 		Config = ConfigParser()
@@ -256,23 +248,21 @@ class getShow:
 					regex = re.sub("[A-Z]",lambda pat: "["+pat.group(0)+pat.group(0).lower()+"]",regex)
 					
 					regex = "("+regex+")"
-					with self.conn:
-						c = self.conn.cursor()
-				#		try:
-				#			c.execute("SELECT MAX(id) FROM tv_show")
-				#			id = c.fetchone()
-				#			id = id[0]
-				#			id = int(id)+1
-				#		except:
-				#			id=1
-						query = "INSERT OR REPLACE INTO tv_show VALUES(COALESCE((SELECT id FROM tv_show WHERE title='"+title+"'),(SELECT MAX(id) FROM tv_show) + 1),'"+title+"','"+regex+"',"+nextReg['season']+","+nextReg['episode']+",1,'"+self.imdb+"','"+id+"',datetime())"
-						c.execute(query)
-						if self.prompt:
-							print("Show '%s' scheduled!" % title)
-						path = self.downloadFolder+"/"+title.replace(' ','.')
-						path = re.sub('[^ a-zA-Z0-9\.]','', path)
-						if not os.path.exists(path):
-							os.makedirs(path)
+					data = {
+						'title': title,
+						'regex': regex,
+						'season': nextReg['season'],
+						'episode': nextReg['episode'],
+						'imdbID': self.imdb,
+						'thetvdbID': id
+					}
+					self.database.write(data)
+					if self.prompt:
+						print("Show '%s' scheduled!" % title)
+					path = self.downloadFolder+"/"+title.replace(' ','.')
+					path = re.sub('[^ a-zA-Z0-9\.]','', path)
+					if not os.path.exists(path):
+						os.makedirs(path)
 				return True
 			except Exception as e:
 				print("Unable to save show: {0}", e)

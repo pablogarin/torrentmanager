@@ -2,6 +2,7 @@
 import sys, os
 from configparser import ConfigParser
 from modules import torrentFinder, getShow
+from modules.persistence import ShowManager
 from pprint import pprint
 
 def main(args):
@@ -14,7 +15,7 @@ def main(args):
                 id = serie['thetvdbID']
                 print("Updating show '%s'(%s)" % (serie['title'],id))
                 if id != None:
-                    obj = getShow()
+                    obj = getShow(ShowManager())
                     obj.insertName = serie['title']
                     obj.imdb = serie['imdbID']
                     obj.registerSeries(id)
@@ -22,7 +23,7 @@ def main(args):
             torrentFinder().checkByName()
         elif option == "--search" or option == "-s":
             try:
-                gs = getShow()
+                gs = getShow(ShowManager())
                 gs.promptName()
             except:
                 print("Cancelled by user")
@@ -40,7 +41,7 @@ def main(args):
             value = value+args[i]+" "
         value = value.rstrip()
         if option == "--search" or option == "-s":
-            gs = getShow()
+            gs = getShow(ShowManager())
             if gs.search(value):
                 print("Match Found!")
                 for show in gs.getShows():
@@ -48,7 +49,7 @@ def main(args):
             else:
                 print("No Matches for Show")
         elif option == "--add" or option == "-a":
-            gs = getShow()
+            gs = getShow(ShowManager())
             if gs.registerSeries(value):
                 print("Show Added")
             else:
@@ -62,6 +63,7 @@ def main(args):
 
 def defineDownloadFolder():
     path = os.path.dirname(os.path.realpath(__file__))
+    print(path)
     Config = ConfigParser()
     folder = input("Please, enter the download folder: ")
     if not folder:
