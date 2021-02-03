@@ -1,5 +1,5 @@
-from .download_torrents import torrentFinder
-from .show_finder import getShow
+from modules.download_torrents import torrentFinder
+from modules.show_finder import getShow
 
 __all__ = [
     "torrentFinder",

@@ -4,8 +4,8 @@ from xml import parsers
 from urllib.request import urlopen
 from configparser import ConfigParser
 from pprint import pprint
-from .persistence import PersistanceInterface, ShowManager
-from .persistence.models.show import Show
+from modules.persistence import PersistanceInterface, ShowManager
+from modules.persistence.models.show import Show
 
 def main():
 	try:
