@@ -1,7 +1,7 @@
 import sqlite3
 import sys
-from .persistence_interface import PersistanceInterface
-from .models.show import Show
+from modules.persistence.persistence_interface import PersistanceInterface
+from modules.persistence.models.show import Show
 
 
 class ShowManager(PersistanceInterface):
@@ -28,19 +28,23 @@ class ShowManager(PersistanceInterface):
             print("Error: unable to create database. Details: "+str(e))
             sys.exit(1)
     
+    def __del__(self):
+        self.conn.close()
+    
     def write(self, data: any):
         try:
-            show = Show(data, self.conn)
-            show.save()
+            c = self.conn.cursor()
+            c.execute(self.build_insert_query(data))
+            self.conn.commit()
         except Exception as e:
-            print(e)
+            print("Error writing into database: %s" % e)
 
     def read(self, id):
         pass
 
-    def find(self, query):
+    def find(self, query=''):
         series = []
-        with self.conn:
+        try:
             self.conn.row_factory = sqlite3.Row
             c = self.conn.cursor()
             c.execute("SELECT * FROM "+self.table+" ORDER BY lastDownload")
@@ -48,8 +52,41 @@ class ShowManager(PersistanceInterface):
                 row = c.fetchone()
                 if row==None:
                     break
-                series.append(Show(row, self.conn))
-        return series   
+                series.append(Show(row, self))
+        except Exception as e:
+            print("Error reading database: %s" % e)
+        return series
+    
+    def build_insert_query(self, show: Show) -> str:
+        query = "INSERT OR REPLACE\
+            INTO tv_show\
+            VALUES(\
+                COALESCE(\
+                    (SELECT id FROM tv_show WHERE title='%s'),\
+                    (SELECT MAX(id) FROM tv_show) + 1\
+                ),\
+                '%s',\
+                '%s',\
+                %d,\
+                %d,\
+                %d,\
+                '%s',\
+                '%s',\
+                datetime()\
+            )" % (
+                show.title,
+                show.title,
+                show.regex,
+                show.season,
+                show.episode,
+                show.status,
+                show.imdbID,
+                show.thetvdbID
+            )
+        return query
+
+    def table(self) -> str:
+        return self.__table
 
     @property
     def database(self):

@@ -6,6 +6,7 @@ from modules.persistence import ShowManager
 from pprint import pprint
 
 def main(args):
+    show_manager = ShowManager()
     if len(args)>1:
         option = args[1]
     if len(args)==2:
@@ -15,7 +16,7 @@ def main(args):
                 id = serie['thetvdbID']
                 print("Updating show '%s'(%s)" % (serie['title'],id))
                 if id != None:
-                    obj = getShow(ShowManager())
+                    obj = getShow(show_manager)
                     obj.insertName = serie['title']
                     obj.imdb = serie['imdbID']
                     obj.registerSeries(id)
@@ -23,14 +24,13 @@ def main(args):
             torrentFinder().checkByName()
         elif option == "--search" or option == "-s":
             try:
-                gs = getShow(ShowManager())
+                gs = getShow(show_manager)
                 gs.promptName()
             except:
                 print("Cancelled by user")
         elif option == "--list-shows" or option == "-l":
-            for show in torrentFinder().getSeries():
-                print("%s (Season %s, Episode %s)" % \
-                    (show['title'], str(show['season']), str(show['episode'])))
+            for show in show_manager.find():
+                print(show)
         elif option == "--config" or option == "-c":
             defineDownloadFolder()
         else:
@@ -41,7 +41,7 @@ def main(args):
             value = value+args[i]+" "
         value = value.rstrip()
         if option == "--search" or option == "-s":
-            gs = getShow(ShowManager())
+            gs = getShow(show_manager)
             if gs.search(value):
                 print("Match Found!")
                 for show in gs.getShows():
@@ -49,7 +49,7 @@ def main(args):
             else:
                 print("No Matches for Show")
         elif option == "--add" or option == "-a":
-            gs = getShow(ShowManager())
+            gs = getShow(show_manager)
             if gs.registerSeries(value):
                 print("Show Added")
             else:

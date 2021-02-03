@@ -5,6 +5,7 @@ from urllib.request import urlopen
 from configparser import ConfigParser
 from pprint import pprint
 from .persistence import PersistanceInterface, ShowManager
+from .persistence.models.show import Show
 
 def main():
 	try:
@@ -29,7 +30,7 @@ class getShow(object):
 
 	def defineDownloadFolder(self):
 		Config = ConfigParser()
-		if not os.path.isfile(self.folder+"/config.ini"):
+		if not os.path.isfile("config.ini"):
 			folder = input("Por favor ingrese una carpeta para la descarga de los torrents: ")
 			if not folder:
 				self.defineDownloadFolder()
@@ -37,11 +38,11 @@ class getShow(object):
 				Config.add_section("generals")
 				Config.set("generals", "download_folder", folder)
 				self.downloadFolder = folder
-				cfgfile = open(self.folder+"/config.ini", 'w')
+				cfgfile = open("config.ini", 'w')
 				Config.write(cfgfile)
 				cfgfile.close()
 		else:
-			Config.read(self.folder+"/config.ini")
+			Config.read("config.ini")
 			self.downloadFolder = Config.get("generals", "download_folder")
 		
 	def promptName(self):
@@ -256,7 +257,8 @@ class getShow(object):
 						'imdbID': self.imdb,
 						'thetvdbID': id
 					}
-					self.database.write(data)
+					show = Show(data, self.database)
+					show.save()
 					if self.prompt:
 						print("Show '%s' scheduled!" % title)
 					path = self.downloadFolder+"/"+title.replace(' ','.')

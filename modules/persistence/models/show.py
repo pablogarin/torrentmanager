@@ -1,4 +1,4 @@
-import sqlite3
+from modules.persistence.persistence_interface import PersistanceInterface
 
 
 class Show(object):
@@ -11,11 +11,12 @@ class Show(object):
     __imdbID = None
     __thetvdbID = None
     __lastDownload = None
+    __database = None
 
-    def __init__(self, data: dict, conn: sqlite3.Connection):
+    def __init__(self, data: dict, database: PersistanceInterface):
         if data == None:
             raise Exception('Cannot initialize an empty show')
-        self.conn = conn
+        self.database = database
         self.set_data(data)
     
     def set_data(self, data: dict):
@@ -28,57 +29,27 @@ class Show(object):
         self.imdbID = data['imdbID']
         self.thetvdbID = data['thetvdbID']
         #self.lastDownload = data['lastDownload']
-        print("set_data", self)
     
-    def get_insert_query(self):
-        query = "INSERT OR REPLACE\
-            INTO tv_show\
-            VALUES(\
-                COALESCE(\
-                    (SELECT id FROM tv_show WHERE title='"+self.title+"'),\
-                    (SELECT MAX(id) FROM tv_show) + 1\
-                ),\
-                '%s',\
-                '%s',\
-                %d,\
-                %d,\
-                %d,\
-                '%s',\
-                '%s',\
-                datetime()\
-            )" % (
-                self.title,
-                self.regex,
-                self.season,
-                self.episode,
-                self.status,
-                self.imdbID,
-                self.thetvdbID
-            )
-        print(query)
-        return query
+    def to_dict(self) -> dict:
+        return {
+            'title': self.title,
+            'regex': self.regex,
+            'season': self.season,
+            'episode': self.episode,
+            'status': self.status,
+            'imdbID': self.imdbID,
+            'thetvdbID': self.thetvdbID
+        }
 
     def save(self):
-        print("Saving %s" % self.title)
-        try:
-            c = self.conn.cursor()
-            c.execute(self.get_insert_query())
-            self.conn.commit()
-        except Exception as e:
-            print(e)
+        print("Saving %s" % self)
+        self.database.write(self)
+
+    def __repr__(self):
+        return "Show %s" % self.to_dict
 
     def __str__(self):
-        return "Show {\n\
-            title: %s\n\
-            season: %s\n\
-            episode: %s\n\
-            status: %s\n\
-            }" % (
-                self.title,
-                self.season,
-                self.episode,
-                self.status
-            )
+        return "%s (Season %s, Episode %s)" % (self.title, self.season, self.episode)
     
     @property
     def id(self):
@@ -151,3 +122,11 @@ class Show(object):
     @lastDownload.setter
     def lastDownload(self, lastDownload):
         self.__lastDownload = lastDownload
+
+    @property
+    def database(self):
+        return self.__database
+
+    @database.setter
+    def database(self, database: PersistanceInterface):
+        self.__database = database
