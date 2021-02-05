@@ -11,7 +11,7 @@ from modules.show import Show
 from modules.tvdbclient import TVDBClient
 
 
-class getShow(object):
+class GetShow(object):
     prompt = False
 
     def __init__(
@@ -19,7 +19,7 @@ class getShow(object):
             database: PersistanceInterface,
             torrent_folder: str = ''):
         self.database = database
-        self.defineDownloadFolder()
+        self.__torrent_folder = torrent_folder
         self.tvdb = TVDBClient(self.database)
 
     def promptName(self):
@@ -57,11 +57,11 @@ class getShow(object):
             save_show = input("Do you wish to schedule the show?[Y/n]:")
             if r'y' == save_show.lower():
                 show.save()
-                path = self.downloadFolder+"/"+title.replace(' ', '.')
-                path = re.sub(r'[^ a-zA-Z0-9\.]', '', path)
-                if not os.path.exists(path):
-                    os.makedirs(path)
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+                try:
+                    show_folder = show.title.replace(' ', '.')
+                    path = self.__torrent_folder+"/"+show_folder
+                    path = re.sub(r'[^ /a-zA-Z0-9\.]', '', path)
+                    if not os.path.exists(path):
+                        os.makedirs(path)
+                except Exception as e:
+                    print("The system was unable to create the folder: %s" % e)

@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import sys, os
-from configparser import ConfigParser
-from modules.tvdbclient.show_finder import getShow
+from modules.config.config import Config
+from modules.tvdbclient.show_finder import GetShow
 from modules.download_torrents import torrentFinder
 from modules.show import ShowManager
 from pprint import pprint
@@ -9,6 +9,9 @@ from pprint import pprint
 
 def main(args):
     show_manager = ShowManager()
+    config = Config()
+    torrent_folder = config.get_config("download_folder")
+    torrent_quality = config.get_config("quality")
     if len(args) > 1:
         option = args[1]
     if len(args) == 2:
@@ -18,7 +21,7 @@ def main(args):
                 id = serie['thetvdbID']
                 print("Updating show '%s'(%s)" % (serie['title'], id))
                 if id is not None:
-                    obj = getShow(show_manager)
+                    obj = GetShow(show_manager, torrent_folder)
                     obj.insertName = serie['title']
                     obj.imdb = serie['imdbID']
                     obj.registerSeries(id)
@@ -26,7 +29,7 @@ def main(args):
             torrentFinder().checkByName()
         elif option == "--search" or option == "-s":
             try:
-                gs = getShow(show_manager)
+                gs = GetShow(show_manager, torrent_folder)
                 gs.promptName()
             except Exception as e:
                 print(e)
@@ -35,7 +38,7 @@ def main(args):
             for show in show_manager.find():
                 print(show)
         elif option == "--config" or option == "-c":
-            defineDownloadFolder()
+            config.initial_configuration()
         else:
             print("Unknown Option.")
     elif len(args) >= 3:
@@ -44,12 +47,12 @@ def main(args):
             value = value+args[i]+" "
         value = value.rstrip()
         if option == "--search" or option == "-s":
-            gs = getShow(show_manager)
+            gs = GetShow(show_manager, torrent_folder)
             shows = gs.search(value)
             if len(shows) == 0:
                 print("No Matches for Show")
         elif option == "--add" or option == "-a":
-            gs = getShow(show_manager)
+            gs = GetShow(show_manager, torrent_folder)
             if gs.registerSeries(value):
                 print("Show Added")
             else:
@@ -59,26 +62,6 @@ def main(args):
     else:
         torrentFinder().readRSS()
     return 0
-
-
-def defineDownloadFolder():
-    path = os.path.dirname(os.path.realpath(__file__))
-    print(path)
-    Config = ConfigParser()
-    folder = input("Please, enter the download folder: ")
-    if not folder:
-        print("You must define a download folder.")
-        defineDownloadFolder()
-    quality = input("Please, enter the download quality: ")
-    if not quality:
-        print("You must define a download quality.")
-        defineDownloadFolder()
-        Config.add_section("generals")
-        Config.set("generals", "download_folder", folder)
-        Config.set("generals", "quality", quality)
-        cfgfile = open(path+"/config.ini", 'w')
-        Config.write(cfgfile)
-        cfgfile.close()
 
 
 if __name__ == "__main__":
