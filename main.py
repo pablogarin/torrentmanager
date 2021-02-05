@@ -6,17 +6,18 @@ from modules.download_torrents import torrentFinder
 from modules.show import ShowManager
 from pprint import pprint
 
+
 def main(args):
     show_manager = ShowManager()
-    if len(args)>1:
+    if len(args) > 1:
         option = args[1]
-    if len(args)==2:
+    if len(args) == 2:
         if option == "--update" or option == "-u":
             series = torrentFinder().series
             for serie in series:
                 id = serie['thetvdbID']
-                print("Updating show '%s'(%s)" % (serie['title'],id))
-                if id != None:
+                print("Updating show '%s'(%s)" % (serie['title'], id))
+                if id is not None:
                     obj = getShow(show_manager)
                     obj.insertName = serie['title']
                     obj.imdb = serie['imdbID']
@@ -27,7 +28,8 @@ def main(args):
             try:
                 gs = getShow(show_manager)
                 gs.promptName()
-            except:
+            except Exception as e:
+                print(e)
                 print("Cancelled by user")
         elif option == "--list-shows" or option == "-l":
             for show in show_manager.find():
@@ -36,18 +38,15 @@ def main(args):
             defineDownloadFolder()
         else:
             print("Unknown Option.")
-    elif len(args)>=3:
+    elif len(args) >= 3:
         value = ""
-        for i in range(2,len(args)):
+        for i in range(2, len(args)):
             value = value+args[i]+" "
         value = value.rstrip()
         if option == "--search" or option == "-s":
             gs = getShow(show_manager)
-            if gs.search(value):
-                print("Match Found!")
-                for show in gs.getShows():
-                    pprint(show)
-            else:
+            shows = gs.search(value)
+            if len(shows) == 0:
                 print("No Matches for Show")
         elif option == "--add" or option == "-a":
             gs = getShow(show_manager)
@@ -57,10 +56,10 @@ def main(args):
                 print("Show not found!")
         else:
             print("Unknown Option.")
-            
     else:
         torrentFinder().readRSS()
     return 0
+
 
 def defineDownloadFolder():
     path = os.path.dirname(os.path.realpath(__file__))
@@ -81,5 +80,9 @@ def defineDownloadFolder():
         Config.write(cfgfile)
         cfgfile.close()
 
+
 if __name__ == "__main__":
-    sys.exit(main(sys.argv))
+    try:
+        sys.exit(main(sys.argv))
+    except KeyboardInterrupt as e:
+        print("Cancelled by user")
