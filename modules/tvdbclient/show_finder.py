@@ -2,9 +2,6 @@
 import os
 import sys
 import re
-import sqlite3
-import xmltodict
-import time
 from xml import parsers
 from urllib.request import urlopen
 from configparser import ConfigParser
