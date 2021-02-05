@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 import sys, os
 from configparser import ConfigParser
-from modules import torrentFinder, getShow
-from modules.persistence import ShowManager
+from modules.tvdbclient.show_finder import getShow
+from modules.download_torrents import torrentFinder
+from modules.show import ShowManager
 from pprint import pprint
 
 def main(args):

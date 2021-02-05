@@ -1,4 +1,4 @@
-from modules.persistence.persistence_interface import PersistanceInterface
+from modules.interfaces import PersistanceInterface
 
 
 class Show(object):

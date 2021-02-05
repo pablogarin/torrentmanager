@@ -1,7 +1,7 @@
 import sqlite3
 import sys
-from modules.persistence.persistence_interface import PersistanceInterface
-from modules.persistence.models.show import Show
+from modules.interfaces import PersistanceInterface
+from .show import Show
 
 
 class ShowManager(PersistanceInterface):
