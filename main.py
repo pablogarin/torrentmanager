@@ -22,7 +22,7 @@ def main(args):
                 seriesid = show.thetvdbID
                 print("Updating show '%s'(%s)" % (show.title, show.thetvdbID))
                 if seriesid is not None:
-                    showFinder.schedule_show(seriesid)
+                    showFinder.schedule_show(seriesid, update=True)
         elif option == "--by-name" or option == "-n":
             torrentFinder().checkByName()
         elif option == "--search" or option == "-s":

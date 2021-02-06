@@ -49,7 +49,7 @@ class ShowFinder(object):
             self.schedule_show(show_to_insert['id'])
         return search_result
 
-    def schedule_show(self, seriesid):
+    def schedule_show(self, seriesid, update: bool = False):
         show = self.tvdb.find(seriesid)
         if show is None:
             return False
@@ -61,6 +61,8 @@ class ShowFinder(object):
             should_save_show = r'y' == save_show.lower()
         if should_save_show:
             show.save()
+            if update:
+                return True
             try:
                 show_folder = show.title.replace(' ', '.')
                 path = self.__torrent_folder+"/"+show_folder
