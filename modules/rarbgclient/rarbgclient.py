@@ -21,7 +21,7 @@ class RarbgClient(FeedClientInterface):
         except Exception as e:
             print("Error while reading the feed: %s" % e)
 
-    def _create_feed_entry(self, entry: list) -> FeedEntry:
+    def _create_feed_entry(self, entry: dict) -> FeedEntry:
         title = entry['title']
         link = entry['link']
         return FeedEntry(title, link)
