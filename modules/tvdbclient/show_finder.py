@@ -11,7 +11,7 @@ from modules.show import Show
 from modules.tvdbclient import TVDBClient
 
 
-class GetShow(object):
+class ShowFinder(object):
     prompt = False
 
     def __init__(

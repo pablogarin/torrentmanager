@@ -1,7 +1,8 @@
 #!/usr/bin/python3
-import sys, os
+import sys
+import os
 from modules.config.config import Config
-from modules.tvdbclient.show_finder import GetShow
+from modules.tvdbclient.show_finder import ShowFinder
 from modules.download_torrents import torrentFinder
 from modules.show import ShowManager
 from pprint import pprint
@@ -21,7 +22,7 @@ def main(args):
                 id = serie['thetvdbID']
                 print("Updating show '%s'(%s)" % (serie['title'], id))
                 if id is not None:
-                    obj = GetShow(show_manager, torrent_folder)
+                    obj = ShowFinder(show_manager, torrent_folder)
                     obj.insertName = serie['title']
                     obj.imdb = serie['imdbID']
                     obj.registerSeries(id)
@@ -29,7 +30,7 @@ def main(args):
             torrentFinder().checkByName()
         elif option == "--search" or option == "-s":
             try:
-                gs = GetShow(show_manager, torrent_folder)
+                gs = ShowFinder(show_manager, torrent_folder)
                 gs.promptName()
             except Exception as e:
                 print(e)
@@ -47,12 +48,12 @@ def main(args):
             value = value+args[i]+" "
         value = value.rstrip()
         if option == "--search" or option == "-s":
-            gs = GetShow(show_manager, torrent_folder)
+            gs = ShowFinder(show_manager, torrent_folder)
             shows = gs.search(value)
             if len(shows) == 0:
                 print("No Matches for Show")
         elif option == "--add" or option == "-a":
-            gs = GetShow(show_manager, torrent_folder)
+            gs = ShowFinder(show_manager, torrent_folder)
             if gs.registerSeries(value):
                 print("Show Added")
             else:
