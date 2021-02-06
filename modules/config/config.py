@@ -1,4 +1,5 @@
 import os
+import re
 from configparser import ConfigParser
 
 
@@ -41,8 +42,12 @@ class Config(object):
 
     def define_quality(self):
         try:
-            quality = input("Enter the quality (720p, 1080p or 2160p): ")
+            quality = input("Enter the quality (none, 720p, 1080p or 2160p): ")
             if not quality:
+                return self.define_quality()
+            match = re.search(r'(none|720[pP]|1080[pP]|2160[pP])', quality)
+            if match is None:
+                print("Invalid input!")
                 return self.define_quality()
             return quality
         except KeyboardInterrupt as e:
