@@ -18,6 +18,7 @@ class ShowManager(PersistanceInterface):
             thetvdbID varchar(120),\
             lastDownload datetime\
         );"
+
     def __init__(self):
         self.conn = sqlite3.connect(self.database)
         try:
@@ -27,14 +28,14 @@ class ShowManager(PersistanceInterface):
         except Exception as e:
             print("Error: unable to create database. Details: "+str(e))
             sys.exit(1)
-    
+
     def __del__(self):
         self.conn.close()
-    
+
     def write(self, data: any):
         try:
             c = self.conn.cursor()
-            c.execute(self.build_insert_query(data))
+            c.execute(self._build_insert_query(data))
             self.conn.commit()
         except Exception as e:
             print("Error writing into database: %s" % e)
@@ -47,17 +48,17 @@ class ShowManager(PersistanceInterface):
         try:
             self.conn.row_factory = sqlite3.Row
             c = self.conn.cursor()
-            c.execute("SELECT * FROM "+self.table+" ORDER BY lastDownload")
+            c.execute("SELECT * FROM %s ORDER BY lastDownload" % self.table)
             while True:
                 row = c.fetchone()
-                if row==None:
+                if row is None:
                     break
                 series.append(Show(row, self))
         except Exception as e:
             print("Error reading database: %s" % e)
         return series
-    
-    def build_insert_query(self, show: Show) -> str:
+
+    def _build_insert_query(self, show: Show) -> str:
         query = "INSERT OR REPLACE\
             INTO tv_show\
             VALUES(\
@@ -91,11 +92,11 @@ class ShowManager(PersistanceInterface):
     @property
     def database(self):
         return self.__database
-    
+
     @property
     def schema(self):
         return self.__schema
-    
+
     @property
     def table(self):
         return self.__table
