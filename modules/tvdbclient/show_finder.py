@@ -1,11 +1,6 @@
-#!/usr/bin/env python
 import os
 import sys
 import re
-from xml import parsers
-from urllib.request import urlopen
-from configparser import ConfigParser
-from pprint import pprint
 from modules.interfaces.persistence_interface import PersistanceInterface
 from modules.show import Show
 from modules.tvdbclient import TVDBClient
