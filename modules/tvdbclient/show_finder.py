@@ -49,19 +49,25 @@ class ShowFinder(object):
             self.registerSeries(show_to_insert['id'])
         return search_result
 
-    def registerSeries(self, id):
-        show = self.tvdb.find(id)
+    def schedule_show(self, seriesid):
+        show = self.tvdb.find(seriesid)
+        if show is None:
+            return False
         show.episode += 1
+        should_save_show = True
         if self.prompt:
             print("Next episode: %s" % show)
             save_show = input("Do you wish to schedule the show?[Y/n]:")
-            if r'y' == save_show.lower():
-                show.save()
-                try:
-                    show_folder = show.title.replace(' ', '.')
-                    path = self.__torrent_folder+"/"+show_folder
-                    path = re.sub(r'[^ /a-zA-Z0-9\.]', '', path)
-                    if not os.path.exists(path):
-                        os.makedirs(path)
-                except Exception as e:
-                    print("The system was unable to create the folder: %s" % e)
+            should_save_show = r'y' == save_show.lower()
+        if should_save_show:
+            show.save()
+            try:
+                show_folder = show.title.replace(' ', '.')
+                path = self.__torrent_folder+"/"+show_folder
+                escaped_path = re.sub(r'[^ /a-zA-Z0-9\.]', '', path)
+                print("Path: %s" % escaped_path)
+                if not os.path.exists(escaped_path):
+                    os.makedirs(escaped_path)
+            except Exception as e:
+                print("The system was unable to create the folder: %s" % e)
+            return True

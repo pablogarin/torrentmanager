@@ -25,7 +25,7 @@ def main(args):
                     obj = ShowFinder(show_manager, torrent_folder)
                     obj.insertName = serie['title']
                     obj.imdb = serie['imdbID']
-                    obj.registerSeries(id)
+                    obj.schedule_show(id)
         elif option == "--by-name" or option == "-n":
             torrentFinder().checkByName()
         elif option == "--search" or option == "-s":
@@ -54,7 +54,7 @@ def main(args):
                 print("No Matches for Show")
         elif option == "--add" or option == "-a":
             gs = ShowFinder(show_manager, torrent_folder)
-            if gs.registerSeries(value):
+            if gs.schedule_show(value):
                 print("Show Added")
             else:
                 print("Show not found!")
