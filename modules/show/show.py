@@ -1,3 +1,4 @@
+import re
 from modules.interfaces import PersistanceInterface
 
 
@@ -40,6 +41,10 @@ class Show(object):
             'imdbID': self.imdbID,
             'thetvdbID': self.thetvdbID
         }
+
+    def get_folder(self):
+        sanitized_title = re.sub(r'[^ a-zA-Z0-9\.]', '', self.title)
+        return sanitized_title.replace(' ', '.')
 
     def save(self):
         print("Saving %s" % self)

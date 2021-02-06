@@ -58,7 +58,7 @@ class ShowFinder(object):
             if update:
                 return True
             try:
-                show_folder = show.title.replace(' ', '.')
+                show_folder = show.get_folder()
                 path = self._torrent_folder+"/"+show_folder
                 escaped_path = re.sub(r'[^ /a-zA-Z0-9\.]', '', path)
                 print("Path: %s" % escaped_path)
