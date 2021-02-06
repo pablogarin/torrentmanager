@@ -31,7 +31,7 @@ class TVDBClient(ClientInterface):
             raise ShowSearchException(
                 "Unable to connect to api => %s" % e,
                 query)
-        return self.show_list_from_response(response)
+        return self._show_list_from_response(response)
 
     def find(self, seriesid: any, prompt: bool = False) -> Show:
         url = self.__base_url+self.__find_path % (self.__api_key, seriesid)
@@ -47,23 +47,23 @@ class TVDBClient(ClientInterface):
         if data['Series']['id'] == "0":
             return None
         episodes = data['Episode'] if 'Episode' in data else None
-        season, episode = self.check_current_episode(episodes)
+        season, episode = self._check_current_episode(episodes)
         series = data['Series']
-        return self.create_show_from_response(
+        return self._create_show_from_response(
             seriesid,
             series,
             season,
             episode)
 
-    def show_list_from_response(self, response):
+    def _show_list_from_response(self, response):
         if response['Data'] is None:
             return list([])
         series = response['Data']['Series']
         shows_found = series if type(series) == list else [series]
-        show_list = map(self.map_to_show_dict, shows_found)
+        show_list = map(self._map_to_show_dict, shows_found)
         return list(show_list)
 
-    def map_to_show_dict(self, data: dict):
+    def _map_to_show_dict(self, data: dict):
         show_id = data['seriesid']
         title = data['SeriesName']
         imdb = data['IMDB_ID'] if 'IMDB_ID' in data else 'Null'
@@ -73,7 +73,7 @@ class TVDBClient(ClientInterface):
             'imdb': imdb
         }
 
-    def create_show_from_response(
+    def _create_show_from_response(
             self,
             seriesid: str,
             data: dict,
@@ -89,7 +89,7 @@ class TVDBClient(ClientInterface):
         imdb = data['IMDB_ID'] if 'IMDB_ID' in data else 'Null'
         show_dict = {
             'title': title,
-            'regex': self.build_regex(title),
+            'regex': self._build_regex(title),
             'season': season,
             'episode': episode,
             'imdbID': imdb,
@@ -97,7 +97,7 @@ class TVDBClient(ClientInterface):
         }
         return Show(show_dict, self.__database)
 
-    def build_regex(self, title):
+    def _build_regex(self, title):
         # FIXME: too many mutations on the same str
         regex = title.title().strip()
         regex = re.sub("[:']", "", regex)
@@ -108,12 +108,12 @@ class TVDBClient(ClientInterface):
             regex)
         return "(%s)" % regex
 
-    def check_current_episode(self, episodes: list) -> list:
+    def _check_current_episode(self, episodes: list) -> list:
         print("Searching current episode...")
         last_aired = None
         if episodes is not None:
             episode_list = episodes if type(episodes) == list else [episodes]
-            for episode in map(self.format_episode, episode_list):
+            for episode in map(self._format_episode, episode_list):
                 if episode['aired']:
                     if last_aired is None:
                         last_aired = episode
@@ -129,12 +129,12 @@ class TVDBClient(ClientInterface):
             return 1, 0
         return last_aired['season'], last_aired['episode']
 
-    def format_episode(self, episode_dict) -> dict:
+    def _format_episode(self, episode_dict) -> dict:
         title = episode_dict['EpisodeName']
         season = int(episode_dict['SeasonNumber'])
         episode = int(episode_dict['EpisodeNumber'])
-        date = self.get_air_date(episode_dict)
-        aired = self.has_episode_aired(date)
+        date = self._get_air_date(episode_dict)
+        aired = self._has_episode_aired(date)
         return {
             'title': title,
             'season': season,
@@ -143,12 +143,12 @@ class TVDBClient(ClientInterface):
             'aired': aired
         }
 
-    def has_episode_aired(self, air_date) -> bool:
+    def _has_episode_aired(self, air_date) -> bool:
         if self.__current_date < air_date:
             return False
         return True
 
-    def get_air_date(self, episode) -> any:
+    def _get_air_date(self, episode) -> any:
         if 'FirstAired' not in episode:
             return None
         air_date = episode['FirstAired']
