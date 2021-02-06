@@ -14,22 +14,22 @@ class Show(object):
     __database = None
 
     def __init__(self, data: dict, database: PersistanceInterface):
-        if data == None:
+        if data is None:
             raise Exception('Cannot initialize an empty show')
         self.database = database
         self.set_data(data)
-    
+
     def set_data(self, data: dict):
-        #self.id = data['id']
+        # self.id = data['id']
         self.title = data['title']
         self.regex = data['regex']
         self.season = data['season']
         self.episode = data['episode']
-        #self.status = data['status'] if 'status' in data else 1
+        # self.status = data['status'] if 'status' in data else 1
         self.imdbID = data['imdbID']
         self.thetvdbID = data['thetvdbID']
-        #self.lastDownload = data['lastDownload']
-    
+        # self.lastDownload = data['lastDownload']
+
     def to_dict(self) -> dict:
         return {
             'title': self.title,
@@ -49,8 +49,11 @@ class Show(object):
         return "Show %s" % self.to_dict
 
     def __str__(self):
-        return "%s (Season %s, Episode %s)" % (self.title, self.season, self.episode)
-    
+        return "%s (Season %s, Episode %s)" % (
+            self.title,
+            self.season,
+            self.episode)
+
     @property
     def id(self):
         return self.__id
