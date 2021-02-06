@@ -59,7 +59,7 @@ class ShowFinder(object):
                 return True
             try:
                 show_folder = show.title.replace(' ', '.')
-                path = self.__torrent_folder+"/"+show_folder
+                path = self._torrent_folder+"/"+show_folder
                 escaped_path = re.sub(r'[^ /a-zA-Z0-9\.]', '', path)
                 print("Path: %s" % escaped_path)
                 if not os.path.exists(escaped_path):
