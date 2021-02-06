@@ -7,20 +7,19 @@ from modules.tvdbclient import TVDBClient
 
 
 class ShowFinder(object):
-    prompt = False
+    _prompt = False
 
     def __init__(
             self,
             database: PersistanceInterface,
             torrent_folder: str = ''):
-        self.database = database
-        self.__torrent_folder = torrent_folder
-        self.tvdb = TVDBClient(self.database)
+        self._database = database
+        self._torrent_folder = torrent_folder
+        self.tvdb = TVDBClient(self._database)
 
     def promptName(self):
         query = input("Please input the show to find: ")
-        self.query = query
-        self.prompt = True
+        self._prompt = True
         self.search(query)
 
     def search(self, query: str) -> list:
@@ -29,12 +28,12 @@ class ShowFinder(object):
         search_result = self.tvdb.search(seriesName)
         show_to_insert = None
         if len(search_result) == 0:
-            if self.prompt:
+            if self._prompt:
                 print("Show not found.")
             return []
         for i, show in enumerate(search_result):
             print("%d) %s = %s" % (i+1, show['title'], show['id']))
-        if self.prompt:
+        if self._prompt:
             if len(search_result) == 1:
                 i = 0
             else:
@@ -50,7 +49,7 @@ class ShowFinder(object):
             return False
         show.episode += 1
         should_save_show = True
-        if self.prompt:
+        if self._prompt:
             print("Next episode: %s" % show)
             save_show = input("Do you wish to schedule the show?[Y/n]:")
             should_save_show = r'y' == save_show.lower()
