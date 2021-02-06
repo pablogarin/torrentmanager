@@ -3,7 +3,7 @@ import sys
 import os
 from modules.config.config import Config
 from modules.tvdbclient.show_finder import ShowFinder
-from modules.download_torrents import torrentFinder
+from modules.download_torrents import TorrentFinder
 from modules.show import ShowManager
 from pprint import pprint
 
@@ -13,7 +13,11 @@ def main(args):
     config = Config()
     torrent_folder = config.get_config("download_folder")
     torrent_quality = config.get_config("quality")
-    showFinder = ShowFinder(show_manager, torrent_folder)
+    show_finder = ShowFinder(show_manager, torrent_folder)
+    torrent_finder = TorrentFinder(
+        show_manager,
+        torrent_folder,
+        torrent_quality)
     if len(args) > 1:
         option = args[1]
     if len(args) == 2:
@@ -22,12 +26,12 @@ def main(args):
                 seriesid = show.thetvdbID
                 print("Updating show '%s'(%s)" % (show.title, show.thetvdbID))
                 if seriesid is not None:
-                    showFinder.schedule_show(seriesid, update=True)
+                    show_finder.schedule_show(seriesid, update=True)
         elif option == "--by-name" or option == "-n":
-            torrentFinder().checkByName()
+            torrent_finder.checkByName()
         elif option == "--search" or option == "-s":
             try:
-                showFinder.promptName()
+                show_finder.promptName()
             except Exception as e:
                 print(e)
                 print("Cancelled by user")
@@ -44,18 +48,18 @@ def main(args):
             value = value+args[i]+" "
         value = value.rstrip()
         if option == "--search" or option == "-s":
-            shows = showFinder.search(value)
+            shows = show_finder.search(value)
             if len(shows) == 0:
                 print("No Matches for Show")
         elif option == "--add" or option == "-a":
-            if showFinder.schedule_show(value):
+            if show_finder.schedule_show(value):
                 print("Show Added")
             else:
                 print("Show not found!")
         else:
             print("Unknown Option.")
     else:
-        torrentFinder().readRSS()
+        torrent_finder.readRSS()
     return 0
 
 
