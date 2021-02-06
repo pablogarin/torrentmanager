@@ -14,7 +14,7 @@ class Config(object):
             self.initial_configuration()
 
     def get_config(self, key: str, section: str = "generals") -> str:
-        self.__config.get(section, key)
+        return self.__config.get(section, key)
 
     def initial_configuration(self):
         folder = self.define_folder()
