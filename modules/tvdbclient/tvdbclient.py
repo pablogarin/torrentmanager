@@ -117,12 +117,18 @@ class TVDBClient(ClientInterface):
                 if episode['aired']:
                     if last_aired is None:
                         last_aired = episode
-                    elif last_aired['date'] < episode['date']:
-                        last_aired = episode
+                    else:
+                        if last_aired['date'] is not None and\
+                                episode['date'] is not None:
+                            if last_aired['date'] < episode['date']:
+                                last_aired = episode
+                date = "Pending"
+                if episode['date'] is not None:
+                    date = time.strftime("%Y-%m-%d", episode['date'])
                 print("S%02dE%02d (%s): %s" % (
                     episode['season'],
                     episode['episode'],
-                    time.strftime("%Y-%m-%d", episode['date']),
+                    date,
                     episode['title']))
         if last_aired is None:
             print("No episode has aired")
@@ -144,6 +150,8 @@ class TVDBClient(ClientInterface):
         }
 
     def _has_episode_aired(self, air_date) -> bool:
+        if air_date is None:
+            return False
         if self.__current_date < air_date:
             return False
         return True
@@ -152,6 +160,8 @@ class TVDBClient(ClientInterface):
         if 'FirstAired' not in episode:
             return None
         air_date = episode['FirstAired']
+        if air_date is None:
+            return None
         try:
             date = time.strptime(air_date, "%Y-%m-%d")
             return date
