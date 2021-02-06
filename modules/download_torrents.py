@@ -53,6 +53,7 @@ class TorrentFinder:
         torrentSeries = None
         foundBest = False
         for feed_entry in feed_list:
+            print(feed_entry.title)
             for show in self._shows:
                 torrent_link = None
                 if self._should_download_torrent(
@@ -66,6 +67,7 @@ class TorrentFinder:
                     torrent_link = feed_entry.link
                 if torrent_link is not None:
                     print(torrent_link)
+                    self.addTorrent(torrent_link, show)
 
     def checkByName(self):
         print("Searching by name. This might take a while (1-5 minutes)...\n")
@@ -141,7 +143,7 @@ class TorrentFinder:
                         self._update_after = True
                         foundBest = True
             if torrent != None:
-                self.addTorrent(torrent, torrentSeries, filename)
+                self.addTorrent(torrent, torrentSeries)
                 torrent = None
         except HTTPError as e:
             print("HTTP Error:", str(e), url)
@@ -163,8 +165,8 @@ class TorrentFinder:
             self._is_entry_current_episode(title, show)
 
     def _is_entry_scheduled(self, title: str, show: Show) -> bool:
-        match = re.search(show.regex, title)
-        return match
+        match = re.search(show.regex, title.lower())
+        return match is not None
 
     def _has_expected_quality(self, title: str) -> bool:
         if self._torrent_quality == "none":
@@ -194,7 +196,7 @@ class TorrentFinder:
         show.episode += 1
         show.save()
 
-    def addTorrent(self, url, show: Show, fileName):
+    def addTorrent(self, url, show: Show):
         folder = show.get_folder()
         if "magnet:" in url:
             print("Trying to add torrent '" + url + "' to download queue...")
@@ -204,7 +206,7 @@ class TorrentFinder:
             self.logOutput(url, result)
         else:
             try:
-                torrentFile = fileName.replace("'", "")
+                torrentFile = show.title.replace("'", "")
                 print("Descargando ", torrentFile)
                 hdr = {
                     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',

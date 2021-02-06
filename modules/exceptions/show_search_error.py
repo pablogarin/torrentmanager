@@ -1,6 +1,6 @@
 class ShowSearchException(Exception):
-    __query = None
+    _query = None
 
     def __init__(self, message, query: str):
         super.__init__(message)
-        self.__query = query
+        self._query = query

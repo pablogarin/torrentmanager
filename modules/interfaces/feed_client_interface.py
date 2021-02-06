@@ -3,8 +3,8 @@ from typing import List
 
 
 class FeedEntry(object):
-    __title = None
-    __link = None
+    _title = None
+    _link = None
 
     def __init__(self, title, link):
         self.title = title
@@ -15,19 +15,19 @@ class FeedEntry(object):
 
     @property
     def title(self):
-        return self.__title
+        return self._title
 
     @title.setter
     def title(self, title):
-        self.__title = title
+        self._title = title
 
     @property
     def link(self):
-        return self.__link
+        return self._link
 
     @link.setter
     def link(self, link):
-        self.__link = link
+        self._link = link
 
 
 FeedList = List[FeedEntry]

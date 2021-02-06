@@ -3,16 +3,16 @@ from modules.interfaces import PersistanceInterface
 
 
 class Show(object):
-    __id = None
-    __title = None
-    __regex = None
-    __season = None
-    __episode = None
-    __status = 1
-    __imdbID = None
-    __thetvdbID = None
-    __lastDownload = None
-    __database = None
+    _id = None
+    _title = None
+    _regex = None
+    _season = None
+    _episode = None
+    _status = 1
+    _imdbID = None
+    _thetvdbID = None
+    _lastDownload = None
+    _database = None
 
     def __init__(self, data: dict, database: PersistanceInterface):
         if data is None:
@@ -61,80 +61,80 @@ class Show(object):
 
     @property
     def id(self):
-        return self.__id
+        return self._id
 
     @id.setter
     def id(self, id):
-        self.__id = id
+        self._id = id
 
     @property
     def title(self):
-        return self.__title
+        return self._title
 
     @title.setter
     def title(self, title):
-        self.__title = title
+        self._title = title
 
     @property
     def regex(self):
-        return self.__regex
+        return self._regex
 
     @regex.setter
     def regex(self, regex):
-        self.__regex = regex
+        self._regex = regex
 
     @property
     def season(self):
-        return self.__season
+        return self._season
 
     @season.setter
     def season(self, season):
-        self.__season = season
+        self._season = season
 
     @property
     def episode(self):
-        return self.__episode
+        return self._episode
 
     @episode.setter
     def episode(self, episode):
-        self.__episode = episode
+        self._episode = episode
 
     @property
     def status(self):
-        return self.__status
+        return self._status
 
     @status.setter
     def status(self, status):
-        self.__status = status
+        self._status = status
 
     @property
     def imdbID(self):
-        return self.__imdbID
+        return self._imdbID
 
     @imdbID.setter
     def imdbID(self, imdbID):
-        self.__imdbID = imdbID
+        self._imdbID = imdbID
 
     @property
     def thetvdbID(self):
-        return self.__thetvdbID
+        return self._thetvdbID
 
     @thetvdbID.setter
     def thetvdbID(self, thetvdbID):
-        self.__thetvdbID = thetvdbID
+        self._thetvdbID = thetvdbID
 
     @property
     def lastDownload(self):
-        return self.__lastDownload
+        return self._lastDownload
 
     @lastDownload.setter
     def lastDownload(self, lastDownload):
-        self.__lastDownload = lastDownload
+        self._lastDownload = lastDownload
 
     @property
     def database(self):
-        return self.__database
+        return self._database
 
     @database.setter
     def database(self, database: PersistanceInterface):
-        self.__database = database
+        self._database = database

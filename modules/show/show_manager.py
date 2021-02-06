@@ -5,9 +5,9 @@ from .show import Show
 
 
 class ShowManager(PersistanceInterface):
-    __database = 'db/downloadTorrents.db'
-    __table = 'tv_show'
-    __schema = "CREATE TABLE IF NOT EXISTS tv_show(\
+    _database = 'db/downloadTorrents.db'
+    _table = 'tv_show'
+    _schema = "CREATE TABLE IF NOT EXISTS tv_show(\
             id integer primary key autoincrement,\
             title varchar(255),\
             regex varchar(255),\
@@ -18,25 +18,26 @@ class ShowManager(PersistanceInterface):
             thetvdbID varchar(120),\
             lastDownload datetime\
         );"
+    _conn = None
 
     def __init__(self):
-        self.conn = sqlite3.connect(self.database)
+        self._conn = sqlite3.connect(self.database)
         try:
-            self.conn.row_factory = sqlite3.Row
-            c = self.conn.cursor()
+            self._conn.row_factory = sqlite3.Row
+            c = self._conn.cursor()
             c.execute(self.schema)
         except Exception as e:
             print("Error: unable to create database. Details: "+str(e))
             sys.exit(1)
 
     def __del__(self):
-        self.conn.close()
+        self._conn.close()
 
     def write(self, data: any):
         try:
-            c = self.conn.cursor()
+            c = self._conn.cursor()
             c.execute(self._build_insert_query(data))
-            self.conn.commit()
+            self._conn.commit()
         except Exception as e:
             print("Error writing into database: %s" % e)
 
@@ -46,8 +47,8 @@ class ShowManager(PersistanceInterface):
     def find(self, query=''):
         series = []
         try:
-            self.conn.row_factory = sqlite3.Row
-            c = self.conn.cursor()
+            self._conn.row_factory = sqlite3.Row
+            c = self._conn.cursor()
             c.execute("SELECT * FROM %s ORDER BY lastDownload" % self.table)
             while True:
                 row = c.fetchone()
@@ -87,16 +88,16 @@ class ShowManager(PersistanceInterface):
         return query
 
     def table(self) -> str:
-        return self.__table
+        return self._table
 
     @property
     def database(self):
-        return self.__database
+        return self._database
 
     @property
     def schema(self):
-        return self.__schema
+        return self._schema
 
     @property
     def table(self):
-        return self.__table
+        return self._table

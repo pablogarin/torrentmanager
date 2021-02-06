@@ -10,19 +10,19 @@ from modules.exceptions import ShowSearchException
 
 
 class TVDBClient(ClientInterface):
-    __base_url = 'http://thetvdb.com/api/'
-    __api_key = 'E16D53FBF4407C2B'
-    __search_path = 'GetSeries.php?seriesname='
-    __find_path = "%s/series/%s/all/en.xml"
-    __database = None
+    _base_url = 'http://thetvdb.com/api/'
+    _api_key = 'E16D53FBF4407C2B'
+    _search_path = 'GetSeries.php?seriesname='
+    _find_path = "%s/series/%s/all/en.xml"
+    _database = None
 
     def __init__(self, database: PersistanceInterface):
-        self.__database = database
+        self._database = database
         str_date = time.strftime("%Y-%m-%d")
-        self.__current_date = time.strptime(str_date, "%Y-%m-%d")
+        self._current_date = time.strptime(str_date, "%Y-%m-%d")
 
     def search(self, query: str) -> list:
-        url = self.__base_url+self.__search_path+query
+        url = self._base_url+self._search_path+query
         try:
             request = urlopen(url)
             response = xmltodict.parse(request.read())
@@ -34,7 +34,7 @@ class TVDBClient(ClientInterface):
         return self._show_list_from_response(response)
 
     def find(self, seriesid: any, prompt: bool = False) -> Show:
-        url = self.__base_url+self.__find_path % (self.__api_key, seriesid)
+        url = self._base_url+self._find_path % (self._api_key, seriesid)
         try:
             request = urlopen(url)
             response = xmltodict.parse(request.read())
@@ -95,17 +95,13 @@ class TVDBClient(ClientInterface):
             'imdbID': imdb,
             'thetvdbID': seriesid
         }
-        return Show(show_dict, self.__database)
+        return Show(show_dict, self._database)
 
     def _build_regex(self, title):
         # FIXME: too many mutations on the same str
-        regex = title.title().strip()
+        regex = title.lower().strip()
         regex = re.sub("[:']", "", regex)
         regex = re.sub(r'[ \.]', "[\\. ]{0,1}", regex)
-        regex = re.sub(
-            "[A-Z]",
-            lambda pat: "["+pat.group(0)+pat.group(0).lower()+"]",
-            regex)
         return "(%s)" % regex
 
     def _check_current_episode(self, episodes: list) -> list:
@@ -152,7 +148,7 @@ class TVDBClient(ClientInterface):
     def _has_episode_aired(self, air_date) -> bool:
         if air_date is None:
             return False
-        if self.__current_date < air_date:
+        if self._current_date < air_date:
             return False
         return True
 
