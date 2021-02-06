@@ -13,25 +13,21 @@ def main(args):
     config = Config()
     torrent_folder = config.get_config("download_folder")
     torrent_quality = config.get_config("quality")
+    showFinder = ShowFinder(show_manager, torrent_folder)
     if len(args) > 1:
         option = args[1]
     if len(args) == 2:
         if option == "--update" or option == "-u":
-            series = torrentFinder().series
-            for serie in series:
-                id = serie['thetvdbID']
-                print("Updating show '%s'(%s)" % (serie['title'], id))
-                if id is not None:
-                    obj = ShowFinder(show_manager, torrent_folder)
-                    obj.insertName = serie['title']
-                    obj.imdb = serie['imdbID']
-                    obj.schedule_show(id)
+            for show in show_manager.find():
+                seriesid = show.thetvdbID
+                print("Updating show '%s'(%s)" % (show.title, show.thetvdbID))
+                if seriesid is not None:
+                    showFinder.schedule_show(seriesid)
         elif option == "--by-name" or option == "-n":
             torrentFinder().checkByName()
         elif option == "--search" or option == "-s":
             try:
-                gs = ShowFinder(show_manager, torrent_folder)
-                gs.promptName()
+                showFinder.promptName()
             except Exception as e:
                 print(e)
                 print("Cancelled by user")
@@ -48,13 +44,11 @@ def main(args):
             value = value+args[i]+" "
         value = value.rstrip()
         if option == "--search" or option == "-s":
-            gs = ShowFinder(show_manager, torrent_folder)
-            shows = gs.search(value)
+            shows = showFinder.search(value)
             if len(shows) == 0:
                 print("No Matches for Show")
         elif option == "--add" or option == "-a":
-            gs = ShowFinder(show_manager, torrent_folder)
-            if gs.schedule_show(value):
+            if showFinder.schedule_show(value):
                 print("Show Added")
             else:
                 print("Show not found!")
