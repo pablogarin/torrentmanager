@@ -44,6 +44,8 @@ class TVDBClient(ClientInterface):
                 "Unable to connect to api => %s" % e,
                 seriesid)
         data = response['Data']
+        if data['Series']['id'] == "0":
+            return None
         episodes = data['Episode'] if 'Episode' in data else None
         season, episode = self.check_current_episode(episodes)
         series = data['Series']
