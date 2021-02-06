@@ -46,7 +46,7 @@ class ShowFinder(object):
                 i = int(input("Please select a show from the list: "))-1
             show_to_insert = search_result[i]
         if show_to_insert is not None:
-            self.registerSeries(show_to_insert['id'])
+            self.schedule_show(show_to_insert['id'])
         return search_result
 
     def schedule_show(self, seriesid):
