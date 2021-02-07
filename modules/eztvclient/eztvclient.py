@@ -55,7 +55,7 @@ class EZTVClient(TorrentClientInterface):
         )
         request = Request(torrent.link, headers=self._hdr)
         f = urlopen(request)
-        with open(filename, 'w') as fout:
+        with open(filename, 'wb') as fout:
             fout.write(f.read())
         f.close()
         return filename

@@ -56,26 +56,33 @@ class TorrentFinder:
             self._shows.append(show)
 
     def readRSS(self, torrent_client: TorrentClientInterface):
-        self._check_torrent_list_for_show(torrent_client.fetch_torrents())
-
-    def _check_torrent_list_for_show(self, torrent_list: TorrentList):
+        torrent_list = torrent_client.fetch_torrents()
         for show in self._shows:
             print("Checking show %s" % show.title)
-            matches = PriorityQueue()
-            for index, torrent in enumerate(torrent_list):
-                if self._should_download_torrent(
-                        torrent.title,
-                        show):
-                    matches.put((1, index))
-                elif self._should_download_torrent(
-                        torrent.title,
-                        show,
-                        False):
-                    matches.put((2, index))
-            if not matches.empty():
-                _, index = matches.get()
+            index = self._find_show_in_torrent_list(show, torrent_list)
+            if index >= 0:
                 torrent = torrent_list[index]
                 self._add_torrent(torrent, show)
+
+    def _find_show_in_torrent_list(
+            self,
+            show: Show,
+            torrent_list: TorrentList) -> int:
+        matches = PriorityQueue()
+        for index, torrent in enumerate(torrent_list):
+            if self._should_download_torrent(
+                    torrent.title,
+                    show):
+                matches.put((1, index))
+            elif self._should_download_torrent(
+                    torrent.title,
+                    show,
+                    False):
+                matches.put((2, index))
+        if not matches.empty():
+            _, index = matches.get()
+            return index
+        return -1
 
     def checkByName(self):
         print("Searching by name. This might take a while (1-5 minutes)...\n")
@@ -95,7 +102,14 @@ class TorrentFinder:
         print("Search done!")
 
     def lookupTorrents(self, show: Show):
-        self._check_torrent_list_for_show(self._eztv.fetch_torrents(show))
+        torrent_list = self._eztv.fetch_torrents(show)
+        index = self._find_show_in_torrent_list(show, torrent_list)
+        if index < 0:
+            return
+        torrent = torrent_list[index]
+        torrent_path = self._eztv.download_torrent_file(show, torrent)
+        torrent.link = torrent_path
+        self._add_torrent(torrent, show)
 
     def _should_download_torrent(
             self,
@@ -146,11 +160,9 @@ class TorrentFinder:
     def _add_torrent(self, torrent: Torrent, show: Show):
         folder = show.get_folder()
         torrent_path = torrent.link
-        if "magnet:" not in torrent_path:
-            torrent_path = self._eztv.download_torrent_file(show, torrent)
         addCommand = "deluge-console add '%s' --path=%s" % (
             torrent_path,
-            self._torrent_folder+folder
+            self._torrent_folder+"/"+folder
         )
         print(addCommand)
         result = subprocess.check_output(addCommand, shell=True)
