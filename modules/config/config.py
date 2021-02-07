@@ -35,9 +35,14 @@ class Config(object):
             folder = input("Enter a folder to download your shows: ")
             if not folder:
                 return self.define_folder()
+            if not os.path.exists(folder):
+                raise FileNotFoundError("Folder %s doesn't exists!" % folder)
             return folder
         except KeyboardInterrupt as e:
             print("Action cancelled by user")
+        except FileNotFoundError as e:
+            print(e)
+            return self.define_folder()
         return None
 
     def define_quality(self):

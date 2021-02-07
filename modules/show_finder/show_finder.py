@@ -1,39 +1,42 @@
 import os
 import sys
 import re
-from modules.interfaces.persistence_interface import PersistanceInterface
+from modules.interfaces import PersistanceInterface
+from modules.interfaces import ClientInterface
 from modules.show import Show
-from modules.tvdbclient import TVDBClient
 
 
 class ShowFinder(object):
-    _prompt = False
+    _interactive = False
+    _client = None
 
     def __init__(
             self,
             database: PersistanceInterface,
+            client: ClientInterface,
             torrent_folder: str = ''):
         self._database = database
         self._torrent_folder = torrent_folder
-        self.tvdb = TVDBClient(self._database)
+        self._client = client
 
-    def promptName(self):
+    def interactive_search(self):
         query = input("Please input the show to find: ")
-        self._prompt = True
+        self._interactive = True
+        self._client.verbose = True
         self.search(query)
 
     def search(self, query: str) -> list:
         seriesName = query.replace('.', '')
         seriesName = seriesName.replace(' ', '%20')
-        search_result = self.tvdb.search(seriesName)
+        search_result = self._client.search(seriesName)
         show_to_insert = None
         if len(search_result) == 0:
-            if self._prompt:
+            if self._interactive:
                 print("Show not found.")
             return []
         for i, show in enumerate(search_result):
             print("%d) %s = %s" % (i+1, show['title'], show['id']))
-        if self._prompt:
+        if self._interactive:
             if len(search_result) == 1:
                 i = 0
             else:
@@ -43,13 +46,16 @@ class ShowFinder(object):
             self.schedule_show(show_to_insert['id'])
         return search_result
 
-    def schedule_show(self, seriesid, update: bool = False):
-        show = self.tvdb.find(seriesid)
+    def schedule_show(
+            self,
+            seriesid,
+            update: bool = False):
+        show = self._client.find(seriesid)
         if show is None:
             return False
         show.episode += 1
         should_save_show = True
-        if self._prompt:
+        if self._interactive:
             print("Next episode: %s" % show)
             save_show = input("Do you wish to schedule the show?[Y/n]:")
             should_save_show = r'y' == save_show.lower()

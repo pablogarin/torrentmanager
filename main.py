@@ -1,23 +1,34 @@
 #!/usr/bin/python3
 import sys
 import os
+from pprint import pprint
 from modules.config.config import Config
-from modules.tvdbclient.show_finder import ShowFinder
+from modules.show_finder import ShowFinder
 from modules.download_torrents import TorrentFinder
 from modules.show import ShowManager
-from pprint import pprint
+from modules.tvdbclient import TVDBClient
+from modules.rarbgclient import RarbgClient
 
 
 def main(args):
-    show_manager = ShowManager()
+    # Config
     config = Config()
     torrent_folder = config.get_config("download_folder")
     torrent_quality = config.get_config("quality")
-    show_finder = ShowFinder(show_manager, torrent_folder)
+    # Database
+    show_manager = ShowManager()
+    # Show Info Client
+    tvdb = TVDBClient(show_manager)
+    # Workers
+    show_finder = ShowFinder(
+        show_manager,
+        tvdb,
+        torrent_folder)
     torrent_finder = TorrentFinder(
         show_manager,
         torrent_folder,
         torrent_quality)
+    # Check Args
     if len(args) > 1:
         option = args[1]
     if len(args) == 2:
@@ -31,7 +42,7 @@ def main(args):
             torrent_finder.checkByName()
         elif option == "--search" or option == "-s":
             try:
-                show_finder.promptName()
+                show_finder.interactive_search()
             except Exception as e:
                 print(e)
                 print("Cancelled by user")
@@ -59,7 +70,7 @@ def main(args):
         else:
             print("Unknown Option.")
     else:
-        torrent_finder.readRSS()
+        torrent_finder.readRSS(RarbgClient())
     return 0
 
 

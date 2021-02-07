@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import List
 
 
-class FeedEntry(object):
+class Torrent(object):
     _title = None
     _link = None
 
@@ -11,7 +11,7 @@ class FeedEntry(object):
         self.link = link
 
     def __repr__(self):
-        return "FeedEntry { %s }" % self.title
+        return "Torrent { %s }" % self.title
 
     @property
     def title(self):
@@ -30,10 +30,10 @@ class FeedEntry(object):
         self._link = link
 
 
-FeedList = List[FeedEntry]
+TorrentList = List[Torrent]
 
 
-class FeedClientInterface(ABC):
+class TorrentClientInterface(ABC):
     @abstractmethod
-    def read(self, query: str) -> FeedList:
+    def fetch_torrents(self, query: str) -> TorrentList:
         pass

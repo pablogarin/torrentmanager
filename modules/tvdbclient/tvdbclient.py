@@ -15,6 +15,7 @@ class TVDBClient(ClientInterface):
     _search_path = 'GetSeries.php?seriesname='
     _find_path = "%s/series/%s/all/en.xml"
     _database = None
+    _verbose = False
 
     def __init__(self, database: PersistanceInterface):
         self._database = database
@@ -33,7 +34,7 @@ class TVDBClient(ClientInterface):
                 query)
         return self._show_list_from_response(response)
 
-    def find(self, seriesid: any, prompt: bool = False) -> Show:
+    def find(self, seriesid: any) -> Show:
         url = self._base_url+self._find_path % (self._api_key, seriesid)
         try:
             request = urlopen(url)
@@ -121,7 +122,7 @@ class TVDBClient(ClientInterface):
                 date = "Pending"
                 if episode['date'] is not None:
                     date = time.strftime("%Y-%m-%d", episode['date'])
-                print("S%02dE%02d (%s): %s" % (
+                self.verbose and print("S%02dE%02d (%s): %s" % (
                     episode['season'],
                     episode['episode'],
                     date,
@@ -164,3 +165,11 @@ class TVDBClient(ClientInterface):
         except Exception as e:
             print("Couldn't parse date: %s" % e)
         return None
+
+    @property
+    def verbose(self) -> bool:
+        return self._verbose
+
+    @verbose.setter
+    def verbose(self, verbose: bool):
+        self._verbose = verbose
