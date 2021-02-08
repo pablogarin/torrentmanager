@@ -1,8 +1,6 @@
 Torrent Manager
 ====================
 
-# NOTICE: I'm currently working on V2 of this project. Please go to that branch to check updates.
-
 To install, run "sudo ./install.sh"
 
 <b>TORRENTMANAGER(1)</b><br/>
