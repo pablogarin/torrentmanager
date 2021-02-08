@@ -1,6 +1,9 @@
+bin
 bin/*
+lib
 lib/*
 include/*
+db
 downloadTorrents.db
 config.ini
 *.pyc
@@ -9,3 +12,5 @@ lastExec
 lastUPD
 recursive_search
 torrentmanager
+pyvenv.cfg
+.vscode
