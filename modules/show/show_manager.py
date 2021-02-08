@@ -60,6 +60,7 @@ class ShowManager(PersistanceInterface):
         return series
 
     def _build_insert_query(self, show: Show) -> str:
+        title = show.title.replace("'", "''")
         query = "INSERT OR REPLACE\
             INTO tv_show\
             VALUES(\
@@ -76,8 +77,8 @@ class ShowManager(PersistanceInterface):
                 '%s',\
                 datetime()\
             )" % (
-                show.title,
-                show.title,
+                title,
+                title,
                 show.regex,
                 show.season,
                 show.episode,

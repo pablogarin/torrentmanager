@@ -1,2 +1,3 @@
-from .show_find_error import ShowFindException
-from .show_search_error import ShowSearchException
+from .show_find_error import ShowFindError
+from .show_search_error import ShowSearchError
+from .torrent_error import TorrentError

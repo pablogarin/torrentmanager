@@ -1,4 +1,4 @@
-class ShowSearchException(Exception):
+class ShowSearchError(Exception):
     _query = None
 
     def __init__(self, message, query: str):

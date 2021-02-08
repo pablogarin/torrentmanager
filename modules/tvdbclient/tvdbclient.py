@@ -5,8 +5,8 @@ from urllib.request import urlopen
 from modules.interfaces import PersistanceInterface
 from modules.interfaces import ClientInterface
 from modules.show import Show
-from modules.exceptions import ShowFindException
-from modules.exceptions import ShowSearchException
+from modules.exceptions import ShowFindError
+from modules.exceptions import ShowSearchError
 
 
 class TVDBClient(ClientInterface):
@@ -29,7 +29,7 @@ class TVDBClient(ClientInterface):
             response = xmltodict.parse(request.read())
             request.close()
         except Exception as e:
-            raise ShowSearchException(
+            raise ShowSearchError(
                 "Unable to connect to api => %s" % e,
                 query)
         return self._show_list_from_response(response)
@@ -41,7 +41,7 @@ class TVDBClient(ClientInterface):
             response = xmltodict.parse(request.read())
             request.close()
         except Exception as e:
-            raise ShowFindException(
+            raise ShowFindError(
                 "Unable to connect to api => %s" % e,
                 seriesid)
         data = response['Data']
@@ -86,11 +86,11 @@ class TVDBClient(ClientInterface):
             data['SeriesName'])
         title = series_name\
             .strip()\
-            .replace("'", "\\'")
+            .replace("'", "''")
         imdb = data['IMDB_ID'] if 'IMDB_ID' in data else 'Null'
         show_dict = {
             'title': title,
-            'regex': self._build_regex(title),
+            'regex': self._build_regex(series_name),
             'season': season,
             'episode': episode,
             'imdbID': imdb,
@@ -101,8 +101,8 @@ class TVDBClient(ClientInterface):
     def _build_regex(self, title):
         # FIXME: too many mutations on the same str
         regex = title.lower().strip()
-        regex = re.sub("[:']", "", regex)
         regex = re.sub(r'[ \.]', "[\\. ]{0,1}", regex)
+        regex = re.sub("[:']+", ".*", regex)
         return "^(%s).*" % regex
 
     def _check_current_episode(self, episodes: list) -> list:

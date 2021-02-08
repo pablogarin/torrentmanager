@@ -1,4 +1,4 @@
-class ShowFindException(Exception):
+class ShowFindError(Exception):
     _seriesid = None
 
     def __init__(self, message: str, seriesid: any):
