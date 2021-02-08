@@ -1,8 +1,6 @@
 Torrent Manager
 ====================
 
-** WARNING **: V2 is in development. Please do not use!
-
 To install, run "sudo ./install.sh"
 
 <b>TORRENTMANAGER(1)</b><br/>
