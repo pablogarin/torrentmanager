@@ -1,16 +1,9 @@
 bin
-bin/*
 lib
-lib/*
-include/*
+include
 db
-downloadTorrents.db
 config.ini
 *.pyc
 *.log
-lastExec
-lastUPD
-recursive_search
-torrentmanager
 pyvenv.cfg
 .vscode
