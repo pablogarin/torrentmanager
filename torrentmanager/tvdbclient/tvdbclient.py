@@ -1,12 +1,14 @@
 import xmltodict
 import re
 import time
+
 from urllib.request import urlopen
-from modules.interfaces import PersistanceInterface
-from modules.interfaces import ClientInterface
-from modules.show import Show
-from modules.exceptions import ShowFindError
-from modules.exceptions import ShowSearchError
+
+from torrentmanager.interfaces import PersistanceInterface
+from torrentmanager.interfaces import ClientInterface
+from torrentmanager.show import Show
+from torrentmanager.exceptions import ShowFindError
+from torrentmanager.exceptions import ShowSearchError
 
 
 class TVDBClient(ClientInterface):

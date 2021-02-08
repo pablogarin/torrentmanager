@@ -1,15 +1,17 @@
-from modules.interfaces import TorrentClientInterface
-from modules.interfaces import TorrentInterface
-from modules.interfaces import TorrentList
-from modules.exceptions import TorrentError
-from .eztv_torrent import EZTVTorrent
-from modules.show import Show
+import re
+
 from urllib.request import urlopen
 from urllib.request import Request
 from urllib.request import HTTPError
 from urllib.request import URLError
 from lxml import html
-import re
+
+from torrentmanager.eztvclient.eztv_torrent import EZTVTorrent
+from torrentmanager.exceptions import TorrentError
+from torrentmanager.interfaces import TorrentClientInterface
+from torrentmanager.interfaces import TorrentInterface
+from torrentmanager.interfaces import TorrentList
+from torrentmanager.show import Show
 
 
 class EZTVClient(TorrentClientInterface):

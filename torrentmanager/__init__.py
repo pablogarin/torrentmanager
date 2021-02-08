@@ -1,0 +1,1 @@
+from .torrentmanager import main

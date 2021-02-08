@@ -1,9 +1,10 @@
 import os
 import sys
 import re
-from modules.interfaces import PersistanceInterface
-from modules.interfaces import ClientInterface
-from modules.show import Show
+
+from torrentmanager.interfaces import PersistanceInterface
+from torrentmanager.interfaces import ClientInterface
+from torrentmanager.show import Show
 
 
 class ShowFinder(object):

@@ -1,5 +1,5 @@
-from modules.interfaces import TorrentInterface
-from modules.interfaces import TorrentClientInterface
+from torrentmanager.interfaces import TorrentClientInterface
+from torrentmanager.interfaces import TorrentInterface
 
 
 class EZTVTorrent(TorrentInterface):

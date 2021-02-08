@@ -1,4 +1,4 @@
-from modules.interfaces import TorrentInterface
+from torrentmanager.interfaces import TorrentInterface
 
 
 class RarbgTorrent(TorrentInterface):

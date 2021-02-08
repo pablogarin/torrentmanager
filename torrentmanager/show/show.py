@@ -1,5 +1,6 @@
 import re
-from modules.interfaces import PersistanceInterface
+
+from torrentmanager.interfaces import PersistanceInterface
 
 
 class Show(object):

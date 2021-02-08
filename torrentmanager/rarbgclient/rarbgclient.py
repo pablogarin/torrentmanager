@@ -1,8 +1,9 @@
 import feedparser
-from modules.interfaces import TorrentClientInterface
-from modules.interfaces import TorrentInterface
-from modules.interfaces import TorrentList
-from .rarbg_torrent import RarbgTorrent
+
+from torrentmanager.interfaces import TorrentClientInterface
+from torrentmanager.interfaces import TorrentInterface
+from torrentmanager.interfaces import TorrentList
+from torrentmanager.rarbgclient.rarbg_torrent import RarbgTorrent
 
 
 class RarbgClient(TorrentClientInterface):

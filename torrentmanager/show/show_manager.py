@@ -1,7 +1,8 @@
 import sqlite3
 import sys
-from modules.interfaces import PersistanceInterface
-from .show import Show
+
+from torrentmanager.interfaces import PersistanceInterface
+from torrentmanager.show import Show
 
 
 class ShowManager(PersistanceInterface):

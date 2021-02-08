@@ -1,14 +1,15 @@
 #!/usr/bin/env python
-import sys
 import re
 import subprocess
+import sys
 import threading
 from queue import PriorityQueue
-from modules.interfaces import PersistanceInterface
-from modules.interfaces import TorrentClientInterface
-from modules.interfaces import TorrentInterface
-from modules.interfaces import TorrentList
-from modules.show import Show
+
+from torrentmanager.interfaces import PersistanceInterface
+from torrentmanager.interfaces import TorrentClientInterface
+from torrentmanager.interfaces import TorrentInterface
+from torrentmanager.interfaces import TorrentList
+from torrentmanager.show import Show
 
 
 class TorrentFinder:
