@@ -4,7 +4,7 @@ import os
 from pprint import pprint
 from modules.config.config import Config
 from modules.show_finder import ShowFinder
-from modules.download_torrents import TorrentFinder
+from modules.torrent_finder import TorrentFinder
 from modules.show import ShowManager
 from modules.tvdbclient import TVDBClient
 from modules.rarbgclient import RarbgClient
