@@ -38,23 +38,17 @@ class Config(object):
             if not os.path.exists(folder):
                 raise FileNotFoundError("Folder %s doesn't exists!" % folder)
             return folder
-        except KeyboardInterrupt as e:
-            print("Action cancelled by user")
         except FileNotFoundError as e:
             print(e)
             return self.define_folder()
         return None
 
     def define_quality(self):
-        try:
-            quality = input("Enter the quality (none, 720p, 1080p or 2160p): ")
-            if not quality:
-                return self.define_quality()
-            match = re.search(r'(none|720[pP]|1080[pP]|2160[pP])', quality)
-            if match is None:
-                print("Invalid input!")
-                return self.define_quality()
-            return quality
-        except KeyboardInterrupt as e:
-            print("Action cancelled by user")
-        return None
+        quality = input("Enter the quality (none, 720p, 1080p or 2160p): ")
+        if not quality:
+            return self.define_quality()
+        match = re.search(r'(none|720[pP]|1080[pP]|2160[pP])', quality)
+        if match is None:
+            print("Invalid input!")
+            return self.define_quality()
+        return quality
