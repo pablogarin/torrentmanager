@@ -8,6 +8,7 @@ from modules.download_torrents import TorrentFinder
 from modules.show import ShowManager
 from modules.tvdbclient import TVDBClient
 from modules.rarbgclient import RarbgClient
+from modules.eztvclient import EZTVClient
 
 
 def main(args):
@@ -39,7 +40,7 @@ def main(args):
                 if seriesid is not None:
                     show_finder.schedule_show(seriesid, update=True)
         elif option == "--by-name" or option == "-n":
-            torrent_finder.checkByName()
+            torrent_finder.check_scheduled_shows(EZTVClient())
         elif option == "--search" or option == "-s":
             try:
                 show_finder.interactive_search()
@@ -70,7 +71,7 @@ def main(args):
         else:
             print("Unknown Option.")
     else:
-        torrent_finder.readRSS(RarbgClient())
+        torrent_finder.read_rss(RarbgClient())
     return 0
 
 

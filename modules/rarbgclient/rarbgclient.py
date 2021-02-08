@@ -1,7 +1,8 @@
 import feedparser
 from modules.interfaces import TorrentClientInterface
-from modules.interfaces import Torrent
+from modules.interfaces import TorrentInterface
 from modules.interfaces import TorrentList
+from .rarbg_torrent import RarbgTorrent
 
 
 class RarbgClient(TorrentClientInterface):
@@ -21,7 +22,7 @@ class RarbgClient(TorrentClientInterface):
         except Exception as e:
             print("Error while reading the feed: %s" % e)
 
-    def _create_feed_entry(self, entry: dict) -> Torrent:
+    def _create_feed_entry(self, entry: dict) -> TorrentInterface:
         title = entry['title']
         link = entry['link']
-        return Torrent(title, link)
+        return RarbgTorrent(title, link)

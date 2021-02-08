@@ -103,7 +103,7 @@ class TVDBClient(ClientInterface):
         regex = title.lower().strip()
         regex = re.sub("[:']", "", regex)
         regex = re.sub(r'[ \.]', "[\\. ]{0,1}", regex)
-        return "(%s)" % regex
+        return "^(%s).*" % regex
 
     def _check_current_episode(self, episodes: list) -> list:
         print("Searching current episode...")

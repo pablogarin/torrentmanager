@@ -1,6 +1,7 @@
 from modules.interfaces import TorrentClientInterface
-from modules.interfaces import Torrent
+from modules.interfaces import TorrentInterface
 from modules.interfaces import TorrentList
+from .eztv_torrent import EZTVTorrent
 from modules.show import Show
 from urllib.request import urlopen, Request
 from lxml import html
@@ -42,17 +43,15 @@ class EZTVClient(TorrentClientInterface):
         sanitized_title = re.sub(r'[^ \.,a-z0-9]', '', title.lower())
         return re.sub(r'[ \.,]', '-', sanitized_title)
 
-    def _create_torrent_from_link(self, anchor) -> Torrent:
+    def _create_torrent_from_link(self, anchor) -> TorrentInterface:
         link = anchor.attrib['href']
         title = link.split('/')[-1]
-        return Torrent(title, link)
+        torrent = EZTVTorrent(title, link)
+        torrent.client = self
+        return torrent
 
-    def download_torrent_file(self, show: Show, torrent: Torrent) -> str:
-        filename = "/tmp/%s.S%02dE%02d.torrent" % (
-            show.title.replace(' ', '.'),
-            show.season,
-            show.episode
-        )
+    def download_torrent_file(self, torrent: TorrentInterface) -> str:
+        filename = "/tmp/%s" % torrent.title
         request = Request(torrent.link, headers=self._hdr)
         f = urlopen(request)
         with open(filename, 'wb') as fout:

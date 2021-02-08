@@ -1,32 +1,21 @@
 #!/usr/bin/env python
-import os
 import sys
 import re
 import subprocess
-import time
 import threading
-import socket
-from urllib.request import urlopen, Request, URLError, HTTPError
-from lxml import html
-from OpenSSL import SSL
-from datetime import date
 from queue import PriorityQueue
 from modules.interfaces import PersistanceInterface
 from modules.interfaces import TorrentClientInterface
-from modules.interfaces import Torrent
+from modules.interfaces import TorrentInterface
 from modules.interfaces import TorrentList
 from modules.show import Show
-from modules.eztvclient import EZTVClient
-# https://rarbg.unblocked.stream/torrents.php?imdb=
-
-socket.setdefaulttimeout(3)
 
 
 class TorrentFinder:
     _database = None
     _torrent_folder = ''
     _torrent_quality = ''
-    _update_after = False
+    _updates = []
     _shows = []
 
     def __init__(
@@ -38,24 +27,13 @@ class TorrentFinder:
         self._torrent_folder = torrent_folder
         self._torrent_quality = torrent_quality
         self._shows = []
-        """
-        self.safeRSS = ["https://rarbg.to/rss.php?categories=18;41",
-        "https://kat.cr/usearch/category:tv%20age:hour/?rss=1"]
-        """
-        # self.safeRSS = ["https://rarbg.to/rss.php?categories=18;41"]
-        self.safeRSS = [
-            "https://eztv.io/ezrss.xml",
-            "http://rarbg.to/rss.php?category=1;18;41;49"]
-        self.safeRSS = ["http://rarbg.to/rssdd.php?category=1;18;41;49"]
         self._set_show_list()
-        # FIXME: Decouple this!
-        self._eztv = EZTVClient()
 
     def _set_show_list(self):
         for show in self._database.find():
             self._shows.append(show)
 
-    def readRSS(self, torrent_client: TorrentClientInterface):
+    def read_rss(self, torrent_client: TorrentClientInterface):
         torrent_list = torrent_client.fetch_torrents()
         for show in self._shows:
             print("Checking show %s" % show.title)
@@ -84,14 +62,26 @@ class TorrentFinder:
             return index
         return -1
 
-    def checkByName(self):
-        print("Searching by name. This might take a while (1-5 minutes)...\n")
+    def check_scheduled_shows(self, torrent_client: TorrentClientInterface):
+        print("Checking all scheduled shows.")
+        print("This might take a while (1-5 minutes)")
         tmp = []
         for show in self._shows:
-            tmp.append((show,))
-        self.run_parallel_in_threads(self.lookupTorrents, tmp)
+            tmp.append((show, torrent_client))
+        self.run_parallel_in_threads(
+            self.lookupTorrents,
+            tmp,
+            self._finished_show_check)
 
-    def run_parallel_in_threads(self, target, args_list):
+    def _finished_show_check(self):
+        print("Finished check!")
+        if len(self._updates) > 0:
+            print("Updating shows")
+            for show in self._updates:
+                self._update_episode(show)
+            self._updates = []
+
+    def run_parallel_in_threads(self, target, args_list, callback):
         threads = [
             threading.Thread(target=target, args=args) for args in args_list
         ]
@@ -99,16 +89,18 @@ class TorrentFinder:
             t.start()
         for t in threads:
             t.join()
-        print("Search done!")
+        if callback.__class__.__name__ == "method":
+            callback()
 
-    def lookupTorrents(self, show: Show):
-        torrent_list = self._eztv.fetch_torrents(show)
+    def lookupTorrents(
+            self,
+            show: Show,
+            torrent_client: TorrentClientInterface):
+        torrent_list = torrent_client.fetch_torrents(show)
         index = self._find_show_in_torrent_list(show, torrent_list)
         if index < 0:
             return
         torrent = torrent_list[index]
-        torrent_path = self._eztv.download_torrent_file(show, torrent)
-        torrent.link = torrent_path
         self._add_torrent(torrent, show)
 
     def _should_download_torrent(
@@ -153,20 +145,24 @@ class TorrentFinder:
         return feed_episode.upper() in current_episode
 
     def _update_episode(self, show: Show):
-        print("Updating database...")
+        print("Updating Show episode")
         show.episode += 1
         show.save()
 
-    def _add_torrent(self, torrent: Torrent, show: Show):
+    def _add_torrent(self, torrent: TorrentInterface, show: Show):
         folder = show.get_folder()
-        torrent_path = torrent.link
+        torrent_path = torrent.get_link()
         addCommand = "deluge-console add '%s' --path=%s" % (
             torrent_path,
             self._torrent_folder+"/"+folder
         )
         print(addCommand)
-        result = subprocess.check_output(addCommand, shell=True)
-        print(result)
+        try:
+            result = subprocess.check_output(addCommand, shell=True)
+            print(result)
+        except Exception as e:
+            print("Error adding torrent: %s" % e)
+        self._updates.append(show)
 
 
 def main(argv=None):
@@ -179,12 +175,12 @@ def main(argv=None):
     if option is not None:
         if option == "-n":
             finder = torrentFinder()
-            finder.checkByName()
+            finder.check_scheduled_shows()
         else:
             print("Unknown Option.")
     else:
         finder = torrentFinder()
-        finder.readRSS()
+        finder.read_rss()
     return 0
 
 
