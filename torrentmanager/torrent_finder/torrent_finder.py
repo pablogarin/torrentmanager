@@ -70,7 +70,7 @@ class TorrentFinder:
         for show in self._shows:
             tmp.append((show, torrent_client))
         self.run_parallel_in_threads(
-            self.lookupTorrents,
+            self._find_episode_for_show,
             tmp,
             self._finished_show_check)
 
@@ -93,7 +93,7 @@ class TorrentFinder:
         if callback.__class__.__name__ == "method":
             callback()
 
-    def lookupTorrents(
+    def _find_episode_for_show(
             self,
             show: Show,
             torrent_client: TorrentProviderInterface):
@@ -101,6 +101,13 @@ class TorrentFinder:
         index = self._find_show_in_torrent_list(show, torrent_list)
         if index < 0:
             return
+        print(
+            "Found new episode: %s, Season: %s, Episode: %s" % (
+                show.title,
+                show.season,
+                show.episode
+            )
+        )
         torrent = torrent_list[index]
         self._add_torrent(torrent, show)
 
@@ -146,7 +153,6 @@ class TorrentFinder:
         return feed_episode.upper() in current_episode
 
     def _update_episode(self, show: Show):
-        print("Updating Show episode")
         show.episode += 1
         show.save()
 
@@ -154,5 +160,6 @@ class TorrentFinder:
         if self._bittorrent_client.add_torrent(
                 torrent,
                 folder=show.get_folder()):
+            print("Torrent added successfully!")
             self._updates.append(show)
         return
