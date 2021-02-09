@@ -36,12 +36,32 @@ class TorrentInterface(ABC):
 
     @property
     @abstractmethod
-    def progress(self):
+    def progress(self) -> str:
         pass
 
     @progress.setter
     @abstractmethod
     def progress(self, progress: str):
+        pass
+
+    @property
+    @abstractmethod
+    def size(self):
+        pass
+
+    @size.setter
+    @abstractmethod
+    def size(self, size: str):
+        pass
+
+    @property
+    @abstractmethod
+    def age(self):
+        pass
+
+    @age.setter
+    @abstractmethod
+    def age(self, age: str):
         pass
 
 

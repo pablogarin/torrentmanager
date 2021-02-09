@@ -7,6 +7,20 @@ from .torrent_interface import TorrentList
 
 class BittorrentClientInterface(ABC):
     @abstractmethod
+    def __init__(self, download_folder: str):
+        self.download_folder = download_folder
+
+    @property
+    @abstractmethod
+    def download_folder(self) -> str:
+        pass
+
+    @download_folder.setter
+    @abstractmethod
+    def download_folder(self, folder: str):
+        pass
+
+    @abstractmethod
     def add_torrent(self, torrent: TorrentLinkInterface) -> bool:
         pass
 
