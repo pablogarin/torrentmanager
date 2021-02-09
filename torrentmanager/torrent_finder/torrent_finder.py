@@ -16,6 +16,7 @@ class TorrentFinder:
     _database = None
     _bittorrent_client = ''
     _torrent_quality = ''
+    _enforce_quality = ''
     _updates = []
     _shows = []
 
@@ -23,10 +24,12 @@ class TorrentFinder:
             self,
             database: PersistanceInterface,
             bittorrent_client: BittorrentClientInterface,
-            torrent_quality: str = ''):
+            torrent_quality: str = '',
+            enforce_quality: str = 'no'):
         self._database = database
         self._bittorrent_client = bittorrent_client
         self._torrent_quality = torrent_quality
+        self._enforce_quality = enforce_quality
         self._shows = []
         self._set_show_list()
 
@@ -48,12 +51,13 @@ class TorrentFinder:
             show: Show,
             torrent_list: TorrentLinkList) -> int:
         matches = PriorityQueue()
+        accept_any = self._enforce_quality == "no"
         for index, torrent in enumerate(torrent_list):
             if self._should_download_torrent(
                     torrent.title,
                     show):
                 matches.put((1, index))
-            elif self._should_download_torrent(
+            elif accept_any and self._should_download_torrent(
                     torrent.title,
                     show,
                     False):
