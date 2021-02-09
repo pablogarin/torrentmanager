@@ -10,6 +10,7 @@ from torrentmanager.show import ShowManager
 from torrentmanager.show_finder import ShowFinder
 from torrentmanager.torrent_finder import TorrentFinder
 from torrentmanager.tvdbclient import TVDBClient
+from torrentmanager.delugedclient import DelugedClient
 
 
 def _get_arguments() -> dict:
@@ -49,6 +50,11 @@ def _get_arguments() -> dict:
         '--config',
         action='store_true',
         help='update the current show episode')
+    parser.add_argument(
+        '--display-torrent-client',
+        action='store_true',
+        help='Display the bittorrent client info'
+    )
     parsed_args = parser.parse_args()
     return vars(parsed_args)
 
@@ -66,6 +72,8 @@ def main():
         show_manager = ShowManager()
         # Show Info Client
         tvdb = TVDBClient(show_manager)
+        # BitTorrent Client
+        bittorrent_client = DelugedClient(torrent_folder)
         # Workers
         show_finder = ShowFinder(
             show_manager,
@@ -73,7 +81,7 @@ def main():
             torrent_folder)
         torrent_finder = TorrentFinder(
             show_manager,
-            torrent_folder,
+            bittorrent_client,
             torrent_quality)
         # Check Args
         if len(args) == 0:
@@ -106,6 +114,9 @@ def main():
                     print("Show Added")
                 else:
                     print("Show not found!")
+        elif 'display_torrent_client' in args:
+            for torrent in bittorrent_client.find():
+                print(torrent)
         else:
             print("¯\\_(ツ)_/¯")
         return 0
