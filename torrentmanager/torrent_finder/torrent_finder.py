@@ -6,6 +6,7 @@ from queue import PriorityQueue
 
 from torrentmanager.interfaces import PersistanceInterface
 from torrentmanager.interfaces import TorrentProviderInterface
+from torrentmanager.interfaces import BittorrentClientInterface
 from torrentmanager.interfaces import TorrentLinkInterface
 from torrentmanager.interfaces import TorrentLinkList
 from torrentmanager.show import Show
@@ -13,7 +14,7 @@ from torrentmanager.show import Show
 
 class TorrentFinder:
     _database = None
-    _torrent_folder = ''
+    _bittorrent_client = ''
     _torrent_quality = ''
     _updates = []
     _shows = []
@@ -21,10 +22,10 @@ class TorrentFinder:
     def __init__(
             self,
             database: PersistanceInterface,
-            torrent_folder: str = '',
+            bittorrent_client: BittorrentClientInterface,
             torrent_quality: str = ''):
         self._database = database
-        self._torrent_folder = torrent_folder
+        self._bittorrent_client = bittorrent_client
         self._torrent_quality = torrent_quality
         self._shows = []
         self._set_show_list()
@@ -150,16 +151,8 @@ class TorrentFinder:
         show.save()
 
     def _add_torrent(self, torrent: TorrentLinkInterface, show: Show):
-        folder = show.get_folder()
-        torrent_path = torrent.get_link()
-        addCommand = "deluge-console add '%s' --path=%s" % (
-            torrent_path,
-            self._torrent_folder+"/"+folder
-        )
-        print(addCommand)
-        try:
-            result = subprocess.check_output(addCommand, shell=True)
-            print(result)
-        except Exception as e:
-            print("Error adding torrent: %s" % e)
-        self._updates.append(show)
+        if self._bittorrent_client.add_torrent(
+                torrent,
+                folder=show.get_folder()):
+            self._updates.append(show)
+        return
