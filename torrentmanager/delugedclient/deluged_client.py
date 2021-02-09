@@ -36,11 +36,12 @@ class DelugedClient(BittorrentClientInterface):
             self._command,
             (self._add % (torrent.get_link(), torrent_folder))
         )
-        print("Command: %s" % add_command)
         try:
+            print("Attempting to add %s" % torrent.title)
             add_result = subprocess.check_output(add_command, shell=True)\
                 .decode('utf-8')
-            if self._parse_add_result(add_result)[1] == 'Torrent added!':
+            parsed_result = self._parse_add_result(add_result)
+            if len(parsed_result) > 1 and parsed_result[1] == 'Torrent added!':
                 return True
         except Exception as e:
             print("Unable to execute add command: %s" % e)
