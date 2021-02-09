@@ -3,6 +3,6 @@ from .client_interface import ClientInterface
 from .persistence_interface import PersistanceInterface
 from .torrent_provider_interface import TorrentProviderInterface
 from .torrent_link_interface import TorrentLinkInterface
-from .torrent_client_interface import TorrentLinkList
+from .torrent_provider_interface import TorrentLinkList
 from .torrent_interface import TorrentInterface
 from .torrent_interface import TorrentList

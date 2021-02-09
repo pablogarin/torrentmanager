@@ -1,8 +1,8 @@
 from abc import ABC
 from abc import abstractmethod
-from . import TorrentLinkInterface
-from . import TorrentInterface
-from . import TorrentList
+from .torrent_link_interface import TorrentLinkInterface
+from .torrent_interface import TorrentInterface
+from .torrent_interface import TorrentList
 
 
 class BittorrentClientInterface(ABC):
