@@ -1,7 +1,7 @@
-from torrentmanager.interfaces import TorrentInterface
+from torrentmanager.interfaces import TorrentLinkInterface
 
 
-class RarbgTorrent(TorrentInterface):
+class RarbgTorrent(TorrentLinkInterface):
     def __init__(self, title, link):
         super().__init__(title, link)
 

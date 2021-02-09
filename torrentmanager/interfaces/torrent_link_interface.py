@@ -1,7 +1,8 @@
-from abc import ABC, abstractmethod
+from abc import ABC
+from abc import abstractmethod
 
 
-class TorrentInterface(ABC):
+class TorrentLinkInterface(ABC):
     _title = None
     _link = None
 

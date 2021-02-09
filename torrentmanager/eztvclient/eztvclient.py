@@ -8,13 +8,13 @@ from lxml import html
 
 from torrentmanager.eztvclient.eztv_torrent import EZTVTorrent
 from torrentmanager.exceptions import TorrentError
-from torrentmanager.interfaces import TorrentClientInterface
-from torrentmanager.interfaces import TorrentInterface
-from torrentmanager.interfaces import TorrentList
+from torrentmanager.interfaces import TorrentProviderInterface
+from torrentmanager.interfaces import TorrentLinkInterface
+from torrentmanager.interfaces import TorrentLinkList
 from torrentmanager.show import Show
 
 
-class EZTVClient(TorrentClientInterface):
+class EZTVClient(TorrentProviderInterface):
     _base_url = "https://eztv.re"
     _find_path = ""
     _search_path = "/search/%s"
@@ -38,7 +38,7 @@ class EZTVClient(TorrentClientInterface):
     def __init__(self):
         pass
 
-    def fetch_torrents(self, show: Show) -> TorrentList:
+    def fetch_torrents(self, show: Show) -> TorrentLinkList:
         url = self._base_url+self._search_path % \
             self._url_encode_title(show.title)
         try:
@@ -60,14 +60,14 @@ class EZTVClient(TorrentClientInterface):
         sanitized_title = re.sub(r'[^ \.,a-z0-9]', '', title.lower())
         return re.sub(r'[ \.,]', '-', sanitized_title)
 
-    def _create_torrent_from_link(self, anchor) -> TorrentInterface:
+    def _create_torrent_from_link(self, anchor) -> TorrentLinkInterface:
         link = anchor.attrib['href']
         title = link.split('/')[-1]
         torrent = EZTVTorrent(title, link)
         torrent.client = self
         return torrent
 
-    def download_torrent_file(self, torrent: TorrentInterface) -> str:
+    def download_torrent_file(self, torrent: TorrentLinkInterface) -> str:
         try:
             filename = "/tmp/%s" % torrent.title
             request = Request(torrent.link, headers=self._hdr)

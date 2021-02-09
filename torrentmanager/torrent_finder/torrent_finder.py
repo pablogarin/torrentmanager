@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 import re
 import subprocess
 import sys
@@ -6,9 +5,9 @@ import threading
 from queue import PriorityQueue
 
 from torrentmanager.interfaces import PersistanceInterface
-from torrentmanager.interfaces import TorrentClientInterface
-from torrentmanager.interfaces import TorrentInterface
-from torrentmanager.interfaces import TorrentList
+from torrentmanager.interfaces import TorrentProviderInterface
+from torrentmanager.interfaces import TorrentLinkInterface
+from torrentmanager.interfaces import TorrentLinkList
 from torrentmanager.show import Show
 
 
@@ -34,7 +33,7 @@ class TorrentFinder:
         for show in self._database.find():
             self._shows.append(show)
 
-    def read_rss(self, torrent_client: TorrentClientInterface):
+    def read_rss(self, torrent_client: TorrentProviderInterface):
         torrent_list = torrent_client.fetch_torrents()
         for show in self._shows:
             print("Checking show %s" % show.title)
@@ -46,7 +45,7 @@ class TorrentFinder:
     def _find_show_in_torrent_list(
             self,
             show: Show,
-            torrent_list: TorrentList) -> int:
+            torrent_list: TorrentLinkList) -> int:
         matches = PriorityQueue()
         for index, torrent in enumerate(torrent_list):
             if self._should_download_torrent(
@@ -63,7 +62,7 @@ class TorrentFinder:
             return index
         return -1
 
-    def check_scheduled_shows(self, torrent_client: TorrentClientInterface):
+    def check_scheduled_shows(self, torrent_client: TorrentProviderInterface):
         print("Checking all scheduled shows.")
         print("This might take a while (1-5 minutes)")
         tmp = []
@@ -96,7 +95,7 @@ class TorrentFinder:
     def lookupTorrents(
             self,
             show: Show,
-            torrent_client: TorrentClientInterface):
+            torrent_client: TorrentProviderInterface):
         torrent_list = torrent_client.fetch_torrents(show)
         index = self._find_show_in_torrent_list(show, torrent_list)
         if index < 0:
@@ -150,7 +149,7 @@ class TorrentFinder:
         show.episode += 1
         show.save()
 
-    def _add_torrent(self, torrent: TorrentInterface, show: Show):
+    def _add_torrent(self, torrent: TorrentLinkInterface, show: Show):
         folder = show.get_folder()
         torrent_path = torrent.get_link()
         addCommand = "deluge-console add '%s' --path=%s" % (
@@ -164,26 +163,3 @@ class TorrentFinder:
         except Exception as e:
             print("Error adding torrent: %s" % e)
         self._updates.append(show)
-
-
-def main(argv=None):
-    if argv is None:
-        argv = sys.argv
-    print("Deluged tv shows Manager.\n")
-    option = None
-    if len(argv) == 2:
-        option = argv[1]
-    if option is not None:
-        if option == "-n":
-            finder = torrentFinder()
-            finder.check_scheduled_shows()
-        else:
-            print("Unknown Option.")
-    else:
-        finder = torrentFinder()
-        finder.read_rss()
-    return 0
-
-
-if __name__ == '__main__':
-    sys.exit(main())

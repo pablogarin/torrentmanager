@@ -1,8 +1,8 @@
-from torrentmanager.interfaces import TorrentClientInterface
-from torrentmanager.interfaces import TorrentInterface
+from torrentmanager.interfaces import TorrentProviderInterface
+from torrentmanager.interfaces import TorrentLinkInterface
 
 
-class EZTVTorrent(TorrentInterface):
+class EZTVTorrent(TorrentLinkInterface):
     _client = None
 
     def __init__(self, title, link):
@@ -15,9 +15,9 @@ class EZTVTorrent(TorrentInterface):
         return self.client.download_torrent_file(self)
 
     @property
-    def client(self) -> TorrentClientInterface:
+    def client(self) -> TorrentProviderInterface:
         return self._client
 
     @client.setter
-    def client(self, client: TorrentClientInterface):
+    def client(self, client: TorrentProviderInterface):
         self._client = client
