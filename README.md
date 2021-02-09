@@ -1,7 +1,7 @@
 Torrent Manager
 ====================
 
-To install, run "sudo ./install.sh"
+To install, run `python setup.py install`
 
 <b>TORRENTMANAGER(1)</b><br/>
 <br/>
@@ -13,12 +13,12 @@ To install, run "sudo ./install.sh"
 <b>SYNOPSIS:</b><br/>
 <pre>
 	torrentmanager<br/>
-	torrentmanager [options] [value]<br/>
+	torrentmanager-cli [options] [value]<br/>
 </pre>
 <br/>
 <b>DESCRIPTION:</b><br/>
 <pre>
-	Torrent Manager is a software dedicated to search and download the tv shows you watch daily. It must be preloaded with the shows you want it to search (see: --search and --add). It relies on Deluged torrent and deluge-console, all which will be installed with this software.<br/>
+	Torrent Manager is a software dedicated to search and download the tv shows you watch daily. It must be preloaded with the shows you want it to search (see: --search and --add). It relies on Deluge torrent and deluge-console.<br/>
 </pre>
 <br/>
 <b>OPTIONS:</b><br/>
