@@ -1,3 +1,5 @@
+from pathlib import Path
+import os
 import sqlite3
 import sys
 
@@ -5,8 +7,10 @@ from torrentmanager.interfaces import PersistanceInterface
 from torrentmanager.show import Show
 
 
+# TODO: peewee or sqlalchemy?
 class ShowManager(PersistanceInterface):
-    _database = 'db/downloadTorrents.db'
+    _database_folder = "%s/.torrentmanager/db" % Path.home()
+    _database = 'downloadTorrents.db'
     _table = 'tv_show'
     _schema = "CREATE TABLE IF NOT EXISTS tv_show(\
             id integer primary key autoincrement,\
@@ -22,7 +26,13 @@ class ShowManager(PersistanceInterface):
     _conn = None
 
     def __init__(self):
-        self._conn = sqlite3.connect(self.database)
+        if not os.path.isdir(self._database_folder):
+            os.makedirs(self._database_folder)
+        database_path = "%s/%s" % (
+            self._database_folder,
+            self._database
+        )
+        self._conn = sqlite3.connect(database_path)
         try:
             self._conn.row_factory = sqlite3.Row
             c = self._conn.cursor()

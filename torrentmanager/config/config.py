@@ -1,14 +1,18 @@
 import os
 import re
+from pathlib import Path
 from configparser import ConfigParser
 
 
 class Config(object):
-    _config_file = 'config.ini'
+    _config_folder = "%s/.torrentmanager" % str(Path.home())
+    _config_file = '%s/config.ini' % _config_folder
     _config = None
 
     def __init__(self):
         self._config = ConfigParser()
+        if not os.path.isdir(self._config_folder):
+            os.makedirs(self._config_folder)
         if os.path.isfile(self._config_file):
             self._config.read(self._config_file)
         else:
