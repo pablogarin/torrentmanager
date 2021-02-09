@@ -24,17 +24,17 @@ class Config(object):
     def initial_configuration(self):
         folder = self.define_folder()
         quality = self.define_quality()
-        try:
+        enforce_quality = self.define_enforce_quality()
+        if "generals" not in self._config.sections():
             self._config.add_section("generals")
-        except Exception as e:
-            print("Section already created")
         self._config.set("generals", "download_folder", folder)
         self._config.set("generals", "quality", quality)
+        self._config.set("generals", "enforce_quality", enforce_quality)
         cfg_file_handle = open(self._config_file, 'w')
         self._config.write(cfg_file_handle)
         cfg_file_handle.close()
 
-    def define_folder(self):
+    def define_folder(self) -> str:
         try:
             folder = input("Enter a folder to download your shows: ")
             if not folder:
@@ -47,7 +47,7 @@ class Config(object):
             return self.define_folder()
         return None
 
-    def define_quality(self):
+    def define_quality(self) -> str:
         quality = input("Enter the quality (none, 720p, 1080p or 2160p): ")
         if not quality:
             return self.define_quality()
@@ -56,3 +56,18 @@ class Config(object):
             print("Invalid input!")
             return self.define_quality()
         return quality
+
+    def define_enforce_quality(self):
+        answer_map = {
+            "y": "yes",
+            "n": "no"
+        }
+        enforce_quality = input(
+            "Check quality before download? [y/n] (Default: 'n')")
+        if not enforce_quality:
+            enforce_quality = 'n'
+        if enforce_quality.lower() not in ("y", "n"):
+            print("Answer must be 'y' for yes or 'n' for no")
+            return self.define_enforce_quality()
+        return answer_map[enforce_quality.lower()]
+        
