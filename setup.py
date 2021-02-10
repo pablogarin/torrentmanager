@@ -13,7 +13,8 @@ setup(
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'torrentmanager-cli = torrentmanager:main'
+            'torrentmanager-cli = torrentmanager:main',
+            'torrentmanagerd = torrentmanager.torrentmanagerd:run_in_background',
         ]
     }
 )

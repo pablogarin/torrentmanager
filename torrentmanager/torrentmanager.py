@@ -71,14 +71,15 @@ def _schedule_watch(callback, minutes=1):
     while True:
         callback()
         curr_date = datetime.datetime.today()
-        next_tick = curr_date + datetime.timedelta(minutes=minutes)
+        next_tick = curr_date + datetime.timedelta(seconds=minutes)
         print("Sleeping for %d minutes" % minutes)
         time.sleep((next_tick-curr_date).total_seconds())
 
 
-def main():
+def main(args=None):
     try:
-        args = _get_arguments()
+        if args is None:
+            args = _get_arguments()
         if len(args) > 1:
             raise Exception("too many arguments")
         # Config
