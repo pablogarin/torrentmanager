@@ -12,7 +12,7 @@ class DelugedClient(BittorrentClientInterface):
     _client_name = "Deluge"
     _command = "deluge-console"
     _add = "add '%s' --path=%s"
-    _del = "del"
+    _del = "del %s"
     _info = "info -v"
     _download_folder = None
 
@@ -63,16 +63,30 @@ class DelugedClient(BittorrentClientInterface):
         try:
             find_result = subprocess.check_output(find_command, shell=True)\
                 .decode('utf-8')
+            if len(find_result) == 0:
+                print("No matches for the query '%s'" % query)
+                return None
             return self._create_torrents_from_output(find_result)
         except Exception as e:
             print("Unable to list torrents: %s" % e)
         return None
 
     def list_torrents(self) -> TorrentList:
-        pass
+        return self.find(query='')
 
     def delete_torrent(self, torrent: TorrentInterface):
-        pass
+        delete_command = "%s %s" % (
+            self._command,
+            self._del % (
+                torrent.id_))
+        try:
+            delete_result = subprocess.check_output(
+                delete_command,
+                shell=True).decode('utf-8')
+            return True
+        except Exception as e:
+            print("Unable to delete torrent: %s" % e)
+        return False
 
     def _create_torrents_from_output(self, find_result: str):
         return list(
