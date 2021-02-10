@@ -1,7 +1,7 @@
 Torrent Manager
 ====================
 
-To install, run `python setup.py install`
+To install, run `python3 setup.py install`
 
 <b>TORRENTMANAGER(1)</b><br/>
 <br/>
