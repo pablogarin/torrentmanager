@@ -4,6 +4,7 @@ from urllib.request import urlopen
 from urllib.request import Request
 from urllib.request import HTTPError
 from urllib.request import URLError
+from urllib.parse import quote
 from lxml import html
 
 from torrentmanager.eztvclient.eztv_torrent import EZTVTorrent
@@ -69,8 +70,10 @@ class EZTVClient(TorrentProviderInterface):
 
     def download_torrent_file(self, torrent: TorrentLinkInterface) -> str:
         try:
-            filename = "/tmp/%s" % torrent.title
-            request = Request(torrent.link, headers=self._hdr)
+            filename = "/tmp/%s" % quote(torrent.title, safe="[]")
+            request = Request(
+                quote(torrent.link, safe=":/[]"),
+                headers=self._hdr)
             f = urlopen(request)
             with open(filename, 'wb') as fout:
                 fout.write(f.read())

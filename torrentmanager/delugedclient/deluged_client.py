@@ -11,7 +11,7 @@ from torrentmanager.interfaces import TorrentList
 class DelugedClient(BittorrentClientInterface):
     _client_name = "Deluge"
     _command = "deluge-console"
-    _add = "add %s --path=%s"
+    _add = "add '%s' --path=%s"
     _del = "del"
     _info = "info -v"
     _download_folder = None
@@ -43,6 +43,8 @@ class DelugedClient(BittorrentClientInterface):
             parsed_result = self._parse_add_result(add_result)
             if len(parsed_result) > 1 and parsed_result[1] == 'Torrent added!':
                 return True
+            else:
+                print(parsed_result)
         except Exception as e:
             print("Unable to execute add command: %s" % e)
             return False
@@ -85,7 +87,10 @@ class DelugedClient(BittorrentClientInterface):
 
     def _parse_output(self, output: str) -> dict:
         try:
-            name = self._extract_value_from_output("Name", output)
+            name = self._extract_value_from_output(
+                "Name",
+                output,
+                regex=r"%s: ([^\n]+)")
             id_ = self._extract_value_from_output("ID", output)
             status = self._extract_value_from_output("State", output)
             progress = self._extract_value_from_output("Progress", output)
