@@ -54,8 +54,14 @@ def _get_arguments() -> dict:
         help="update the current show episode")
     parser.add_argument(
         "--display-torrent-client",
-        nargs="?",
+        nargs="*",
         metavar="TORRENT NAME",
+        help="Display the bittorrent client info"
+    )
+    parser.add_argument(
+        "--delete-torrent",
+        nargs="*",
+        metavar="TORRENT NAME OR ID",
         help="Display the bittorrent client info"
     )
     parser.add_argument(
@@ -141,12 +147,45 @@ def main(args=None):
         elif "display_torrent_client" in args:
             query = ""
             if args["display_torrent_client"] is not None:
-                query = args["display_torrent_client"]
+                query = " ".join(args["display_torrent_client"])
             torrent_list = bittorrent_client.find(query)
             if torrent_list is None:
                 return
             for torrent in torrent_list:
                 print(torrent)
+        elif "delete_torrent" in args:
+            if args["delete_torrent"] is None:
+                print("You must specify a torrent")
+                return 1
+            query = " ".join(args["delete_torrent"])
+            torrent_list = bittorrent_client.find(query)
+            if torrent_list is None:
+                return
+            torrent = None
+            if len(torrent_list) > 1:
+                for index, torr in enumerate(torrent_list):
+                    print("%d) %s (%s)" % (
+                        index+1,
+                        torr.name,
+                        torr.id_))
+                selected = input("Please specify a torrent from the list: ")
+                if not selected.isnumeric():
+                    raise Exception("Invalid option")
+                index = int(selected)-1
+                torrent = torrent_list[index]
+                print("\n")
+            else:
+                torrent = torrent_list[0]
+            print(
+                "Are you sure? Deleting '%s' cannot be undone." % torrent.name)
+            delete = input("Confirm deletion? [y/n] (default 'n'): ")
+            should_delete = delete.lower() == "y"
+            if should_delete:
+                has_deleted = bittorrent_client.delete_torrent(torrent)
+                if has_deleted:
+                    print("Torrent deleted")
+                    return 0
+                print("Coulnd't delete the torrent for unknown reasons.")
         elif "watch" in args:
             _schedule_watch(
                 lambda: torrent_finder.read_rss(RarbgClient()),
