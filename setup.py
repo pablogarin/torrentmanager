@@ -11,6 +11,11 @@ setup(
     author_email='pablo.garin@hotmail.com',
     url='https://github.com/pablogarin/torrentmanager',
     packages=find_packages(),
+    install_requires=[
+        "lxml",
+        "feedparser",
+        "xmltodict"
+    ],
     entry_points={
         'console_scripts': [
             'torrentmanager-cli = torrentmanager:main',

@@ -4,6 +4,7 @@ import sys
 from pathlib import Path
 
 from . import torrentmanager
+from .config import Config
 
 
 PID = None
@@ -94,4 +95,5 @@ def run_in_background():
 
 
 if __name__ == "__main__":
+    config = Config()
     run_in_background()
