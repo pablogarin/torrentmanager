@@ -12,6 +12,7 @@ setup(
     url='https://github.com/pablogarin/torrentmanager',
     packages=find_packages(),
     install_requires=[
+        "deluge",
         "lxml",
         "feedparser",
         "xmltodict"
