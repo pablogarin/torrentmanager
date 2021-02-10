@@ -71,7 +71,7 @@ def _schedule_watch(callback, minutes=1):
     while True:
         callback()
         curr_date = datetime.datetime.today()
-        next_tick = curr_date + datetime.timedelta(seconds=minutes)
+        next_tick = curr_date + datetime.timedelta(minutes=minutes)
         print("Sleeping for %d minutes" % minutes)
         time.sleep((next_tick-curr_date).total_seconds())
 
