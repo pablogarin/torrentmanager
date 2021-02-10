@@ -158,7 +158,7 @@ class TorrentFinder:
 
     def _update_episode(self, show: Show):
         show.episode += 1
-        show.save()
+        show.save(self._database)
 
     def _add_torrent(self, torrent: TorrentLinkInterface, show: Show):
         if self._bittorrent_client.add_torrent(

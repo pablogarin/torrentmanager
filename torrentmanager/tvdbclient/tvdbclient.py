@@ -98,7 +98,7 @@ class TVDBClient(ClientInterface):
             'imdbID': imdb,
             'thetvdbID': seriesid
         }
-        return Show(show_dict, self._database)
+        return Show(show_dict)
 
     def _build_regex(self, title):
         # FIXME: too many mutations on the same str

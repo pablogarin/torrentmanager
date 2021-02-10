@@ -58,10 +58,10 @@ class ShowFinder(object):
         should_save_show = True
         if self._interactive:
             print("Next episode: %s" % show)
-            save_show = input("Do you wish to schedule the show?[Y/n]:")
+            save_show = input("Do you wish to schedule the show?[y/n]: ")
             should_save_show = r'y' == save_show.lower()
         if should_save_show:
-            show.save()
+            show.save(self._database)
             if update:
                 return True
             try:

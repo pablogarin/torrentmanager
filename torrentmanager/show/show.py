@@ -13,12 +13,10 @@ class Show(object):
     _imdbID = None
     _thetvdbID = None
     _lastDownload = None
-    _database = None
 
-    def __init__(self, data: dict, database: PersistanceInterface):
+    def __init__(self, data: dict):
         if data is None:
             raise Exception('Cannot initialize an empty show')
-        self.database = database
         self.set_data(data)
 
     def set_data(self, data: dict):
@@ -49,9 +47,9 @@ class Show(object):
         sanitized_title = re.sub(r'[^ a-zA-Z0-9\.]', '', self.title)
         return sanitized_title.replace(' ', '.')
 
-    def save(self):
+    def save(self, database: PersistanceInterface):
         print("Saving %s" % self)
-        self.database.write(self)
+        database.write(self)
 
     def __repr__(self):
         return "Show %s" % dict(self)

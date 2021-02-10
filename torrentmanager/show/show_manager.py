@@ -65,7 +65,7 @@ class ShowManager(PersistanceInterface):
                 row = c.fetchone()
                 if row is None:
                     break
-                series.append(Show(row, self))
+                series.append(Show(row))
         except Exception as e:
             print("Error reading database: %s" % e)
         return series
