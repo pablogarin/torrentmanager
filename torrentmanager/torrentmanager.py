@@ -54,7 +54,8 @@ def _get_arguments() -> dict:
         help="update the current show episode")
     parser.add_argument(
         "--display-torrent-client",
-        action="store_true",
+        nargs="?",
+        metavar="TORRENT NAME",
         help="Display the bittorrent client info"
     )
     parser.add_argument(
@@ -115,7 +116,10 @@ def main(args=None):
         elif "by_name" in args and args["by_name"]:
             torrent_finder.check_scheduled_shows(EZTVClient())
         elif "list" in args and args["list"]:
-            for show in show_manager.find():
+            show_list = show_manager.find()
+            if show_list is None:
+                return 0
+            for show in show_list:
                 print(show)
         elif "config" in args and args["config"]:
             config.initial_configuration()
@@ -135,7 +139,13 @@ def main(args=None):
                 else:
                     print("Show not found!")
         elif "display_torrent_client" in args:
-            for torrent in bittorrent_client.find():
+            query = ""
+            if args["display_torrent_client"] is not None:
+                query = args["display_torrent_client"]
+            torrent_list = bittorrent_client.find(query)
+            if torrent_list is None:
+                return
+            for torrent in torrent_list:
                 print(torrent)
         elif "watch" in args:
             _schedule_watch(
