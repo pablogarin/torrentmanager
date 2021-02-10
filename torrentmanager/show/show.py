@@ -32,8 +32,8 @@ class Show(object):
         self.thetvdbID = data['thetvdbID']
         # self.lastDownload = data['lastDownload']
 
-    def to_dict(self) -> dict:
-        return {
+    def __iter__(self) -> dict:
+        d = {
             'title': self.title,
             'regex': self.regex,
             'season': self.season,
@@ -42,6 +42,8 @@ class Show(object):
             'imdbID': self.imdbID,
             'thetvdbID': self.thetvdbID
         }
+        for key in d.keys():
+            yield (key, d[key])
 
     def get_folder(self):
         sanitized_title = re.sub(r'[^ a-zA-Z0-9\.]', '', self.title)
@@ -52,7 +54,7 @@ class Show(object):
         self.database.write(self)
 
     def __repr__(self):
-        return "Show %s" % self.to_dict
+        return "Show %s" % dict(self)
 
     def __str__(self):
         return "%s (Season %s, Episode %s)" % (

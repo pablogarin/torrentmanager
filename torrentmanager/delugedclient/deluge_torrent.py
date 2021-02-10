@@ -79,3 +79,15 @@ class DelugeTorrent(TorrentInterface):
             self.size['actual_size'],
             self.age['added']
         )
+
+    def __iter__(self):
+        d = {
+            "id_": self.id_,
+            "name": self.name,
+            "status": self.status,
+            "progress": self.progress,
+            "size": self.size,
+            "age": self.age,
+        }
+        for key in d.keys():
+            yield (key, d[key])
