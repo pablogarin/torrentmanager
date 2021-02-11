@@ -41,7 +41,12 @@ class ShowFinder(object):
             if len(search_result) == 1:
                 i = 0
             else:
-                i = int(input("Please select a show from the list: "))-1
+                selected = input("Please select a show from the list: ")
+                if not selected.isnumeric():
+                    raise Exception(
+                        "Option must be a number. Received: '%s'"
+                        % selected)
+                i = int(selected)-1
             show_to_insert = search_result[i]
         if show_to_insert is not None:
             self.schedule_show(show_to_insert['id'])
@@ -54,7 +59,6 @@ class ShowFinder(object):
         show = self._client.find(seriesid)
         if show is None:
             return False
-        show.episode += 1
         should_save_show = True
         if self._interactive:
             print("Next episode: %s" % show)
