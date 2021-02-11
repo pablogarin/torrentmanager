@@ -74,6 +74,10 @@ class DelugedClient(BittorrentClientInterface):
     def list_torrents(self) -> TorrentList:
         return self.find(query='')
 
+    def delete_torrent_batch(self, torrent_list: TorrentList):
+        for torrent in torrent_list:
+            self.delete_torrent(torrent)
+
     def delete_torrent(self, torrent: TorrentInterface):
         delete_command = "%s %s" % (
             self._command,
