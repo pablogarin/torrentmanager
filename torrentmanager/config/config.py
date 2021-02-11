@@ -19,6 +19,10 @@ class Config(object):
             self.initial_configuration()
 
     def get_config(self, key: str, section: str = "generals") -> str:
+        if section not in self._config.sections():
+            return None
+        if key not in dict(self._config.items(section)):
+            return None
         return self._config.get(section, key)
 
     def initial_configuration(self):
@@ -30,6 +34,8 @@ class Config(object):
         self._config.set("generals", "download_folder", folder)
         self._config.set("generals", "quality", quality)
         self._config.set("generals", "enforce_quality", enforce_quality)
+        if self.get_config("max_torrent_age") is None:
+            self._config.set("generals", "max_torrent_age", "1")
         cfg_file_handle = open(self._config_file, 'w')
         self._config.write(cfg_file_handle)
         cfg_file_handle.close()
