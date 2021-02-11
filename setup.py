@@ -13,6 +13,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         "lxml",
+        "sgmllib3k",
         "feedparser",
         "xmltodict"
     ],

@@ -65,11 +65,11 @@ class DelugedClient(BittorrentClientInterface):
                 .decode('utf-8')
             if len(find_result) == 0:
                 print("No matches for the query '%s'" % query)
-                return None
+                return []
             return self._create_torrents_from_output(find_result)
         except Exception as e:
             print("Unable to list torrents: %s" % e)
-        return None
+        return []
 
     def list_torrents(self) -> TorrentList:
         return self.find(query='')
