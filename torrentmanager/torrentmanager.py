@@ -1,11 +1,13 @@
-import os
-import sys
 import argparse
-import time
 import datetime
+import os
+import re
+import sys
+import time
 from pprint import pprint
 
 from torrentmanager.config import Config
+from torrentmanager.interfaces import BittorrentClientInterface
 from torrentmanager.eztvclient import EZTVClient
 from torrentmanager.rarbgclient import RarbgClient
 from torrentmanager.show import ShowManager
@@ -73,14 +75,33 @@ def _get_arguments() -> dict:
     return vars(parsed_args)
 
 
-def _schedule_watch(callback, minutes=1):
+def _schedule_watch(*callbacks, minutes=1):
     print("Initializing in watch mode")
     while True:
-        callback()
+        for callback in callbacks:
+            callback()
         curr_date = datetime.datetime.today()
         next_tick = curr_date + datetime.timedelta(minutes=minutes)
         print("Sleeping for %d minutes" % minutes)
         time.sleep((next_tick-curr_date).total_seconds())
+
+
+def _get_old_torrents(bittorrent_client: BittorrentClientInterface, max_age=1):
+    torrents_to_delete = []
+    regex = r"([0-9]+) days ([0-9]+):([0-9]+):([0-9]+)"
+    for torrent in bittorrent_client.list_torrents():
+        match = re.search(regex, torrent.age["added"])
+        if match is None:
+            break
+        days = match.group(1)
+        hours = match.group(2)
+        minutes = match.group(3)
+        seconds = match.group(4)
+        if not days.isnumeric():
+            break
+        if int(days) >= max_age:
+            torrents_to_delete.append(torrent)
+    return torrents_to_delete
 
 
 def main(args=None):
@@ -94,6 +115,10 @@ def main(args=None):
         torrent_folder = config.get_config("download_folder")
         torrent_quality = config.get_config("quality")
         enforce_quality = config.get_config("enforce_quality")
+        max_torrent_age = config.get_config("max_torrent_age")
+        if not max_torrent_age or not max_torrent_age.isnumeric():
+            max_torrent_age = "1"
+        max_torrent_age = int(max_torrent_age)
         # Database
         show_manager = ShowManager()
         # Show Info Client
@@ -189,6 +214,9 @@ def main(args=None):
         elif "watch" in args:
             _schedule_watch(
                 lambda: torrent_finder.read_rss(RarbgClient()),
+                lambda: bittorrent_client.delete_torrent_batch(
+                    _get_old_torrents(
+                        bittorrent_client, max_age=max_torrent_age)),
                 minutes=5)
         else:
             print("¯\\_(ツ)_/¯")
