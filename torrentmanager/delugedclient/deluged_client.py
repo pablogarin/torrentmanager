@@ -1,4 +1,5 @@
 import re
+import time
 import subprocess
 
 from .deluge_torrent import DelugeTorrent
@@ -41,7 +42,7 @@ class DelugedClient(BittorrentClientInterface):
             add_result = subprocess.check_output(add_command, shell=True)\
                 .decode('utf-8')
             parsed_result = self._parse_add_result(add_result)
-            if len(parsed_result) > 1 and parsed_result[1] == 'Torrent added!':
+            if len(parsed_result) > 0 and 'Torrent added!' in parsed_result:
                 return True
             else:
                 print(parsed_result)
