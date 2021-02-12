@@ -15,7 +15,7 @@ class ShowFinder(object):
             self,
             database: PersistanceInterface,
             client: ClientInterface,
-            torrent_folder: str = ''):
+            torrent_folder: str = ""):
         self._database = database
         self._torrent_folder = torrent_folder
         self._client = client
@@ -27,8 +27,8 @@ class ShowFinder(object):
         self.search(query)
 
     def search(self, query: str) -> list:
-        seriesName = query.replace('.', '')
-        seriesName = seriesName.replace(' ', '%20')
+        seriesName = query.replace(".", "")
+        seriesName = seriesName.replace(" ", "%20")
         search_result = self._client.search(seriesName)
         show_to_insert = None
         if len(search_result) == 0:
@@ -36,7 +36,7 @@ class ShowFinder(object):
                 print("Show not found.")
             return []
         for i, show in enumerate(search_result):
-            print("%d) %s = %s" % (i+1, show['title'], show['id']))
+            print("%d) %s = %s" % (i+1, show["title"], show["id"]))
         if self._interactive:
             if len(search_result) == 1:
                 i = 0
@@ -49,7 +49,7 @@ class ShowFinder(object):
                 i = int(selected)-1
             show_to_insert = search_result[i]
         if show_to_insert is not None:
-            self.schedule_show(show_to_insert['id'])
+            self.schedule_show(show_to_insert["id"])
         return search_result
 
     def schedule_show(
@@ -63,7 +63,7 @@ class ShowFinder(object):
         if self._interactive:
             print("Next episode: %s" % show)
             save_show = input("Do you wish to schedule the show?[y/n]: ")
-            should_save_show = r'y' == save_show.lower()
+            should_save_show = r"y" == save_show.lower()
         if should_save_show:
             show.save(self._database)
             if update:
@@ -71,7 +71,7 @@ class ShowFinder(object):
             try:
                 show_folder = show.get_folder()
                 path = self._torrent_folder+"/"+show_folder
-                escaped_path = re.sub(r'[^ /a-zA-Z0-9\.]', '', path)
+                escaped_path = re.sub(r"[^ /a-zA-Z0-9\.]", "", path)
                 print("Path: %s" % escaped_path)
                 if not os.path.exists(escaped_path):
                     os.makedirs(escaped_path)

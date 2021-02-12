@@ -20,20 +20,21 @@ class EZTVClient(TorrentProviderInterface):
     _find_path = ""
     _search_path = "/search/%s"
     _accept_types = [
-        'text/html',
-        'application/xhtml+xml',
-        'application/xml;q=0.9',
-        '*/*;q=0.8'
+        "text/html",
+        "application/xhtml+xml",
+        "application/xml;q=0.9",
+        "*/*;q=0.8"
     ]
+    _user_agent = "Mozilla/5.0 (X11; Linux x86_64) " \
+        "AppleWebKit/537.11 (KHTML, like Gecko) " \
+        "Chrome/23.0.1271.64 Safari/537.11"
     _hdr = {
-        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) \
-            AppleWebKit/537.11 (KHTML, like Gecko) \
-            Chrome/23.0.1271.64 Safari/537.11',
-        'Accept': ",".join(_accept_types),
-        'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
-        'Accept-Encoding': 'none',
-        'Accept-Language': 'en-US,en;q=0.8',
-        'Connection': 'keep-alive'
+        "User-Agent": _user_agent,
+        "Accept": ",".join(_accept_types),
+        "Accept-Charset": "ISO-8859-1,utf-8;q=0.7,*;q=0.3",
+        "Accept-Encoding": "none",
+        "Accept-Language": "en-US,en;q=0.8",
+        "Connection": "keep-alive"
     }
 
     def __init__(self):
@@ -50,20 +51,19 @@ class EZTVClient(TorrentProviderInterface):
             page = html.fromstring(strHTML)
             results = page.xpath("//a[@class='download_1']")
             return list(
-                map(self._create_torrent_from_link, results)
-            )
+                map(self._create_torrent_from_link, results))
         except HTTPError as e:
             print("HTTP Error:", str(e), url)
         except URLError as e:
             print("URL Error:", str(e), url)
 
     def _url_encode_title(self, title) -> str:
-        sanitized_title = re.sub(r'[^ \.,a-z0-9]', '', title.lower())
-        return re.sub(r'[ \.,]', '-', sanitized_title)
+        sanitized_title = re.sub(r"[^ \.,a-z0-9]", "", title.lower())
+        return re.sub(r"[ \.,]", "-", sanitized_title)
 
     def _create_torrent_from_link(self, anchor) -> TorrentLinkInterface:
-        link = anchor.attrib['href']
-        title = link.split('/')[-1]
+        link = anchor.attrib["href"]
+        title = link.split("/")[-1]
         torrent = EZTVTorrent(title, link)
         torrent.client = self
         return torrent
@@ -75,7 +75,7 @@ class EZTVClient(TorrentProviderInterface):
                 quote(torrent.link, safe=":/[]"),
                 headers=self._hdr)
             f = urlopen(request)
-            with open(filename, 'wb') as fout:
+            with open(filename, "wb") as fout:
                 fout.write(f.read())
             f.close()
             return filename

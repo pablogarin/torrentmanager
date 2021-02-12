@@ -31,18 +31,17 @@ class DelugedClient(BittorrentClientInterface):
     def add_torrent(
             self,
             torrent: TorrentLinkInterface,
-            folder: str = '') -> bool:
+            folder: str = "") -> bool:
         torrent_folder = self._download_folder+"/"+folder
         add_command = "%s %s" % (
             self._command,
-            (self._add % (torrent.get_link(), torrent_folder))
-        )
+            (self._add % (torrent.get_link(), torrent_folder)))
         try:
             print("Attempting to add %s" % torrent.title)
             add_result = subprocess.check_output(add_command, shell=True)\
-                .decode('utf-8')
+                .decode("utf-8")
             parsed_result = self._parse_add_result(add_result)
-            if len(parsed_result) > 0 and 'Torrent added!' in parsed_result:
+            if len(parsed_result) > 0 and "Torrent added!" in parsed_result:
                 return True
             else:
                 print(parsed_result)
@@ -54,16 +53,15 @@ class DelugedClient(BittorrentClientInterface):
     def _parse_add_result(self, result: str):
         return result.split("\n")
 
-    def find(self, query: str = '', status=None) -> TorrentList:
+    def find(self, query: str = "", status=None) -> TorrentList:
         find_command = "%s %s %s %s" % (
             self._command,
             self._info,
-            ("-s%s" % status if status is not None else ''),
-            query
-        )
+            ("-s%s" % status if status is not None else ""),
+            query)
         try:
             find_result = subprocess.check_output(find_command, shell=True)\
-                .decode('utf-8')
+                .decode("utf-8")
             if len(find_result) == 0:
                 print("No matches for the query '%s'" % query)
                 return []
@@ -73,7 +71,7 @@ class DelugedClient(BittorrentClientInterface):
         return []
 
     def list_torrents(self) -> TorrentList:
-        return self.find(query='')
+        return self.find(query="")
 
     def delete_torrent_batch(self, torrent_list: TorrentList):
         for torrent in torrent_list:
@@ -88,7 +86,7 @@ class DelugedClient(BittorrentClientInterface):
         try:
             delete_result = subprocess.check_output(
                 delete_command,
-                shell=True).decode('utf-8')
+                shell=True).decode("utf-8")
             return True
         except Exception as e:
             print("Unable to delete torrent: %s" % e)
@@ -96,8 +94,7 @@ class DelugedClient(BittorrentClientInterface):
 
     def _create_torrents_from_output(self, find_result: str):
         return list(
-            map(self._create_torrent_object, find_result.split("\n \n"))
-        )
+            map(self._create_torrent_object, find_result.split("\n \n")))
 
     def _create_torrent_object(self, output: str) -> DelugeTorrent:
         torrent_dict = self._parse_output(output)
@@ -121,8 +118,8 @@ class DelugedClient(BittorrentClientInterface):
             sizes_array = size.split(" Ratio")[0].split("/")
             size_dict = {}
             if len(sizes_array) > 0:
-                size_dict['current_size'] = sizes_array[0]
-                size_dict['actual_size'] = sizes_array[1]
+                size_dict["current_size"] = sizes_array[0]
+                size_dict["actual_size"] = sizes_array[1]
             age = self._extract_value_from_output(
                 "Seed time",
                 output,
@@ -130,16 +127,16 @@ class DelugedClient(BittorrentClientInterface):
             ages_array = age.split(" Active: ")
             age_dict = {}
             if len(ages_array) > 0:
-                age_dict['seeding'] = ages_array[0]
-                age_dict['added'] = ages_array[1]
+                age_dict["seeding"] = ages_array[0]
+                age_dict["added"] = ages_array[1]
 
             return {
-                'id': id_,
-                'name': name,
-                'status': status,
-                'progress': progress,
-                'size': size_dict,
-                'age': age_dict
+                "id": id_,
+                "name": name,
+                "status": status,
+                "progress": progress,
+                "size": size_dict,
+                "age": age_dict
             }
         except Exception as e:
             print("Couldn't parse torrent: %s" % e)
@@ -151,5 +148,5 @@ class DelugedClient(BittorrentClientInterface):
             regex: str = r"%s: ([^\s]+)"):
         match = re.search((regex % field), output)
         if match is None:
-            raise Exception('Not a valid torrent')
+            raise Exception("Not a valid torrent")
         return match.group(1)

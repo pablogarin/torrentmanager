@@ -20,8 +20,7 @@ from torrentmanager.delugedclient import DelugedClient
 def _get_arguments() -> dict:
     parser = argparse.ArgumentParser(
         argument_default=argparse.SUPPRESS,
-        description="Torrent Manager and Scheduler"
-    )
+        description="Torrent Manager and Scheduler")
     parser.add_argument(
         "-s",
         "--search",
@@ -58,19 +57,16 @@ def _get_arguments() -> dict:
         "--display-torrent-client",
         nargs="*",
         metavar="TORRENT NAME",
-        help="Display the bittorrent client info"
-    )
+        help="Display the bittorrent client info")
     parser.add_argument(
         "--delete-torrent",
         nargs="*",
         metavar="TORRENT NAME OR ID",
-        help="Display the bittorrent client info"
-    )
+        help="Display the bittorrent client info")
     parser.add_argument(
         "--watch",
         action="store_true",
-        help="Start in watch mode"
-    )
+        help="Start in watch mode")
     parsed_args = parser.parse_args()
     return vars(parsed_args)
 
@@ -79,7 +75,11 @@ def _schedule_watch(*callbacks, minutes=1):
     print("Initializing in watch mode")
     while True:
         for callback in callbacks:
-            callback()
+            if callable(callback):
+                callback()
+            else:
+                raise Exception(
+                    "Invalid argument passed to _schedule_watch")
         curr_date = datetime.datetime.today()
         next_tick = curr_date + datetime.timedelta(minutes=minutes)
         print("Sleeping for %d minutes" % minutes)

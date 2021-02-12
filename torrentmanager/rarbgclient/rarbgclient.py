@@ -15,7 +15,7 @@ class RarbgClient(TorrentProviderInterface):
     def fetch_torrents(self) -> TorrentLinkList:
         try:
             feed = feedparser.parse(self._url)
-            feedentries = feed['entries']
+            feedentries = feed["entries"]
             feed = None
             return list(map(
                 self._create_feed_entry,
@@ -24,6 +24,6 @@ class RarbgClient(TorrentProviderInterface):
             print("Error while reading the feed: %s" % e)
 
     def _create_feed_entry(self, entry: dict) -> TorrentLinkInterface:
-        title = entry['title']
-        link = entry['link']
+        title = entry["title"]
+        link = entry["link"]
         return RarbgTorrent(title, link)

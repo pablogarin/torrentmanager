@@ -58,27 +58,26 @@ class DelugeTorrent(TorrentInterface):
         self._age = age
 
     def set_data_from_dict(self, data: dict):
-        if 'name' in data:
-            self.name = data['name']
-        if 'id' in data:
-            self.id_ = data['id']
-        if 'status' in data:
-            self.status = data['status']
-        if 'progress' in data:
-            self.progress = data['progress']
-        if 'size' in data:
-            self.size = data['size']
-        if 'age' in data:
-            self.age = data['age']
+        if "name" in data:
+            self.name = data["name"]
+        if "id" in data:
+            self.id_ = data["id"]
+        if "status" in data:
+            self.status = data["status"]
+        if "progress" in data:
+            self.progress = data["progress"]
+        if "size" in data:
+            self.size = data["size"]
+        if "age" in data:
+            self.age = data["age"]
 
     def __repr__(self):
         return "Name: %s\nStatus: %s - Progress: %s (%s)\nAge: %s\n" % (
             self.name,
             self.status,
             self.progress,
-            self.size['actual_size'],
-            self.age['added']
-        )
+            self.size["actual_size"],
+            self.age["added"])
 
     def __iter__(self):
         d = {

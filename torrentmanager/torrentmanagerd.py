@@ -37,7 +37,7 @@ def _start():
     with open(PID_FILE, "w") as f:
         f.write(str(PID))
     try:
-        torrentmanager.main({'watch': True})
+        torrentmanager.main({"watch": True})
     except Exception as e:
         sys.stdout.close()
         sys.stdout = sys.__stdout__
@@ -53,17 +53,16 @@ def _stop(pid):
 
 
 def run_in_background():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        description="Torrent Manager Daemon")
     parser.add_argument(
         "command",
-        metavar="(start|stop|status|restart)"
-    )
+        metavar="(start|stop|status|restart)")
     parser.add_argument(
         "-v",
         "--verbose",
         action="store_true",
-        help="Verbose mode"
-    )
+        help="Verbose mode")
     args = vars(parser.parse_args())
     command = args["command"]
     is_running = os.path.isfile(PID_FILE)

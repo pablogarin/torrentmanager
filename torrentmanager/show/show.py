@@ -16,36 +16,36 @@ class Show(object):
 
     def __init__(self, data: dict):
         if data is None:
-            raise Exception('Cannot initialize an empty show')
+            raise Exception("Cannot initialize an empty show")
         self.set_data(data)
 
     def set_data(self, data: dict):
-        # self.id = data['id']
-        self.title = data['title']
-        self.regex = data['regex']
-        self.season = data['season']
-        self.episode = data['episode']
-        # self.status = data['status'] if 'status' in data else 1
-        self.imdbID = data['imdbID']
-        self.thetvdbID = data['thetvdbID']
-        # self.lastDownload = data['lastDownload']
+        # self.id = data["id"]
+        self.title = data["title"]
+        self.regex = data["regex"]
+        self.season = data["season"]
+        self.episode = data["episode"]
+        # self.status = data["status"] if "status" in data else 1
+        self.imdbID = data["imdbID"]
+        self.thetvdbID = data["thetvdbID"]
+        # self.lastDownload = data["lastDownload"]
 
     def __iter__(self) -> dict:
         d = {
-            'title': self.title,
-            'regex': self.regex,
-            'season': self.season,
-            'episode': self.episode,
-            'status': self.status,
-            'imdbID': self.imdbID,
-            'thetvdbID': self.thetvdbID
+            "title": self.title,
+            "regex": self.regex,
+            "season": self.season,
+            "episode": self.episode,
+            "status": self.status,
+            "imdbID": self.imdbID,
+            "thetvdbID": self.thetvdbID
         }
         for key in d.keys():
             yield (key, d[key])
 
     def get_folder(self):
-        sanitized_title = re.sub(r'[^ a-zA-Z0-9\.]', '', self.title)
-        return sanitized_title.replace(' ', '.')
+        sanitized_title = re.sub(r"[^ a-zA-Z0-9\.]", "", self.title)
+        return sanitized_title.replace(" ", ".")
 
     def save(self, database: PersistanceInterface):
         print("Saving %s" % self)

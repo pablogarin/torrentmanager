@@ -15,9 +15,9 @@ from torrentmanager.show import Show
 
 class TorrentFinder:
     _database = None
-    _bittorrent_client = ''
-    _torrent_quality = ''
-    _enforce_quality = ''
+    _bittorrent_client = ""
+    _torrent_quality = ""
+    _enforce_quality = ""
     _updates = []
     _shows = []
 
@@ -25,8 +25,8 @@ class TorrentFinder:
             self,
             database: PersistanceInterface,
             bittorrent_client: BittorrentClientInterface,
-            torrent_quality: str = '',
-            enforce_quality: str = 'no'):
+            torrent_quality: str = "",
+            enforce_quality: str = "no"):
         self._database = database
         self._bittorrent_client = bittorrent_client
         self._torrent_quality = torrent_quality
@@ -113,9 +113,7 @@ class TorrentFinder:
             "Found new episode: %s, Season: %s, Episode: %s" % (
                 show.title,
                 show.season,
-                show.episode
-            )
-        )
+                show.episode))
         torrent = torrent_list[index]
         self._add_torrent(torrent, show)
 
@@ -125,10 +123,10 @@ class TorrentFinder:
             show: Show,
             check_quality: bool = True) -> bool:
         if check_quality:
-            return self._is_entry_scheduled(title, show) and\
-                self._has_expected_quality(title) and\
+            return self._is_entry_scheduled(title, show) and \
+                self._has_expected_quality(title) and \
                 self._is_entry_current_episode(title, show)
-        return self._is_entry_scheduled(title, show) and\
+        return self._is_entry_scheduled(title, show) and \
             self._is_entry_current_episode(title, show)
 
     def _is_entry_scheduled(self, title: str, show: Show) -> bool:
@@ -139,8 +137,8 @@ class TorrentFinder:
         if self._torrent_quality == "none":
             return True
         regexp = re.sub(
-            r'[pP]',
-            '[pP]',
+            r"[pP]",
+            "[pP]",
             self._torrent_quality)
         match = re.search(regexp, title)
         if match is None:
@@ -148,7 +146,7 @@ class TorrentFinder:
         return True
 
     def _is_entry_current_episode(self, title: str, show: Show) -> bool:
-        regexp = r'((S[0-9]{,2}E[0-9]{,2})|([0-9]{1,2}[xX][0-9]{1,2}))'
+        regexp = r"((S[0-9]{,2}E[0-9]{,2})|([0-9]{1,2}[xX][0-9]{1,2}))"
         match = re.search(regexp, title)
         if not match:
             return False

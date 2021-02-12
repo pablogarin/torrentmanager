@@ -6,7 +6,7 @@ from configparser import ConfigParser
 
 class Config(object):
     _config_folder = "%s/.torrentmanager" % str(Path.home())
-    _config_file = '%s/config.ini' % _config_folder
+    _config_file = "%s/config.ini" % _config_folder
     _config = None
 
     def __init__(self):
@@ -36,7 +36,7 @@ class Config(object):
         self._config.set("generals", "enforce_quality", enforce_quality)
         if self.get_config("max_torrent_age") is None:
             self._config.set("generals", "max_torrent_age", "1")
-        cfg_file_handle = open(self._config_file, 'w')
+        cfg_file_handle = open(self._config_file, "w")
         self._config.write(cfg_file_handle)
         cfg_file_handle.close()
 
@@ -57,7 +57,7 @@ class Config(object):
         quality = input("Enter the quality (none, 720p, 1080p or 2160p): ")
         if not quality:
             return self.define_quality()
-        match = re.search(r'(none|720[pP]|1080[pP]|2160[pP])', quality)
+        match = re.search(r"(none|720[pP]|1080[pP]|2160[pP])", quality)
         if match is None:
             print("Invalid input!")
             return self.define_quality()
@@ -71,9 +71,8 @@ class Config(object):
         enforce_quality = input(
             "Check quality before download? [y/n] (Default: 'n')")
         if not enforce_quality:
-            enforce_quality = 'n'
+            enforce_quality = "n"
         if enforce_quality.lower() not in ("y", "n"):
             print("Answer must be 'y' for yes or 'n' for no")
             return self.define_enforce_quality()
         return answer_map[enforce_quality.lower()]
-        
