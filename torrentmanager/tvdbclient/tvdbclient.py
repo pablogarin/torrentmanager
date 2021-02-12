@@ -169,7 +169,7 @@ class TVDBClient(ClientInterface):
     def _has_episode_aired(self, air_date) -> bool:
         if air_date is None:
             return False
-        if self._current_date < air_date:
+        if self._current_date <= air_date:
             return False
         return True
 
