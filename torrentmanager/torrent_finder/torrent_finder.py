@@ -1,6 +1,7 @@
 import re
 import subprocess
 import sys
+import time
 import threading
 from queue import PriorityQueue
 
@@ -40,11 +41,14 @@ class TorrentFinder:
     def read_rss(self, torrent_client: TorrentProviderInterface):
         torrent_list = torrent_client.fetch_torrents()
         for show in self._shows:
-            print("Checking show %s" % show.title)
+            print("%s | Checking show %s" % (
+                time.strftime("%Y-%m-%d %H:%M:%S"),
+                show.title))
             index = self._find_show_in_torrent_list(show, torrent_list)
             if index >= 0:
                 torrent = torrent_list[index]
                 self._add_torrent(torrent, show)
+        self._finished_show_check()
 
     def _find_show_in_torrent_list(
             self,
@@ -164,6 +168,8 @@ class TorrentFinder:
         if self._bittorrent_client.add_torrent(
                 torrent,
                 folder=show.get_folder()):
-            print("Torrent added successfully!")
+            print(
+                "%s | Torrent added successfully!"
+                % time.strftime("%Y-%m-%d %H:%M:%S"))
             self._updates.append(show)
         return
