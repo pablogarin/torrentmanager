@@ -81,3 +81,10 @@ class TestConfig(unittest.TestCase):
         # Open should be called twice: opening the file and writing to it
         self.assertEqual(local_mock_open.call_count, 2)
         local_mock_open.assert_called_with(config._config_file, "w")
+
+    def test_set_config(self, args):
+        config = Config()
+        m_key = "mock_config"
+        m_value = "mock_value"
+        config.set_config(m_key, m_value)
+        self.assertEqual(config.get_config(m_key), m_value)
