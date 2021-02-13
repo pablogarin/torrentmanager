@@ -51,6 +51,14 @@ class TestConfig(unittest.TestCase):
         self.assertEqual(
             config.get_config("max_torrent_age"),
             mock_age)
+        self.assertEqual(
+            config.get_config("Non-existant"),
+            None)
+        self.assertEqual(
+            config.get_config(
+                "Non-existant",
+                section="not-section"),
+            None)
 
     @patch('builtins.input', mock_input)
     @patch('os.path.exists', return_value=True)
