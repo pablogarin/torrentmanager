@@ -18,6 +18,10 @@ class Config(object):
         else:
             self.initial_configuration()
 
+    def set_config(
+            self, key: str, value: str, section: str = "generals") -> str:
+        self._config.set(section, key, value)
+
     def get_config(self, key: str, section: str = "generals") -> str:
         if section not in self._config.sections():
             return None
@@ -25,20 +29,23 @@ class Config(object):
             return None
         return self._config.get(section, key)
 
+    def _write_config(self):
+        cfg_file_handle = open(self._config_file, "w")
+        self._config.write(cfg_file_handle)
+        cfg_file_handle.close()
+
     def initial_configuration(self):
         folder = self.define_folder()
         quality = self.define_quality()
         enforce_quality = self.define_enforce_quality()
         if "generals" not in self._config.sections():
             self._config.add_section("generals")
-        self._config.set("generals", "download_folder", folder)
-        self._config.set("generals", "quality", quality)
-        self._config.set("generals", "enforce_quality", enforce_quality)
+        self.set_config("download_folder", folder)
+        self.set_config("quality", quality)
+        self.set_config("enforce_quality", enforce_quality)
         if self.get_config("max_torrent_age") is None:
-            self._config.set("generals", "max_torrent_age", "1")
-        cfg_file_handle = open(self._config_file, "w")
-        self._config.write(cfg_file_handle)
-        cfg_file_handle.close()
+            self.set_config("max_torrent_age", "1")
+        self._write_config()
 
     def define_folder(self) -> str:
         try:
