@@ -54,10 +54,13 @@ class TestConfig(unittest.TestCase):
 
     @patch('builtins.input', mock_input)
     @patch('os.path.exists', return_value=True)
-    def test_initial_configuration(self, *args):
-        local_mock_open = args[1]
+    def test_initial_configuration(
+            self,
+            mock_path_exists,
+            local_mock_open):
         config = Config()
         config.initial_configuration()
+        # Test input calls
         calls = [
             call("Enter a folder to download your shows: "),
             call("Enter the quality (none, 720p, 1080p or 2160p): "),
@@ -65,6 +68,8 @@ class TestConfig(unittest.TestCase):
         ]
         mock_input.assert_has_calls(calls)
         self.assertEqual(mock_input.call_count, 3)
+        # Test folder check
+        mock_path_exists.assert_called_with(mock_folder)
         # Open should be called twice: opening the file and writing to it
         self.assertEqual(local_mock_open.call_count, 2)
         local_mock_open.assert_called_with(config._config_file, "w")
