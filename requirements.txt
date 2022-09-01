@@ -1,5 +1,5 @@
 configparser==5.0.1
-deluge==2.0.3
+deluge==2.1.0
 feedparser==6.0.2
 lxml==4.6.3
 sgmllib3k==1.0.0
